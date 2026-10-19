@@ -601,7 +601,7 @@ async function invoicePdf(r){
   var kl=[r.kunde.name].concat((r.kunde.adresse||"").split("\n")).filter(Boolean);
   kl.forEach(function(t,i){doc.text(t,L,57+i*5.2)});
   y=57;var meta=[["Rechnungsnummer",r.nr],["Rechnungsdatum",fmtD(r.datum)],["Leistungszeitraum",r.leistung||fmtD(r.datum)],["Zahlbar bis",fmtD(r.faellig)]];
-  doc.setFontSize(9);meta.forEach(function(m,i){doc.setTextColor(90,104,123);doc.text(m[0],140,y+i*5.2);doc.setTextColor(18,32,46);doc.text(String(m[1]),R,y+i*5.2,{align:"right"})});
+  doc.setFontSize(9);meta.forEach(function(m,i){doc.setTextColor(90,104,123);doc.text(m[0],126,y+i*5.2);doc.setTextColor(18,32,46);doc.text(String(m[1]),R,y+i*5.2,{align:"right"})});
   y=Math.max(57+kl.length*5.2,y+4*5.2)+14;
   doc.setFont("helvetica","bold");doc.setFontSize(18);doc.text("Rechnung "+r.nr,L,y);y+=10;
   doc.setFontSize(8.5);doc.setTextColor(90,104,123);doc.text("LEISTUNG",L,y);doc.text("MENGE",128,y,{align:"right"});doc.text("EINZELPREIS",158,y,{align:"right"});doc.text("GESAMT",R,y,{align:"right"});
