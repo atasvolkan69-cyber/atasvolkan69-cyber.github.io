@@ -853,6 +853,7 @@ var DATEI_UPLOAD = SB_ON;                       // mit Portal: Kunden laden Logo
 var KONTAKT_EMAIL = CFG.KONTAKT_EMAIL || "hallo@vionda.at";
 var TAWK_ID = CFG.TAWK_ID || "";
 var FORMSPREE = CFG.FORMSPREE_ID ? "https://formspree.io/f/" + CFG.FORMSPREE_ID : "";
+var NOTIFY = CFG.NOTIFY_EMAIL ? "https://formsubmit.co/ajax/" + CFG.NOTIFY_EMAIL : "";   // E-Mail-Benachrichtigung bei neuer Anfrage
 
 document.getElementById('y').textContent = new Date().getFullYear();
 // Vorlagen auswählen
@@ -1036,13 +1037,21 @@ document.querySelectorAll('[data-vorlage]').forEach(function(b){
     var subject = 'Projekt-Anfrage: ' + (val('f-firma') || val('f-name')) + ' – ' + (all('paket')[0] || '');
     document.getElementById('f-briefing').value = text;
     document.getElementById('f-subject').value = subject;
-    if (!SB_ON && !FORMSPREE) {
+    if (!SB_ON && !FORMSPREE && !NOTIFY) {
       location.href = 'mailto:' + KONTAKT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text + '\n\n(Logo und Fotos bitte an diese E-Mail anhängen.)');
       return;
     }
     send.disabled = true; send.textContent = 'Wird gesendet …';
     try {
       if (SB_ON) await sendToPortal(rows);
+      if (NOTIFY) {
+        var mail = {_subject: '🔔 Neue Bestellung: ' + subject.replace('Projekt-Anfrage: ', ''), _template: 'table', _captcha: 'false',
+          _replyto: val('f-email'), _cc: CFG.NOTIFY_CC || ''};
+        rows.forEach(function(r){ mail[r[0]] = r[1]; });
+        mail['Portal'] = 'https://www.vionda.at/portal/ – dort liegen Auftrag, Logo und Fotos';
+        var n = fetch(NOTIFY, {method: 'POST', body: JSON.stringify(mail), headers: {'Content-Type': 'application/json', Accept: 'application/json'}});
+        if (!SB_ON) { n = await n; if (!n.ok) throw new Error('notify'); } else { n.catch(function(){}); }
+      }
       if (FORMSPREE) {
         var data = new FormData(); data.append('_subject', subject); data.append('email', val('f-email')); data.append('briefing', text);
         var r = fetch(FORMSPREE, {method: 'POST', body: data, headers: {Accept: 'application/json'}});
