@@ -3,46 +3,1080 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vionda – Webdesign aus Ried im Innkreis</title>
-<meta name="description" content="Vionda – Webdesign aus Ried im Innkreis, Oberösterreich. Bald online.">
-<meta name="robots" content="noindex">
+<title>Vionda – Webdesign aus Ried im Innkreis, Oberösterreich</title>
+<meta name="description" content="Vionda aus Ried im Innkreis baut moderne Websites für Handwerker, Praxen, Friseure, Gastronomie und Vereine im Innviertel und ganz Oberösterreich. Fixpreise ab 299 €, in 7 Tagen online. Auch Discord-Server-Einrichtung.">
+<meta name="keywords" content="Webdesign Ried im Innkreis, Webdesigner Innviertel, Website erstellen Oberösterreich, Webdesign Österreich, Website erstellen lassen, Homepage Firma, Website Physiotherapie, Website Verein, Webdesigner Oberösterreich, Discord Server einrichten">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.vionda.at/">
+<meta property="og:title" content="Vionda – Deine Website zum Fixpreis">
+<meta property="og:description" content="Moderne Websites für kleine Betriebe. Ab 299 €, in 7 Tagen online.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.vionda.at/">
+<meta property="og:locale" content="de_AT">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#F3EDE3">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vionda">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Vionda",
+  "url": "https://www.vionda.at/",
+  "logo": "https://www.vionda.at/logo.svg",
+  "description": "Webdesign und Discord-Server-Einrichtung für kleine Betriebe, Vereine und Esports-Teams in Österreich.",
+  "email": "hallo@vionda.at",
+  "address": {"@type": "PostalAddress", "addressLocality": "Ried im Innkreis", "postalCode": "4910", "addressRegion": "Oberösterreich", "addressCountry": "AT"},
+  "areaServed": ["Ried im Innkreis", "Innviertel", "Oberösterreich", "Österreich"],
+  "priceRange": "€€",
+  "makesOffer": [
+    {"@type": "Offer", "name": "Website Basic", "price": "299", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Website Standard", "price": "599", "priceCurrency": "EUR"},
+    {"@type": "Offer", "name": "Website Premium", "price": "999", "priceCurrency": "EUR"}
+  ]
+}
+</script>
 <style>
-:root{--paper:#F3EDE3;--ink:#17232D;--muted:#6B6155;--teal:#0A6B5E;--line:#E2D7C6;color-scheme:light}
-@media (prefers-color-scheme: dark){:root{--paper:#181512;--ink:#F2ECE3;--muted:#B4A999;--teal:#22C3AA;--line:#3A332B;color-scheme:dark}}
+/* Layout: ruhige linke Achse, große Wortmarke, Inhalte in klaren Bändern */
+:root{
+  --paper:#F3EDE3; --surface:#FBF8F2; --sand:#E9DFCF; --ink:#17232D; --muted:#6B6155; --line:#E2D7C6;
+  --teal:#0E8F7D; --teal-ink:#0A6B5E; --amber:#D9922B; --ok:#3F7D4E;
+  --display:'Bricolage Grotesque','Arial Rounded MT Bold',Arial,sans-serif;
+  --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --paper:#181512; --surface:#211D19; --sand:#2B2621; --ink:#F2ECE3; --muted:#B4A999; --line:#3A332B;
+    --teal:#3CC7AE; --teal-ink:#3CC7AE; --amber:#E9A94A; color-scheme:dark; }
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{font:17px/1.6 'Figtree',system-ui,sans-serif;background:
-  radial-gradient(60% 60% at 82% 18%, color-mix(in srgb,#D9922B 18%,transparent), transparent 70%),radial-gradient(45% 50% at 8% 92%, color-mix(in srgb,var(--teal) 10%,transparent), transparent 70%),var(--paper);
-  color:var(--ink);display:flex;flex-direction:column;padding:28px max(20px,env(safe-area-inset-left,0px))}
-.brand{display:flex;align-items:center;gap:10px;font:800 1.5rem 'Bricolage Grotesque',Arial,sans-serif;letter-spacing:-.03em}
-.brand svg{width:40px;height:40px}
-main{flex:1;display:flex;flex-direction:column;justify-content:center;max-width:640px;padding-block:48px}
-.place{color:var(--teal);font-weight:600;margin-bottom:14px}
-h1{font:800 clamp(2.4rem,7vw,4rem)/1.03 'Bricolage Grotesque',Arial,sans-serif;letter-spacing:-.035em;margin-bottom:18px}
-p.lead{color:var(--muted);font-size:1.15rem;max-width:44ch;margin-bottom:28px}
-.row{display:flex;gap:12px;flex-wrap:wrap}
-a.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;text-decoration:none;background:var(--ink);color:var(--paper)}
-a.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-footer{color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:16px}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.6;font-size:17px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;letter-spacing:-.02em}
+
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:1.45rem;letter-spacing:-.03em}
+.brand svg{width:36px;height:36px;flex:none}
+nav ul{display:flex;gap:26px;list-style:none}
+nav ul a{text-decoration:none;color:var(--muted);font-weight:500}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--ink);color:var(--paper);padding:13px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:600 1rem var(--body);transition:transform .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.small{padding:9px 18px;font-size:.95rem}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.tl-short{display:none}
+#team-bereich{background:var(--surface);border-top:1px solid var(--line)}
+.team-box{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.team-box p{color:var(--muted);max-width:56ch}
+.team-roles{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+header{padding-block:80px 64px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-ink)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
+header h1{font-size:clamp(2.4rem,7vw,4.6rem);font-weight:800;margin:18px 0 22px;max-width:15ch}
+header h1 span{color:var(--teal)}
+header p.lead{font-size:1.2rem;color:var(--muted);max-width:56ch;margin-bottom:32px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:56px}
+.facts div{background:var(--surface);padding:22px}
+.facts b{display:block;font-family:var(--display);font-size:1.9rem;font-variant-numeric:tabular-nums}
+.facts small{color:var(--muted);font-size:.92rem}
+
+section{padding-block:72px}
+.head{margin-bottom:36px;max-width:640px}
+.head h2{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:800;margin:10px 0 10px}
+.head p{color:var(--muted)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.svc{padding:26px;border-top:2px solid var(--ink)}
+.svc h3{font-size:1.25rem;margin-bottom:8px}
+.svc p{color:var(--muted)}
+
+#preise{background:var(--surface);border-block:1px solid var(--line)}
+#vorlagen,#ueber{background:var(--sand)}
+.tpl{background:var(--surface)}
+.price{border:1px solid var(--line);border-radius:22px;padding:28px;display:flex;flex-direction:column;background:var(--paper)}
+.price.top{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.price.top .muted,.price.top li{color:color-mix(in srgb,var(--paper) 75%,transparent)}
+.price.top .btn{background:var(--teal);color:#fff}
+.tag{align-self:flex-start;background:var(--amber);color:#12202E;font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.price h3{font-size:1.3rem}
+.amount{font-family:var(--display);font-size:2.8rem;font-weight:800;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.amount small{font:500 1rem var(--body);opacity:.7}
+.muted{color:var(--muted)}
+.price ul{list-style:none;margin:18px 0 26px;flex:1;display:grid;gap:8px}
+.price li{padding-left:24px;position:relative;color:var(--muted)}
+.price li::before{content:"";position:absolute;left:2px;top:.55em;width:12px;height:7px;border-left:2.5px solid var(--teal);border-bottom:2.5px solid var(--teal);transform:rotate(-45deg)}
+.extras{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.95rem;background:var(--paper)}
+.chip b{font-variant-numeric:tabular-nums}
+
+.ref{display:block;text-decoration:none;border:1px solid var(--line);border-radius:18px;padding:24px;background:var(--surface);transition:border-color .15s}
+a.ref:hover{border-color:var(--teal)}
+.ref .kind{font-size:.85rem;color:var(--teal-ink);font-weight:600}
+.ref h3{margin:8px 0 6px;font-size:1.25rem}
+.ref p{color:var(--muted)}
+.ref .url{margin-top:10px;font-weight:600;color:var(--teal-ink)}
+
+.steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));counter-reset:s}
+.step{counter-increment:s;padding-top:18px;border-top:1px solid var(--line)}
+.step::before{content:counter(s);font-family:var(--display);font-weight:800;font-size:2.2rem;color:var(--teal)}
+.step h3{font-size:1.15rem;margin:4px 0 6px}
+.step p{color:var(--muted)}
+
+.faq{max-width:760px;display:grid;gap:10px}
+details{border:1px solid var(--line);border-radius:14px;padding:16px 20px;background:var(--surface)}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--muted);margin-top:8px}
+
+#anfrage{background:var(--ink);color:var(--paper)}
+#anfrage .head p{color:color-mix(in srgb,var(--paper) 72%,transparent)}
+#anfrage .eyebrow{color:var(--amber)}
+form{display:grid;gap:14px;max-width:680px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{font-size:.92rem;font-weight:500;display:grid;gap:6px}
+input,select,textarea{width:100%;padding:13px 15px;border-radius:12px;border:1px solid #3A4650;background:#22303A;color:#F2ECE3;font:inherit}
+textarea{min-height:120px;resize:vertical}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;color:color-mix(in srgb,var(--paper) 72%,transparent)}
+.check input{width:auto;margin-top:4px}
+#anfrage .btn{background:var(--teal);color:#fff;justify-self:start}
+#ok{display:none;color:#5EE6C9;font-weight:600}
+
+.legal{padding-block:56px;font-size:.95rem;color:var(--muted)}
+.legal h2{font-size:1.4rem;color:var(--ink);margin-bottom:12px}
+.legal h3{font-size:1.05rem;color:var(--ink);margin:18px 0 6px}
+.legal p{max-width:70ch;margin-bottom:8px}
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media(max-width:760px){nav ul{display:none}.tl-long{display:none}.tl-short{display:inline}.nav-actions .btn{padding:8px 13px}.row{grid-template-columns:1fr}.facts{grid-template-columns:1fr}header{padding-block:56px 48px}}
+.progress{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 26px;padding:0;max-width:680px;counter-reset:p}
+.progress li{counter-increment:p;font-size:.85rem;color:color-mix(in srgb,var(--paper) 55%,transparent);border-top:3px solid #2C3E52;padding-top:8px}
+.progress li::before{content:counter(p) " · "}
+.progress li.on{color:var(--paper);border-color:var(--teal)}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:16px;min-width:0}
+legend{font-family:var(--display);font-weight:800;font-size:1.35rem;margin-bottom:4px;padding:0}
+.group{display:grid;gap:10px;min-width:0}
+.glabel{font-size:.92rem;font-weight:500}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.opt{position:relative;display:grid;gap:2px;border:1px solid #3A4650;background:#22303A;border-radius:14px;padding:14px;cursor:pointer}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt b{font-family:var(--display);font-size:1.05rem;color:#E8EEF3}
+.opt small{color:#9AAABB}
+.opt:has(input:checked){border-color:var(--teal);box-shadow:0 0 0 2px var(--teal) inset}
+.opt:has(input:focus-visible){outline:3px solid var(--amber);outline-offset:2px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:inline-flex;align-items:center;gap:8px;border:1px solid #3A4650;background:#22303A;border-radius:999px;padding:7px 14px;font-size:.92rem;cursor:pointer;color:#E8EEF3}
+.checks input{width:auto;margin:0;accent-color:var(--teal)}
+.checks label:has(input:checked){border-color:var(--teal);background:color-mix(in srgb,var(--teal) 22%,#182A3B)}
+.colors{display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.colors label{min-width:0}
+.colors .grow{flex:1 1 220px}
+input[type=color]{width:72px;height:46px;padding:4px;cursor:pointer}
+label.inline{display:flex;gap:8px;align-items:center;font-size:.9rem;color:color-mix(in srgb,var(--paper) 75%,transparent)}
+label.inline input{width:auto}
+input[type=file]{padding:10px;cursor:pointer}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px}
+.thumbs figure{margin:0;width:84px;display:grid;gap:4px}
+.thumbs img,.thumbs .doc{width:84px;height:84px;object-fit:cover;border-radius:10px;border:1px solid #3A4650;background:#fff}
+.thumbs .doc{display:grid;place-items:center;color:#12202E;font-weight:700;font-size:.8rem}
+.thumbs figcaption{font-size:.7rem;color:#9AAABB;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hint{font-size:.85rem;color:#9AAABB;margin:0}
+.summary{border:1px solid #3A4650;border-radius:14px;padding:16px;background:#22303A;font-size:.92rem;display:grid;gap:6px}
+.summary:empty{display:none}
+.summary h3{font-size:1.05rem;color:#E8EEF3}
+.summary dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;margin:0}
+.summary dt{color:#9AAABB}
+.summary dd{margin:0;color:#E8EEF3;overflow-wrap:anywhere}
+.err{color:#FFB38A;font-weight:600;margin:0;min-height:1.2em}
+.nav-btns{display:flex;gap:10px;flex-wrap:wrap}
+#anfrage .btn.ghost-dark{background:transparent;color:var(--paper);border:1.5px solid #3A5068}
+#anfrage .btn[disabled]{opacity:.6;cursor:wait}
+@media(max-width:560px){.summary dl{grid-template-columns:1fr}.progress li{font-size:.72rem}}
+.tpl-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+.tpl{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column}
+.tpl.picked{border-color:var(--teal);box-shadow:0 0 0 2px var(--teal)}
+.mock{background:var(--c);aspect-ratio:16/11;max-width:100%;padding:0 0 10px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line);overflow:hidden;font-family:var(--body)}
+.mbar{display:flex;gap:4px;padding:7px 10px;background:color-mix(in srgb,var(--t) 10%,var(--c))}
+.mbar i{width:7px;height:7px;border-radius:50%;background:color-mix(in srgb,var(--t) 30%,var(--c))}
+.mnav{display:flex;align-items:center;gap:8px;padding:2px 12px;color:var(--t)}
+.mnav b{font-size:.62rem;letter-spacing:.14em;font-weight:800;margin-right:auto}
+.mnav span{width:22px;height:4px;border-radius:2px;background:color-mix(in srgb,var(--t) 28%,transparent)}
+.mnav em,.mhero em{font-style:normal;font-size:.55rem;font-weight:700;background:var(--b);color:#111;padding:4px 8px;border-radius:999px;white-space:nowrap}
+.mnav.dark{background:var(--a);color:#fff;padding-block:7px;margin-top:-8px}
+.mnav.dark span{background:rgba(255,255,255,.4)}
+.mhero{margin:0 12px;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:7px;align-items:flex-start;flex:1;min-height:0;color:var(--t);background:color-mix(in srgb,var(--b) 35%,var(--c))}
+.mhero .mh{font-family:var(--display);font-weight:800;font-size:.95rem;line-height:1.1;margin:0}
+.mhero .ms{width:70%;height:5px;border-radius:3px;background:currentColor;opacity:.25;margin:0}
+.mhero.dark{background:var(--a);color:#fff}
+.mhero.center{align-items:center;text-align:center;justify-content:center}
+.mhero.center .ms{width:50%}
+.mhero.img{background:linear-gradient(160deg,color-mix(in srgb,var(--a) 85%,#000),var(--a));color:#fff;justify-content:flex-end}
+.mhero.glow{background:radial-gradient(120% 90% at 80% 10%,color-mix(in srgb,var(--b) 45%,var(--a)),var(--a) 60%);color:var(--t)}
+.mhero.split{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;align-items:stretch}
+.mhero.split>div:first-child{display:flex;flex-direction:column;gap:7px;align-items:flex-start;justify-content:center}
+.mimg{border-radius:8px;background:linear-gradient(135deg,var(--a),color-mix(in srgb,var(--a) 40%,var(--b)))}
+.mrow{display:grid;gap:8px;margin:0 12px}
+.mrow div{height:30px;border-radius:7px;background:color-mix(in srgb,var(--t) 9%,var(--c));border:1px solid color-mix(in srgb,var(--t) 10%,transparent)}
+.mrow.two{grid-template-columns:1fr 1fr}.mrow.three{grid-template-columns:repeat(3,1fr)}.mrow.four{grid-template-columns:repeat(4,1fr)}
+.mrow.soft div{background:color-mix(in srgb,var(--b) 45%,var(--c));border:0}
+.mrow.list{grid-template-columns:1fr}.mrow.list div{height:9px}
+.mock.night .mrow div{background:color-mix(in srgb,var(--b) 14%,var(--c));border-color:color-mix(in srgb,var(--b) 30%,transparent)}
+.tpl-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.tpl-body h3{font-size:1.3rem}
+.tpl-body p{color:var(--muted);margin:0}
+.tpl-body ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px;flex:1;align-content:flex-start}
+.tpl-body li{font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted)}
+.tpl-body .btn{align-self:flex-start}
+.tpl.picked .tpl-body .btn{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tpl-note{margin-top:22px;color:var(--muted)}
+.chat-fab{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:20;display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border:0;border-radius:999px;padding:13px 18px;font:600 .98rem var(--body);cursor:pointer;box-shadow:0 10px 30px -10px rgba(14,154,134,.7)}
+.chat-fab svg{width:20px;height:20px}
+/* ---------- Überarbeitung: Hero mit Geräte-Schaukasten ---------- */
+.hero{padding-block:72px 88px;background:
+  radial-gradient(55% 65% at 85% 25%, color-mix(in srgb,var(--amber) 16%,transparent), transparent 70%),
+  radial-gradient(45% 55% at 10% 90%, color-mix(in srgb,var(--teal) 9%,transparent), transparent 70%),
+  var(--paper)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:center}
+.locale{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.95rem;color:var(--teal-ink);margin-bottom:18px}
+.hero h1{font-size:clamp(2.4rem,4.7vw,3.9rem);font-weight:800;line-height:1.03;letter-spacing:-.035em;margin:0 0 22px;max-width:14ch}
+.hero .lead{font-size:1.18rem;color:var(--muted);max-width:46ch;margin-bottom:30px}
+.proof{list-style:none;display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:34px;color:var(--muted);font-size:.95rem}
+.proof li{display:flex;align-items:baseline;gap:6px}
+.proof b{font-family:var(--display);font-size:1.25rem;color:var(--ink);font-variant-numeric:tabular-nums}
+.showcase{--s-ink:#1c1917;--s-rose:#E8C4B8;--s-bg:#FBF8F6;position:relative;margin:0;padding:0 0 34px 0;min-width:0}
+.showcase figcaption{position:absolute;left:0;bottom:0;font-size:.85rem;color:var(--muted);max-width:64%}
+@media(max-width:520px){.chat-fab .fab-t{display:none}.chat-fab{padding:14px}}
+.browser{border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 1px 0 rgba(18,32,46,.06),0 30px 70px -28px rgba(18,32,46,.45),0 0 0 1px rgba(18,32,46,.08);max-width:100%}
+.b-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:#EEF1F4}
+.b-bar i{width:10px;height:10px;border-radius:50%;background:#D2D9E0}
+.b-url{margin-left:14px;flex:1;max-width:260px;background:#fff;border-radius:6px;padding:3px 10px;font-size:.72rem;color:#6B7785}
+.site{--s-ink:#1c1917;--s-rose:#E8C4B8;--s-bg:#FBF8F6;background:var(--s-bg);color:var(--s-ink);font-family:var(--body);padding-bottom:18px}
+.s-nav{display:flex;align-items:center;gap:16px;padding:14px 22px;font-size:.72rem;color:#57534e}
+.s-nav b{font-family:var(--display);font-size:.95rem;color:var(--s-ink);margin-right:auto;letter-spacing:-.01em}
+.s-nav em,.s-text em,.p-site em{font-style:normal;font-weight:600;background:var(--s-ink);color:#fff;border-radius:999px;padding:6px 12px;font-size:.68rem;white-space:nowrap}
+.s-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:18px;padding:10px 22px 18px;align-items:stretch}
+.s-text{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:9px}
+.s-kicker{font-size:.68rem;color:#a16207;font-weight:600;margin:0}
+.s-h{font-family:var(--display);font-weight:800;font-size:1.65rem;line-height:1.02;letter-spacing:-.03em;margin:0}
+.s-p{font-size:.74rem;color:#57534e;margin:0 0 4px;max-width:28ch}
+.s-photo{position:relative;border-radius:12px;min-height:170px;overflow:hidden;
+  background:
+   radial-gradient(55% 45% at 78% 88%, rgba(60,40,34,.55), transparent 70%),
+   radial-gradient(80% 70% at 25% 15%, #fbefe8, transparent 65%),
+   linear-gradient(155deg,#ecd3c7 0%,#c99a88 55%,#8a6153 100%)}
+.s-photo span{position:absolute;left:14%;top:14%;width:30%;height:66%;border-radius:999px 999px 8px 8px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.18));box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
+.s-photo::after{content:"";position:absolute;right:12%;top:22%;width:22%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff7f2,#e9cfc3 60%,#c49482);box-shadow:0 10px 24px -8px rgba(60,40,34,.5)}
+.s-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px}
+.s-cards div{background:#fff;border:1px solid #efe7e2;border-radius:10px;padding:10px 12px;display:grid;gap:2px}
+.s-cards b{font-size:.72rem}
+.s-cards small{font-size:.68rem;color:#a16207;font-weight:600}
+.phone{position:absolute;right:-14px;bottom:4px;width:30%;min-width:132px;max-width:190px;aspect-ratio:9/18.5;background:#12202E;border-radius:26px;padding:8px;box-shadow:0 30px 60px -20px rgba(18,32,46,.55)}
+.p-notch{position:absolute;left:50%;top:12px;transform:translateX(-50%);width:34%;height:12px;border-radius:99px;background:#12202E;z-index:2}
+.p-site{height:100%;border-radius:19px;background:#FBF8F6;overflow:hidden;padding:26px 10px 10px;display:flex;flex-direction:column;gap:8px;color:#1c1917}
+.p-nav{display:flex;justify-content:space-between;align-items:center}
+.p-nav b{font-family:var(--display);font-size:.7rem}
+.p-nav i{width:14px;height:8px;border-top:2px solid #1c1917;border-bottom:2px solid #1c1917}
+.p-photo{flex:0 0 36%;border-radius:10px;background:radial-gradient(55% 45% at 78% 88%,rgba(60,40,34,.55),transparent 70%),radial-gradient(80% 70% at 25% 15%,#fbefe8,transparent 65%),linear-gradient(155deg,#ecd3c7 0%,#c99a88 55%,#8a6153 100%)}
+.p-site .s-h{font-size:.95rem}
+.p-site em{align-self:flex-start;font-size:.6rem;padding:5px 10px}
+.p-row{display:flex;justify-content:space-between;font-size:.6rem;border-top:1px solid #efe7e2;padding-top:6px}
+.p-row span:last-child{color:#a16207;font-weight:700}
+@media (prefers-reduced-motion: no-preference){
+  .browser{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+  .phone{animation:rise .8s .18s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{transform:translateY(18px);opacity:.001}to{transform:none;opacity:1}}
+}
+@media (max-width:920px){.hero-grid{grid-template-columns:1fr;gap:44px}.hero h1{max-width:14ch}.phone{right:0}}
+@media (max-width:520px){.hero{padding-block:44px 60px}.s-hero{grid-template-columns:1fr 1fr;padding:6px 14px 14px}.s-nav span{display:none}.s-nav{padding:12px 14px}.s-cards{padding:0 14px;grid-template-columns:1fr 1fr}.s-cards div:last-child{display:none}.s-h{font-size:1.15rem}.s-p{display:none}.s-photo{min-height:120px}.phone{min-width:104px;width:31%;border-radius:20px;padding:6px}.p-site{border-radius:15px;padding-top:20px}}
+
+/* Leistungen mit Symbolen */
+.svc{padding:24px 0 0;border-top:2px solid var(--ink);display:grid;gap:8px;align-content:start}
+.svc .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--teal) 12%,transparent);color:var(--teal-ink);margin-bottom:6px}
+.svc .ic svg{width:22px;height:22px}
+
+/* Über Vionda */
+.about{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start}
+.about h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:14px}
+.about p{color:var(--muted);max-width:58ch;margin-bottom:12px}
+.promise{display:grid;gap:14px;list-style:none}
+.promise li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.promise li:last-child{border-bottom:0}
+.promise svg{width:22px;height:22px;color:var(--teal);margin-top:2px}
+.promise b{display:block}
+.promise span{color:var(--muted);font-size:.95rem}
+@media(max-width:820px){.about{grid-template-columns:1fr;gap:28px}}
+
+/* FAQ zweispaltig */
+.faq-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:start}
+.faq-wrap .head{margin-bottom:0}
+.faq-wrap .faq{max-width:none}
+@media(max-width:820px){.faq-wrap{grid-template-columns:1fr;gap:20px}}
+
+/* Footer */
+.site-footer{background:var(--ink);color:#C9D3DD;padding-block:56px 28px}
+.f-grid{display:grid;grid-template-columns:1.4fr repeat(3,minmax(0,1fr));gap:32px}
+.f-grid h3{font-size:.95rem;color:#fff;margin-bottom:12px;letter-spacing:0}
+.f-grid ul{list-style:none;display:grid;gap:8px}
+.f-grid a{text-decoration:none;color:#C9D3DD}
+.f-grid a:hover{color:#fff}
+.f-brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.4rem;color:#fff;margin-bottom:12px}
+.f-brand svg{width:34px;height:34px}
+.f-note{max-width:32ch;font-size:.95rem}
+.f-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid #2A3B4D;margin-top:40px;padding-top:20px;font-size:.88rem}
+@media(max-width:820px){.f-grid{grid-template-columns:1fr 1fr}.f-grid>div:first-child{grid-column:1/-1}}
 </style>
 </head>
 <body>
-<div class="brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#12202E"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#14B8A0" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>vionda</div>
-<main>
-  <p class="place">Ried im Innkreis, Oberösterreich</p>
-  <h1>Hier entsteht gerade etwas Neues.</h1>
-  <p class="lead">Vionda baut moderne Websites für Betriebe und Vereine im Innviertel. Die Seite ist bald online – bis dahin erreichst du uns per E-Mail.</p>
-  <div class="row">
-    <a class="btn" href="mailto:hallo@vionda.at">hallo@vionda.at</a>
-    <a class="btn alt" href="portal/">Team-Login</a>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="brand" aria-label="Vionda Startseite">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#12202E"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#14B8A0" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>
+      vionda
+    </a>
+    <ul>
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#preise">Preise</a></li>
+      <li><a href="#vorlagen">Vorlagen</a></li>
+      <li><a href="#referenzen">Referenzen</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions"><a href="portal/" class="btn alt small" aria-label="Team-Login"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="tl-long">Team-Login</span><span class="tl-short">Team</span></a><a href="#anfrage" class="btn small">Anfragen</a></div>
   </div>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="locale"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Ried im Innkreis, Oberösterreich</p>
+      <h1>Websites, die für dein Geschäft arbeiten.</h1>
+      <p class="lead">Vionda baut moderne Websites für Betriebe und Vereine im Innviertel – zum Fixpreis, in 7 Tagen online. Bezahlt wird der Rest erst, wenn deine Seite live ist.</p>
+      <div class="cta">
+        <a href="#anfrage" class="btn">Projekt anfragen</a>
+        <a href="#vorlagen" class="btn alt">Vorlagen ansehen</a>
+      </div>
+      <ul class="proof">
+        <li><b>ab 299 €</b> Fixpreis</li>
+        <li><b>7 Tage</b> bis online</li>
+        <li><b>50 %</b> erst bei Fertigstellung</li>
+      </ul>
+    </div>
+
+    <figure class="showcase" aria-label="Beispiel einer Vionda-Website auf Laptop und Handy">
+      <div class="browser">
+        <div class="b-bar"><i></i><i></i><i></i><span class="b-url">friseur-beispiel.at</span></div>
+        <div class="site">
+          <div class="s-nav"><b>Salon Lumen</b><span>Leistungen</span><span>Preise</span><span>Team</span><em>Termin buchen</em></div>
+          <div class="s-hero">
+            <div class="s-text">
+              <p class="s-kicker">Friseur in Ried</p>
+              <p class="s-h">Dein Look.<br>Unser Handwerk.</p>
+              <p class="s-p">Schnitt, Farbe und Styling – mit Termin in 30 Sekunden.</p>
+              <em>Online-Termin buchen</em>
+            </div>
+            <div class="s-photo" aria-hidden="true"><span></span></div>
+          </div>
+          <div class="s-cards">
+            <div><b>Damenschnitt</b><small>ab 39 €</small></div>
+            <div><b>Herrenschnitt</b><small>ab 24 €</small></div>
+            <div><b>Farbe & Strähnen</b><small>ab 59 €</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="p-notch"></div>
+        <div class="p-site">
+          <div class="p-nav"><b>Salon Lumen</b><i></i></div>
+          <div class="p-photo"></div>
+          <p class="s-h">Dein Look.<br>Unser Handwerk.</p>
+          <em>Termin buchen</em>
+          <div class="p-row"><span>Damenschnitt</span><span>39 €</span></div>
+          <div class="p-row"><span>Herrenschnitt</span><span>24 €</span></div>
+        </div>
+      </div>
+      <figcaption>Beispiel: Vorlage „Salon“ – auf Laptop und Handy</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="head">
+      <h2>Alles aus einer Hand</h2>
+      <p>Du kümmerst dich um dein Geschäft – Vionda um deinen Auftritt im Netz.</p>
+    </div>
+    <div class="grid">
+      <div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18v12H3z"/><path d="M8 21h8M12 17v4"/></svg></span><h3>Websites</h3><p>Moderne Firmenseiten, die auf Handy und PC gut aussehen und schnell laden.</p></div>
+      <div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></span><h3>Bei Google gefunden werden</h3><p>Saubere Suchmaschinen-Grundlagen und Einrichtung deines Google-Unternehmensprofils.</p></div>
+      <div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><h3>Wartung & Änderungen</h3><p>Neue Texte, Bilder oder Öffnungszeiten? Eine Nachricht genügt – erledigt.</p></div>
+      <div class="svc"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8h10a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3h-2l-3 3-3-3H7a3 3 0 0 1-3-3v-3a3 3 0 0 1 3-3z"/><circle cx="9.5" cy="12.5" r="1"/><circle cx="14.5" cy="12.5" r="1"/></svg></span><h3>Discord-Server</h3><p>Komplette Einrichtung für Teams, Streamer und Communities: Rollen, Bots, Tickets, Verifizierung.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="preise">
+  <div class="wrap">
+    <div class="head">
+      <h2>Einmal zahlen, die Website gehört dir</h2>
+      <p>Alle Preise sind Endpreise. Gemäß § 6 Abs. 1 Z 27 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmer).</p>
+    </div>
+    <div class="grid">
+      <div class="price">
+        <h3>Basic</h3>
+        <div class="amount">299 € <small>einmalig</small></div>
+        <p class="muted">Perfekt für den Start.</p>
+        <ul>
+          <li>1 Seite (Onepager)</li>
+          <li>Kontaktformular</li>
+          <li>Für Handy optimiert</li>
+          <li>Google-Grundlagen</li>
+          <li>2 Korrekturrunden</li>
+        </ul>
+        <a href="#anfrage" class="btn alt" data-paket="Basic – 299 €">Basic anfragen</a>
+      </div>
+      <div class="price top">
+        <span class="tag">Am häufigsten gewählt</span>
+        <h3>Standard</h3>
+        <div class="amount">599 € <small>einmalig</small></div>
+        <p class="muted">Für Betriebe, die mehr zeigen wollen.</p>
+        <ul>
+          <li>Bis zu 5 Unterseiten</li>
+          <li>Google Maps & Öffnungszeiten</li>
+          <li>Bildergalerie</li>
+          <li>Impressum & Datenschutz-Seite</li>
+          <li>Google-Unternehmensprofil eingerichtet</li>
+          <li>3 Korrekturrunden</li>
+        </ul>
+        <a href="#anfrage" class="btn" data-paket="Standard – 599 €">Standard anfragen</a>
+      </div>
+      <div class="price">
+        <h3>Premium</h3>
+        <div class="amount">ab 999 € <small>einmalig</small></div>
+        <p class="muted">Mit Extras für dein Business.</p>
+        <ul>
+          <li>Beliebig viele Unterseiten</li>
+          <li>Online-Terminbuchung</li>
+          <li>Kleiner Shop oder Mitgliederbereich</li>
+          <li>Individuelles Design</li>
+          <li>Bevorzugter Support</li>
+        </ul>
+        <a href="#anfrage" class="btn alt" data-paket="Premium – ab 999 €">Premium anfragen</a>
+      </div>
+    </div>
+    <div class="extras">
+      <span class="chip">Wartung ab <b>25 €</b>/Monat</span>
+      <span class="chip">Discord-Server-Setup ab <b>49 €</b></span>
+      <span class="chip">Domain ca. <b>15 €</b>/Jahr</span>
+    </div>
+  </div>
+</section>
+
+<section id="vorlagen">
+  <div class="wrap">
+    <div class="head">
+      <h2>Such dir einen Look aus</h2>
+      <p>Jede Vorlage wird mit deinem Logo, deinen Farben, Texten und Fotos zu deiner eigenen Website. Wähl eine aus – sie wird direkt in deine Anfrage übernommen.</p>
+    </div>
+    <div class="tpl-grid">
+
+      <article class="tpl" style="--a:#1c1917;--b:#e8c4b8;--c:#faf6f3;--t:#1c1917">
+        <div class="mock" aria-hidden="true">
+          <div class="mbar"><i></i><i></i><i></i></div>
+          <div class="mnav"><b>SALON</b><span></span><span></span><span></span><em>Termin</em></div>
+          <div class="mhero split"><div><p class="mh">Dein Look.<br>Unser Handwerk.</p><p class="ms"></p><em>Jetzt buchen</em></div><div class="mimg"></div></div>
+          <div class="mrow three"><div></div><div></div><div></div></div>
+        </div>
+        <div class="tpl-body">
+          <h3>Salon</h3>
+          <p>Elegant und ruhig – für Friseure, Kosmetik, Nagel- und Beauty-Studios.</p>
+          <ul><li>Online-Terminbuchung</li><li>Preisliste</li><li>Galerie</li></ul>
+          <button class="btn alt small" type="button" data-vorlage="Salon">Diese Vorlage wählen</button>
+        </div>
+      </article>
+
+      <article class="tpl" style="--a:#1e3a5f;--b:#f5b700;--c:#f3f5f8;--t:#0f1e33">
+        <div class="mock" aria-hidden="true">
+          <div class="mbar"><i></i><i></i><i></i></div>
+          <div class="mnav dark"><b>WERKSTATT</b><span></span><span></span><span></span><em>Anrufen</em></div>
+          <div class="mhero dark"><p class="mh">Meisterbetrieb seit 1998</p><p class="ms"></p><em>Angebot anfordern</em></div>
+          <div class="mrow four"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <div class="tpl-body">
+          <h3>Werkstatt</h3>
+          <p>Kräftig und vertrauenswürdig – für Handwerk, Bau, Elektro, Installateure und KFZ.</p>
+          <ul><li>Leistungen mit Fotos</li><li>Referenzprojekte</li><li>Anfrage-Formular</li></ul>
+          <button class="btn alt small" type="button" data-vorlage="Werkstatt">Diese Vorlage wählen</button>
+        </div>
+      </article>
+
+      <article class="tpl" style="--a:#5f7f6e;--b:#cfe0d6;--c:#f7faf8;--t:#22332b">
+        <div class="mock" aria-hidden="true">
+          <div class="mbar"><i></i><i></i><i></i></div>
+          <div class="mnav"><b>PRAXIS</b><span></span><span></span><span></span><em>Termin</em></div>
+          <div class="mhero center"><p class="mh">Bewegung, die gut tut</p><p class="ms"></p><em>Termin vereinbaren</em></div>
+          <div class="mrow three soft"><div></div><div></div><div></div></div>
+        </div>
+        <div class="tpl-body">
+          <h3>Praxis</h3>
+          <p>Freundlich und klar – für Physiotherapie, Ärzte, Massage, Coaching und Gesundheit.</p>
+          <ul><li>Leistungen & Kassen-Infos</li><li>Team-Vorstellung</li><li>Öffnungszeiten & Anfahrt</li></ul>
+          <button class="btn alt small" type="button" data-vorlage="Praxis">Diese Vorlage wählen</button>
+        </div>
+      </article>
+
+      <article class="tpl" style="--a:#7a1f2b;--b:#e9d8b8;--c:#fbf7ef;--t:#3a0f15">
+        <div class="mock" aria-hidden="true">
+          <div class="mbar"><i></i><i></i><i></i></div>
+          <div class="mnav"><b>GENUSS</b><span></span><span></span><span></span><em>Reservieren</em></div>
+          <div class="mhero img"><p class="mh">Regional. Saisonal. Gut.</p><em>Tisch reservieren</em></div>
+          <div class="mrow two"><div></div><div></div></div>
+        </div>
+        <div class="tpl-body">
+          <h3>Genuss</h3>
+          <p>Warm und einladend – für Gasthäuser, Cafés, Restaurants, Bäckereien und Hofläden.</p>
+          <ul><li>Speisekarte</li><li>Tischreservierung</li><li>Events & Mittagsmenü</li></ul>
+          <button class="btn alt small" type="button" data-vorlage="Genuss">Diese Vorlage wählen</button>
+        </div>
+      </article>
+
+      <article class="tpl" style="--a:#15803d;--b:#fde047;--c:#f5faf6;--t:#0c2e17">
+        <div class="mock" aria-hidden="true">
+          <div class="mbar"><i></i><i></i><i></i></div>
+          <div class="mnav dark"><b>SV VEREIN</b><span></span><span></span><span></span><em>Mitglied werden</em></div>
+          <div class="mhero split"><div><p class="mh">Gemeinsam stark</p><p class="ms"></p><em>Termine</em></div><div class="mimg"></div></div>
+          <div class="mrow list"><div></div><div></div><div></div></div>
+        </div>
+        <div class="tpl-body">
+          <h3>Verein</h3>
+          <p>Lebendig und übersichtlich – für Sportvereine, Musikkapellen, Feuerwehr und Clubs.</p>
+          <ul><li>News & Spielberichte</li><li>Termine & Events</li><li>Mitglied-werden-Formular</li></ul>
+          <button class="btn alt small" type="button" data-vorlage="Verein">Diese Vorlage wählen</button>
+        </div>
+      </article>
+
+      <article class="tpl" style="--a:#0b0f1a;--b:#22d3ee;--c:#111827;--t:#e5f6fb">
+        <div class="mock night" aria-hidden="true">
+          <div class="mbar"><i></i><i></i><i></i></div>
+          <div class="mnav dark"><b>ARENA</b><span></span><span></span><span></span><em>Discord</em></div>
+          <div class="mhero dark glow"><p class="mh">Next Match: Samstag 20:00</p><p class="ms"></p><em>Team ansehen</em></div>
+          <div class="mrow four"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <div class="tpl-body">
+          <h3>Arena</h3>
+          <p>Dunkel und energiegeladen – für Esports-Teams, Gaming-Communities, Streamer und Ligen.</p>
+          <ul><li>Roster & Spielerprofile</li><li>Spielplan & Ergebnisse</li><li>Discord- & Twitch-Einbindung</li></ul>
+          <button class="btn alt small" type="button" data-vorlage="Arena">Diese Vorlage wählen</button>
+        </div>
+      </article>
+
+    </div>
+    <p class="tpl-note">Keine passt? Kein Problem – im Paket Premium bekommst du ein ganz eigenes Design.</p>
+  </div>
+</section>
+
+<section id="referenzen">
+  <div class="wrap">
+    <div class="head">
+      <h2>Projekte von Vionda</h2>
+    </div>
+    <div class="grid">
+      <a href="https://igl-gaming.de" target="_blank" rel="noopener" class="ref">
+        <span class="kind">Esports-Community</span>
+        <h3>IGL Gaming</h3>
+        <p>Website einer internationalen Gaming-Liga mit Liga-Infos, Teams und Community.</p>
+        <p class="url">igl-gaming.de ↗</p>
+      </a>
+      <div class="ref">
+        <span class="kind">Physiotherapie</span>
+        <h3>Physiora</h3>
+        <p>Ruhige, klare Website für eine Physiotherapeutin – Leistungen auf einen Blick.</p>
+      </div>
+      <div class="ref">
+        <span class="kind">Web-App</span>
+        <h3>Matchplan</h3>
+        <p>Werkzeug für Fußballtrainer: Aufstellung, Taktiktafel und Gegneranalyse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <h2>In vier Schritten online</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Anfrage</h3><p>Du füllst das Formular aus. Antwort innerhalb von 24 Stunden.</p></div>
+      <div class="step"><h3>Gespräch</h3><p>Wir klären kurz, was du brauchst – kostenlos und unverbindlich.</p></div>
+      <div class="step"><h3>Umsetzung</h3><p>Du bekommst eine Vorschau und kannst Korrekturen wünschen.</p></div>
+      <div class="step"><h3>Online</h3><p>Die Seite geht live. Erst dann zahlst du den Restbetrag.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ueber">
+  <div class="wrap about">
+    <div>
+      <h2>Persönlich, aus dem Innviertel</h2>
+      <p>Vionda sitzt in Ried im Innkreis. Du hast einen festen Ansprechpartner, der deine Region kennt – kein Callcenter, keine Agentur mit zehn Zwischenstationen.</p>
+      <p>Auf Wunsch treffen wir uns vor Ort im Innviertel, besprechen alles bei dir im Betrieb und schauen uns gemeinsam an, was deine Kunden auf der Website finden sollen.</p>
+    </div>
+    <ul class="promise">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Fixpreis statt Stundenzettel</b><span>Du weißt vorher genau, was es kostet.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Bezahlt wird erst, wenn es passt</b><span>50 % zum Start, der Rest erst, wenn deine Seite online ist.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Rechtlich sauber</b><span>Impressum, Datenschutzerklärung und SSL-Verschlüsselung sind immer dabei.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Die Website gehört dir</b><span>Keine Knebelverträge, keine Pflicht-Abos.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-wrap">
+    <div class="head">
+      <h2>Häufige Fragen</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Wie bezahle ich?</summary><p>Per Überweisung auf Rechnung: 50 % Anzahlung zum Start, 50 % wenn die Website online ist. Die Rechnungsnummer bitte als Verwendungszweck angeben.</p></details>
+      <details><summary>Gibt es laufende Kosten?</summary><p>Nur die Domain (ca. 15 € im Jahr). Hosting ist bei den meisten Seiten kostenlos. Wartung ist optional.</p></details>
+      <details><summary>Wie lange dauert es?</summary><p>Basic und Standard sind meist in 7 Tagen fertig, sobald Texte und Bilder da sind.</p></details>
+      <details><summary>Muss ich mich um Technik kümmern?</summary><p>Nein. Domain, Einrichtung und Veröffentlichung übernimmt Vionda.</p></details>
+      <details><summary>Bekomme ich eine ordentliche Rechnung?</summary><p>Ja, du bekommst eine Rechnung mit allen gesetzlichen Angaben – auch für deine Buchhaltung.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="anfrage">
+  <div class="wrap">
+    <div class="head">
+      <h2>Erzähl uns genau, was du willst</h2>
+      <p>Vier kurze Schritte, ca. 5 Minuten. Je genauer du beschreibst, desto besser passt dein Angebot – und desto schneller ist deine Website fertig.</p>
+    </div>
+    <ol class="progress" aria-label="Fortschritt">
+      <li class="on">Über dich</li><li>Projekt</li><li>Design</li><li>Details</li>
+    </ol>
+    <form id="form" method="POST" novalidate>
+      <input type="hidden" name="_subject" id="f-subject" value="Neue Projekt-Anfrage">
+      <input type="hidden" name="briefing" id="f-briefing">
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="f-website">Website<input id="f-website" name="website_hp" tabindex="-1" autocomplete="off"></label></div>
+
+      <!-- Schritt 1 -->
+      <fieldset class="step-pane" data-step="1">
+        <legend>Über dich</legend>
+        <div class="row">
+          <label for="f-name">Vor- und Nachname *<input id="f-name" name="name" required autocomplete="name"></label>
+          <label for="f-email">E-Mail *<input id="f-email" type="email" name="email" required autocomplete="email"></label>
+        </div>
+        <div class="row">
+          <label for="f-firma">Firma / Verein<input id="f-firma" name="firma" autocomplete="organization"></label>
+          <label for="f-tel">Telefon<input id="f-tel" type="tel" name="telefon" autocomplete="tel"></label>
+        </div>
+        <div class="row">
+          <label for="f-branche">Branche *
+            <select id="f-branche" name="branche" required>
+              <option value="">Bitte wählen</option>
+              <option>Handwerk</option><option>Gesundheit & Therapie</option><option>Friseur & Kosmetik</option>
+              <option>Gastronomie</option><option>Handel / Shop</option><option>Verein</option>
+              <option>Esports / Gaming</option><option>Dienstleistung</option><option>Sonstiges</option>
+            </select></label>
+          <label for="f-adr">Rechnungsadresse *<input id="f-adr" name="adresse" required autocomplete="street-address" placeholder="Straße Nr., PLZ Ort"></label>
+        </div>
+      </fieldset>
+
+      <!-- Schritt 2 -->
+      <fieldset class="step-pane" data-step="2" hidden>
+        <legend>Dein Projekt</legend>
+        <div class="group">
+          <span class="glabel">Paket *</span>
+          <div class="cards" role="radiogroup">
+            <label class="opt"><input type="radio" name="paket" value="Basic – 299 €" required><b>Basic</b><small>1 Seite · 299 €</small></label>
+            <label class="opt"><input type="radio" name="paket" value="Standard – 599 €"><b>Standard</b><small>bis 5 Seiten · 599 €</small></label>
+            <label class="opt"><input type="radio" name="paket" value="Premium – ab 999 €"><b>Premium</b><small>mit Extras · ab 999 €</small></label>
+            <label class="opt"><input type="radio" name="paket" value="Discord-Server-Setup – ab 49 €"><b>Discord</b><small>Server-Setup · ab 49 €</small></label>
+            <label class="opt"><input type="radio" name="paket" value="Weiß ich noch nicht – bitte beraten"><b>Weiß nicht</b><small>bitte beraten</small></label>
+          </div>
+        </div>
+        <label for="f-vorlage">Vorlage
+          <select id="f-vorlage" name="vorlage">
+            <option value="">Keine – Vionda schlägt etwas vor</option>
+            <option>Salon</option><option>Werkstatt</option><option>Praxis</option><option>Genuss</option><option>Verein</option><option>Arena</option>
+            <option>Eigenes Design (Premium)</option>
+          </select></label>
+        <label for="f-ziel">Was soll die Website erreichen? *<textarea id="f-ziel" name="ziel" required placeholder="z. B. Mehr Terminbuchungen, neue Kunden in der Region finden, Mitglieder informieren …"></textarea></label>
+        <div class="group">
+          <span class="glabel">Welche Seiten brauchst du?</span>
+          <div class="checks">
+            <label><input type="checkbox" name="seiten" value="Startseite" checked> Startseite</label>
+            <label><input type="checkbox" name="seiten" value="Über uns"> Über uns</label>
+            <label><input type="checkbox" name="seiten" value="Leistungen"> Leistungen</label>
+            <label><input type="checkbox" name="seiten" value="Preise"> Preise</label>
+            <label><input type="checkbox" name="seiten" value="Team"> Team</label>
+            <label><input type="checkbox" name="seiten" value="Galerie"> Galerie</label>
+            <label><input type="checkbox" name="seiten" value="Referenzen"> Referenzen</label>
+            <label><input type="checkbox" name="seiten" value="News / Blog"> News / Blog</label>
+            <label><input type="checkbox" name="seiten" value="Termine / Events"> Termine / Events</label>
+            <label><input type="checkbox" name="seiten" value="FAQ"> FAQ</label>
+            <label><input type="checkbox" name="seiten" value="Kontakt" checked> Kontakt</label>
+            <label><input type="checkbox" name="seiten" value="Shop"> Shop</label>
+          </div>
+          <input name="seiten_weitere" id="f-seiten-weitere" placeholder="Weitere Seiten (optional)" aria-label="Weitere Seiten">
+        </div>
+        <div class="group">
+          <span class="glabel">Welche Funktionen?</span>
+          <div class="checks">
+            <label><input type="checkbox" name="funktionen" value="Kontaktformular" checked> Kontaktformular</label>
+            <label><input type="checkbox" name="funktionen" value="Online-Terminbuchung"> Online-Terminbuchung</label>
+            <label><input type="checkbox" name="funktionen" value="Google Maps"> Google Maps</label>
+            <label><input type="checkbox" name="funktionen" value="Öffnungszeiten"> Öffnungszeiten</label>
+            <label><input type="checkbox" name="funktionen" value="Bildergalerie"> Bildergalerie</label>
+            <label><input type="checkbox" name="funktionen" value="Google-Bewertungen"> Google-Bewertungen</label>
+            <label><input type="checkbox" name="funktionen" value="Social-Media-Links"> Social-Media-Links</label>
+            <label><input type="checkbox" name="funktionen" value="Newsletter"> Newsletter</label>
+            <label><input type="checkbox" name="funktionen" value="Mehrsprachig"> Mehrsprachig</label>
+            <label><input type="checkbox" name="funktionen" value="Shop / Online-Zahlung"> Shop / Online-Zahlung</label>
+            <label><input type="checkbox" name="funktionen" value="Mitgliederbereich"> Mitgliederbereich</label>
+            <label><input type="checkbox" name="funktionen" value="Discord-Einbindung"> Discord-Einbindung</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Schritt 3 -->
+      <fieldset class="step-pane" data-step="3" hidden>
+        <legend>Design</legend>
+        <div class="group">
+          <span class="glabel">Welcher Stil passt zu dir? *</span>
+          <div class="cards" role="radiogroup">
+            <label class="opt"><input type="radio" name="stil" value="Modern & klar" required><b>Modern & klar</b><small>viel Weißraum, sachlich</small></label>
+            <label class="opt"><input type="radio" name="stil" value="Elegant & hochwertig"><b>Elegant</b><small>edel, ruhig, hochwertig</small></label>
+            <label class="opt"><input type="radio" name="stil" value="Natürlich & warm"><b>Natürlich</b><small>warme Töne, freundlich</small></label>
+            <label class="opt"><input type="radio" name="stil" value="Verspielt & bunt"><b>Verspielt</b><small>bunt, lebendig</small></label>
+            <label class="opt"><input type="radio" name="stil" value="Dunkel & technisch"><b>Dunkel</b><small>Gaming, Tech, Esports</small></label>
+            <label class="opt"><input type="radio" name="stil" value="Weiß ich nicht – Vorschlag gewünscht"><b>Überrasch mich</b><small>Vionda schlägt vor</small></label>
+          </div>
+        </div>
+        <div class="group">
+          <span class="glabel">Wunschfarben</span>
+          <div class="colors">
+            <label for="f-farbe1">Hauptfarbe<input type="color" id="f-farbe1" name="farbe_haupt" value="#0E9A86"></label>
+            <label for="f-farbe2">Zweitfarbe<input type="color" id="f-farbe2" name="farbe_zweit" value="#F2A93B"></label>
+            <label class="grow" for="f-farbtext">oder in Worten<input id="f-farbtext" name="farben_wunsch" placeholder="z. B. Farben vom Logo übernehmen, kein Rot"></label>
+          </div>
+          <label class="inline"><input type="checkbox" name="farben_egal" value="Farben egal / Vionda entscheidet" id="f-farben-egal"> Farben sind mir egal – Vionda entscheidet</label>
+        </div>
+        <div class="group">
+          <span class="glabel">Hast du ein Logo? *</span>
+          <div class="checks radios">
+            <label><input type="radio" name="logo_status" value="Ja, Logo ist vorhanden" required> Ja, habe ich</label>
+            <label><input type="radio" name="logo_status" value="Nein, brauche ein neues Logo"> Nein, brauche eins</label>
+            <label><input type="radio" name="logo_status" value="Ja, soll aber überarbeitet werden"> Ja, soll überarbeitet werden</label>
+          </div>
+          <div class="upload" id="logoBox">
+            <label for="f-logo">Logo hochladen (PNG, JPG, SVG oder PDF, max. 25 MB)<input type="file" id="f-logo" name="logo" accept="image/png,image/jpeg,image/svg+xml,image/webp,application/pdf"></label>
+            <div class="thumbs" id="logoThumbs"></div>
+          </div>
+        </div>
+        <div class="group upload">
+          <label for="f-bilder">Fotos für die Website (Team, Räume, Arbeiten – bis zu 8)<input type="file" id="f-bilder" name="bilder" accept="image/*" multiple></label>
+          <div class="thumbs" id="bildThumbs"></div>
+          <p class="hint" id="uploadHint"></p>
+        </div>
+        <div class="group" id="linkBox" hidden>
+          <label for="f-dateilink">Logo & Fotos: Link zu deinen Dateien (Google Drive, Dropbox, WeTransfer …)<input id="f-dateilink" name="dateien_link" placeholder="https://…"></label>
+          <p class="hint">Kein Link zur Hand? Kein Problem – schick Logo und Fotos nach der Anfrage einfach als Antwort auf unsere E-Mail.</p>
+        </div>
+        <label for="f-vorbilder">Websites, die dir gefallen (Link + was dir daran gefällt)<textarea id="f-vorbilder" name="vorbilder" placeholder="z. B. www.beispiel.at – die großen Bilder und die klare Menüleiste"></textarea></label>
+        <div class="group">
+          <span class="glabel">Texte für die Website *</span>
+          <div class="checks radios">
+            <label><input type="radio" name="texte" value="Ich liefere die Texte" required> Ich liefere sie</label>
+            <label><input type="radio" name="texte" value="Bitte Texte für mich schreiben"> Bitte für mich schreiben</label>
+            <label><input type="radio" name="texte" value="Teils – Grundlagen liefere ich"> Teils</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Schritt 4 -->
+      <fieldset class="step-pane" data-step="4" hidden>
+        <legend>Details</legend>
+        <label for="f-beschreibung">Beschreib genau, was du dir wünschst *<textarea id="f-beschreibung" name="beschreibung" required style="min-height:160px" placeholder="Was ist dir besonders wichtig? Was muss unbedingt auf die Startseite? Gibt es etwas, das du auf keinen Fall willst?"></textarea></label>
+        <div class="group">
+          <span class="glabel">Domain (Internetadresse)</span>
+          <div class="checks radios">
+            <label><input type="radio" name="domain_status" value="Habe schon eine Domain"> Habe schon eine</label>
+            <label><input type="radio" name="domain_status" value="Brauche eine neue Domain" checked> Brauche eine neue</label>
+          </div>
+          <input name="domain" id="f-domain" placeholder="z. B. friseur-huber.at" aria-label="Domain oder Wunschdomain">
+        </div>
+        <div class="row">
+          <label for="f-termin">Bis wann soll die Website online sein?<input id="f-termin" type="date" name="wunschtermin"></label>
+          <label for="f-social">Social-Media-Profile (optional)<input id="f-social" name="social_media" placeholder="Instagram, Facebook, TikTok …"></label>
+        </div>
+        <div class="summary" id="summary" aria-live="polite"></div>
+        <label class="check" for="f-dsgvo"><input id="f-dsgvo" type="checkbox" required><span>Ich habe die <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a> gelesen und bin einverstanden, dass meine Angaben und Dateien zur Bearbeitung der Anfrage verwendet werden.</span></label>
+      </fieldset>
+
+      <p class="err" id="err" role="alert"></p>
+      <div class="nav-btns">
+        <button class="btn ghost-dark" type="button" id="back" hidden>Zurück</button>
+        <button class="btn" type="button" id="next">Weiter</button>
+        <button class="btn" type="submit" id="send" hidden>Unverbindlich anfragen</button>
+      </div>
+      <p id="ok" role="status">Danke! Deine Anfrage ist angekommen. Du bekommst innerhalb von 24 Stunden eine Antwort mit deinem Angebot.</p>
+    </form>
+  </div>
+</section>
+<section id="team-bereich">
+  <div class="wrap team-box">
+    <div>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem);margin:10px 0 8px">Für das Vionda-Team</h2>
+      <p>Hier melden sich Mitarbeiter und Buchhaltung mit ihrer @vionda.at-Adresse an – für Aufträge, Rechnungen und Buchhaltung.</p>
+      <div class="team-roles"><span class="chip">Aufträge & Kundenbriefings</span><span class="chip">Rechnungen</span><span class="chip">Buchhaltung</span></div>
+    </div>
+    <a href="portal/" class="btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Zum Team-Login</a>
+  </div>
+</section>
 </main>
-<footer>© 2026 Vionda · Ried im Innkreis</footer>
+
+<button class="chat-fab" type="button" id="chatFab" aria-label="Nachricht an Vionda schreiben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="fab-t">Nachricht schreiben</span></button>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="f-brand"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0E9A86" fill-opacity=".14"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#14B8A0" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>vionda</div>
+        <p class="f-note">Webdesign aus Ried im Innkreis für Betriebe und Vereine im Innviertel und ganz Oberösterreich.</p>
+      </div>
+      <div><h3>Angebot</h3><ul><li><a href="#leistungen">Leistungen</a></li><li><a href="#preise">Preise</a></li><li><a href="#vorlagen">Vorlagen</a></li><li><a href="#anfrage">Projekt anfragen</a></li></ul></div>
+      <div><h3>Kontakt</h3><ul><li>hallo@vionda.at</li><li>4910 Ried im Innkreis</li><li>Oberösterreich</li></ul></div>
+      <div><h3>Rechtliches</h3><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="portal/">Team-Login</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><span>© <span id="y">2026</span> Vionda</span><span>Alle Preise sind Endpreise. Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG.</span></div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+/* Einstellungen kommen aus config.js */
+var CFG = window.VIONDA_CONFIG || {};
+var SB_ON = !!(CFG.SUPABASE_URL && CFG.SUPABASE_ANON_KEY);
+var DATEI_UPLOAD = SB_ON;                       // mit Portal: Kunden laden Logo & Fotos direkt hoch
+var KONTAKT_EMAIL = CFG.KONTAKT_EMAIL || "hallo@vionda.at";
+var TAWK_ID = CFG.TAWK_ID || "";
+var FORMSPREE = CFG.FORMSPREE_ID ? "https://formspree.io/f/" + CFG.FORMSPREE_ID : "";
+
+document.getElementById('y').textContent = new Date().getFullYear();
+// Vorlagen auswählen
+document.querySelectorAll('[data-vorlage]').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.getElementById('f-vorlage').value = b.dataset.vorlage;
+    document.querySelectorAll('.tpl').forEach(function(t){ t.classList.remove('picked'); });
+    document.querySelectorAll('[data-vorlage]').forEach(function(x){ x.textContent = 'Diese Vorlage wählen'; });
+    b.closest('.tpl').classList.add('picked'); b.textContent = 'Ausgewählt – weiter zur Anfrage';
+    b.onclick = function(){ document.getElementById('anfrage').scrollIntoView({behavior:'smooth'}); };
+  });
+});
+// Chat: tawk.to wird erst geladen, wenn der Besucher auf den Knopf tippt (keine Cookies vorher)
+(function(){
+  var fab = document.getElementById('chatFab'), loaded = false;
+  fab.addEventListener('click', function(){
+    if (!TAWK_ID) { document.getElementById('anfrage').scrollIntoView({behavior:'smooth'}); return; }
+    if (loaded) { if (window.Tawk_API && Tawk_API.maximize) Tawk_API.maximize(); return; }
+    loaded = true; fab.textContent = 'Chat wird geladen …';
+    window.Tawk_API = window.Tawk_API || {}; window.Tawk_LoadStart = new Date();
+    Tawk_API.onLoad = function(){ fab.hidden = true; Tawk_API.maximize(); };
+    var s = document.createElement('script'); s.async = true; s.src = 'https://embed.tawk.to/' + TAWK_ID; s.charset = 'UTF-8'; s.setAttribute('crossorigin','*');
+    document.body.appendChild(s);
+  });
+})();
+(function(){
+  var form = document.getElementById('form');
+  var panes = [].slice.call(form.querySelectorAll('.step-pane'));
+  var steps = [].slice.call(document.querySelectorAll('.progress li'));
+  var back = document.getElementById('back'), next = document.getElementById('next'), send = document.getElementById('send');
+  var err = document.getElementById('err'), cur = 1;
+  var MAX_FILE = 25 * 1024 * 1024, MAX_BILDER = 8;
+
+  if (!DATEI_UPLOAD) {
+    document.getElementById('logoBox').hidden = true;
+    document.querySelector('#f-bilder').closest('.group').hidden = true;
+    document.getElementById('linkBox').hidden = false;
+    
+  }
+
+  // Paket-Buttons in der Preisübersicht wählen das Paket vor
+  document.querySelectorAll('[data-paket]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var r = form.querySelector('input[name="paket"][value="' + a.dataset.paket + '"]');
+      if (r) r.checked = true;
+    });
+  });
+
+  function show(n){
+    cur = n;
+    panes.forEach(function(p){ p.hidden = +p.dataset.step !== n; });
+    steps.forEach(function(s, i){ s.classList.toggle('on', i < n); });
+    back.hidden = n === 1; next.hidden = n === panes.length; send.hidden = n !== panes.length;
+    err.textContent = '';
+    if (n === panes.length) renderSummary();
+    document.getElementById('anfrage').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+  }
+  function valid(n){
+    var pane = form.querySelector('.step-pane[data-step="' + n + '"]');
+    var fields = [].slice.call(pane.querySelectorAll('input,select,textarea')).filter(function(f){ return f.required && !f.closest('[hidden]'); });
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      if (f.type === 'radio') { if (!form.querySelector('input[name="' + f.name + '"]:checked')) { err.textContent = 'Bitte wähle eine Option bei „' + labelOf(f) + '“.'; return false; } continue; }
+      if (f.type === 'checkbox') { if (!f.checked) { err.textContent = 'Bitte bestätige die Datenschutzerklärung.'; f.focus(); return false; } continue; }
+      if (!f.value.trim()) { err.textContent = 'Bitte fülle „' + labelOf(f) + '“ aus.'; f.focus(); return false; }
+      if (f.type === 'email' && !/^\S+@\S+\.\S+$/.test(f.value)) { err.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.'; f.focus(); return false; }
+    }
+    return true;
+  }
+  function labelOf(f){
+    var g = f.closest('.group'); if (g && g.querySelector('.glabel')) return g.querySelector('.glabel').textContent.replace(' *', '');
+    var l = f.closest('label'); return l ? l.childNodes[0].textContent.replace(' *', '').trim() : f.name;
+  }
+  next.addEventListener('click', function(){ if (valid(cur)) show(cur + 1); });
+  back.addEventListener('click', function(){ show(cur - 1); });
+
+  // Datei-Vorschau und Prüfung
+  function preview(input, box, max){
+    input.addEventListener('change', function(){
+      box.innerHTML = ''; err.textContent = '';
+      var files = [].slice.call(input.files);
+      if (files.length > max) { err.textContent = 'Bitte höchstens ' + max + ' Dateien auswählen.'; input.value = ''; return; }
+      for (var i = 0; i < files.length; i++) if (files[i].size > MAX_FILE) { err.textContent = '„' + files[i].name + '“ ist größer als 25 MB.'; input.value = ''; box.innerHTML = ''; return; }
+      files.forEach(function(file){
+        var fig = document.createElement('figure'), cap = document.createElement('figcaption');
+        cap.textContent = file.name;
+        if (/^image\//.test(file.type)) { var img = document.createElement('img'); img.alt = ''; img.src = URL.createObjectURL(file); fig.appendChild(img); }
+        else { var d = document.createElement('div'); d.className = 'doc'; d.textContent = 'PDF'; fig.appendChild(d); }
+        fig.appendChild(cap); box.appendChild(fig);
+      });
+    });
+  }
+  preview(document.getElementById('f-logo'), document.getElementById('logoThumbs'), 1);
+  preview(document.getElementById('f-bilder'), document.getElementById('bildThumbs'), MAX_BILDER);
+
+  function all(name){ return [].slice.call(form.querySelectorAll('input[name="' + name + '"]:checked')).map(function(i){ return i.value; }); }
+  function val(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function collect(){
+    var farbenEgal = document.getElementById('f-farben-egal').checked;
+    var seiten = all('seiten'); if (val('f-seiten-weitere')) seiten.push(val('f-seiten-weitere'));
+    var logoFiles = DATEI_UPLOAD ? [].slice.call(document.getElementById('f-logo').files).map(function(f){ return f.name; }) : [];
+    var bildFiles = DATEI_UPLOAD ? [].slice.call(document.getElementById('f-bilder').files).map(function(f){ return f.name; }) : [];
+    var termin = val('f-termin'); if (termin) { var p = termin.split('-'); termin = p[2] + '.' + p[1] + '.' + p[0]; }
+    return [
+      ['Name', val('f-name')], ['E-Mail', val('f-email')], ['Telefon', val('f-tel')], ['Firma / Verein', val('f-firma')],
+      ['Branche', val('f-branche')], ['Rechnungsadresse', val('f-adr')],
+      ['Paket', all('paket')[0] || ''], ['Vorlage', val('f-vorlage')], ['Ziel der Website', val('f-ziel')],
+      ['Seiten', seiten.join(', ')], ['Funktionen', all('funktionen').join(', ')],
+      ['Stil', all('stil')[0] || ''],
+      ['Farben', farbenEgal ? 'Vionda entscheidet' : (val('f-farbe1') + ' (Haupt), ' + val('f-farbe2') + ' (Zweit)' + (val('f-farbtext') ? ' – ' + val('f-farbtext') : ''))],
+      ['Logo', (all('logo_status')[0] || '') + (logoFiles.length ? ' – Datei: ' + logoFiles.join(', ') : '')],
+      ['Fotos', bildFiles.length ? bildFiles.length + ' Datei(en): ' + bildFiles.join(', ') : ''],
+      ['Dateien-Link', DATEI_UPLOAD ? '' : val('f-dateilink')],
+      ['Vorbilder', val('f-vorbilder')], ['Texte', all('texte')[0] || ''],
+      ['Domain', (all('domain_status')[0] || '') + (val('f-domain') ? ': ' + val('f-domain') : '')],
+      ['Wunschtermin', termin], ['Social Media', val('f-social')],
+      ['Beschreibung', val('f-beschreibung')]
+    ].filter(function(r){ return r[1]; });
+  }
+  function renderSummary(){
+    var box = document.getElementById('summary'), rows = collect().filter(function(r){ return r[0] !== 'Beschreibung'; });
+    box.innerHTML = '<h3>Deine Angaben im Überblick</h3><dl></dl>';
+    var dl = box.querySelector('dl');
+    rows.forEach(function(r){ var dt = document.createElement('dt'), dd = document.createElement('dd'); dt.textContent = r[0]; dd.textContent = r[1]; dl.appendChild(dt); dl.appendChild(dd); });
+  }
+
+  var PREISE = {Basic: 299, Standard: 599, Premium: 999, Discord: 49};
+  function loadSupabase(){
+    return new Promise(function(ok, fail){
+      if (window.supabase) return ok(window.supabase);
+      var sc = document.createElement('script'); sc.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+      sc.onload = function(){ ok(window.supabase); }; sc.onerror = fail; document.head.appendChild(sc);
+    });
+  }
+  function rid(){ return (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)).replace(/-/g, ''); }
+  function safeName(n){ return String(n || 'datei').toLowerCase().replace(/[^a-z0-9._-]+/g, '-').slice(-80); }
+  async function sendToPortal(rows){
+    var lib = await loadSupabase(), sb = lib.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY, {auth: {persistSession: false}});
+    var id = rid(), dateien = [], files = [];
+    [].slice.call(document.getElementById('f-logo').files).forEach(function(f){ files.push([f, 'Logo']); });
+    [].slice.call(document.getElementById('f-bilder').files).forEach(function(f){ files.push([f, 'Foto']); });
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i][0], path = 'anfragen/' + id + '/' + (i + 1) + '-' + safeName(f.name);
+      send.textContent = 'Lade Dateien hoch (' + (i + 1) + '/' + files.length + ') …';
+      var up = await sb.storage.from('dateien').upload(path, f, {contentType: f.type || 'application/octet-stream', upsert: false});
+      if (up.error) throw new Error('upload');
+      dateien.push({id: path, name: files[i][1] + ': ' + f.name, typ: f.type || 'application/octet-stream'});
+    }
+    var g = {}; rows.forEach(function(r){ g[r[0]] = r[1]; });
+    var paketName = (g['Paket'] || '').split(' ')[0];
+    if (paketName === 'Discord-Server-Setup') paketName = 'Discord';
+    if (!PREISE[paketName]) paketName = 'Offen';
+    var d = new Date(), heute = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    var adr = (g['Rechnungsadresse'] || '').replace(/,\s*(?=\d{4}\b)/, '\n');
+    var doc = {
+      eingang: heute, status: 'neu', quelle: 'website', paket: paketName, preis: PREISE[paketName] || 0,
+      kunde: {name: g['Name'] || '', firma: g['Firma / Verein'] || '', email: g['E-Mail'] || '', telefon: g['Telefon'] || '', adresse: adr},
+      briefing: {vorlage: g['Vorlage'] || '', branche: g['Branche'] || '', ziel: g['Ziel der Website'] || '', seiten: g['Seiten'] || '',
+        funktionen: g['Funktionen'] || '', stil: g['Stil'] || '', farben: g['Farben'] || '', logo: g['Logo'] || '', texte: g['Texte'] || '',
+        domain: g['Domain'] || '', wunschtermin: g['Wunschtermin'] || '', vorbilder: g['Vorbilder'] || '', social: g['Social Media'] || '',
+        dateienLink: g['Dateien-Link'] || '', beschreibung: g['Beschreibung'] || ''},
+      dateien: dateien, nachricht: '', checkliste: {}
+    };
+    send.textContent = 'Wird gesendet …';
+    var ins = await sb.from('docs').insert({collection: 'auftraege', id: id, data: doc});
+    if (ins.error) throw new Error('insert');
+  }
+  function done(){
+    form.querySelectorAll('.step-pane,.nav-btns,.err').forEach(function(el){ el.hidden = true; });
+    document.getElementById('ok').style.display = 'block';
+    steps.forEach(function(s){ s.classList.add('on'); });
+  }
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    if (!valid(cur)) return;
+    if (document.getElementById('f-website') && document.getElementById('f-website').value) { done(); return; } // Spam-Schutz
+    var rows = collect();
+    var text = 'PROJEKT-ANFRAGE VIONDA\n\n' + rows.map(function(r){ return r[0].toLowerCase() + ': ' + r[1]; }).join('\n');
+    var subject = 'Projekt-Anfrage: ' + (val('f-firma') || val('f-name')) + ' – ' + (all('paket')[0] || '');
+    document.getElementById('f-briefing').value = text;
+    document.getElementById('f-subject').value = subject;
+    if (!SB_ON && !FORMSPREE) {
+      location.href = 'mailto:' + KONTAKT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text + '\n\n(Logo und Fotos bitte an diese E-Mail anhängen.)');
+      return;
+    }
+    send.disabled = true; send.textContent = 'Wird gesendet …';
+    try {
+      if (SB_ON) await sendToPortal(rows);
+      if (FORMSPREE) {
+        var data = new FormData(); data.append('_subject', subject); data.append('email', val('f-email')); data.append('briefing', text);
+        var r = fetch(FORMSPREE, {method: 'POST', body: data, headers: {Accept: 'application/json'}});
+        if (!SB_ON) { r = await r; if (!r.ok) throw new Error('formspree'); }
+      }
+      done();
+    } catch (x) {
+      err.textContent = 'Die Anfrage konnte nicht gesendet werden. Bitte versuch es gleich nochmal oder schreib an ' + KONTAKT_EMAIL + '.';
+    }
+    send.disabled = false; send.textContent = 'Unverbindlich anfragen';
+  });
+})();
+</script>
 </body>
 </html>
