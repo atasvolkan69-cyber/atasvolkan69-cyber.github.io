@@ -226,7 +226,7 @@ textarea{min-height:70px;resize:vertical}
     <div class="panel stack" id="importBox">
       <div class="spread"><h3>Anfrage aus E-Mail oder WhatsApp übernehmen</h3><span class="small muted">Website-Anfragen kommen automatisch</span></div>
       <p class="small muted" style="margin:0">Füge die Anfrage-E-Mail von deiner Website (oder eine WhatsApp-/Instagram-Nachricht) hier ein. Alle Angaben werden übernommen: Kontaktdaten, Paket, gewählte Vorlage, Seiten, Funktionen, Stil, Farben, Logo-Infos, Vorbilder, Domain, Termin und die genaue Beschreibung.</p>
-      <label class="f" for="importText">Anfrage einfügen<textarea id="importText" style="min-height:110px" placeholder="z. B.&#10;name: Anna Huber&#10;email: anna@friseur-huber.at&#10;firma: Friseur Huber&#10;adresse: Hauptplatz 3, 4910 Ried im Innkreis&#10;paket: Standard – 599 €" data-wo></textarea></label>
+      <label class="f" for="importText">Anfrage einfügen<textarea id="importText" style="min-height:110px" placeholder="z. B.&#10;name: Anna Huber&#10;email: anna@friseur-huber.at&#10;firma: Friseur Huber&#10;adresse: Hauptplatz 3, 4910 Ried im Innkreis&#10;paket: Standard – 149 €" data-wo></textarea></label>
       <div class="row"><button class="btn teal" id="importBtn" data-wo>Daten auslesen</button><span class="small muted" id="importState" role="status"></span></div>
     </div>
     <div class="tablewrap"><table>
@@ -497,7 +497,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()
 
 function invoiceEditor(r,pre){
   var isNew=!r, f=firma||{}, auftragId=pre&&pre.auftragId;
-  r=r?JSON.parse(JSON.stringify(r)):Object.assign({nr:nextNr(),datum:today(),faellig:addDays(today(),+(f.ziel||14)),leistung:"",kunde:{name:"",adresse:"",email:""},positionen:[{text:"Website Standard-Paket",menge:1,preis:599}],zahlungen:[],notiz:""},pre?pre.fields:{});
+  r=r?JSON.parse(JSON.stringify(r)):Object.assign({nr:nextNr(),datum:today(),faellig:addDays(today(),+(f.ziel||14)),leistung:"",kunde:{name:"",adresse:"",email:""},positionen:[{text:"Website Standard-Paket",menge:1,preis:149}],zahlungen:[],notiz:""},pre?pre.fields:{});
   if(auftragId)r.auftragId=auftragId;
   var ro=canWrite===false;
   openModal(
@@ -716,9 +716,9 @@ $("#firmaForm").addEventListener("submit",async function(e){e.preventDefault();v
   try{await db.doc("config/firma").set(o);toast("Firmendaten gespeichert")}catch(err){writeError(err)}});
 
 /* ---------- Aufträge ---------- */
-var PAKETE=[{name:"Basic",text:"Website Basic-Paket (Onepager, Kontaktformular, Google-Grundlagen)",preis:299},
-  {name:"Standard",text:"Website Standard-Paket (bis 5 Unterseiten, Google Maps, Galerie, Google-Unternehmensprofil)",preis:599},
-  {name:"Premium",text:"Website Premium-Paket (individuelles Design, Terminbuchung/Shop)",preis:999},
+var PAKETE=[{name:"Basic",text:"Website Basic-Paket (Onepager, Kontaktformular, Google-Grundlagen)",preis:99},
+  {name:"Standard",text:"Website Standard-Paket (bis 5 Unterseiten, Google Maps, Galerie, Google-Unternehmensprofil)",preis:149},
+  {name:"Premium",text:"Website Premium-Paket (individuelles Design, Terminbuchung/Shop)",preis:199},
   {name:"Discord",text:"Discord-Server-Einrichtung (Rollen, Bots, Tickets, Verifizierung)",preis:49},
   {name:"Wartung",text:"Website-Wartung (monatlich)",preis:25},
   {name:"Offen",text:"Beratung – Paket noch offen",preis:0}];
@@ -747,7 +747,7 @@ var BRIEF=[["vorlage","Gewählte Vorlage",0],["branche","Branche",0],["ziel","Zi
   ["dateienLink","Link zu Dateien des Kunden",0],["beschreibung","Genaue Beschreibung des Kunden",2]];
 function colorChips(t){var m=String(t||"").match(/#[0-9a-fA-F]{6}\b/g);return m?'<span class="row" style="gap:6px">'+m.map(function(c){return '<span title="'+c+'" style="display:inline-block;width:22px;height:22px;border-radius:6px;border:1px solid var(--line);background:'+c+'"></span>'}).join("")+'</span>':""}
 function orderEditor(a,isNew){
-  a=JSON.parse(JSON.stringify(a||{eingang:today(),status:"neu",paket:"Standard",preis:599,kunde:{name:"",firma:"",email:"",telefon:"",adresse:""},nachricht:"",briefing:{},dateien:[]}));
+  a=JSON.parse(JSON.stringify(a||{eingang:today(),status:"neu",paket:"Standard",preis:149,kunde:{name:"",firma:"",email:"",telefon:"",adresse:""},nachricht:"",briefing:{},dateien:[]}));
   a.kunde=a.kunde||{};a.briefing=a.briefing||{};a.dateien=a.dateien||[];
   var owner=role==="owner";
   openModal('<div class="spread"><h2>'+(isNew?"Auftrag prüfen":"Auftrag")+'</h2>'+(isNew?'<span class="small muted">Bitte kurz kontrollieren</span>':"")+'</div>'+
@@ -1088,20 +1088,20 @@ function makeDemo(role){
       {email: "max@vionda.at", name: "Max Beispiel", rolle: "mitarbeiter"}],
     docs: [
       {collection: "config", id: "firma", data: {name: "Vionda", inhaber: "Vorname Nachname (Beispiel)", strasse: "Musterstraße 1", plz: "4910", ort: "Ried im Innkreis", email: "hallo@vionda.at", web: "www.vionda.at", iban: "AT00 0000 0000 0000 0000", bic: "", bank: "Beispielbank", gisa: "", ziel: "14"}},
-      {collection: "auftraege", id: "a1", data: {eingang: d(18), status: "neu", quelle: "website", paket: "Standard", preis: 599,
+      {collection: "auftraege", id: "a1", data: {eingang: d(18), status: "neu", quelle: "website", paket: "Standard", preis: 149,
         kunde: {name: "Anna Beispiel", firma: "Friseur Beispiel", email: "anna@beispiel.at", telefon: "0664 000000", adresse: "Hauptplatz 3\n4910 Ried im Innkreis"},
         briefing: {vorlage: "Salon", branche: "Friseur & Kosmetik", ziel: "Mehr Online-Termine und neue Kundinnen aus der Region", seiten: "Startseite, Leistungen, Preise, Team, Galerie, Kontakt", funktionen: "Online-Terminbuchung, Google Maps, Öffnungszeiten, Google-Bewertungen", stil: "Elegant & hochwertig", farben: "#1c1917 (Haupt), #e8c4b8 (Zweit)", logo: "Ja, Logo ist vorhanden", texte: "Teils – Grundlagen liefere ich", domain: "Brauche eine neue Domain: friseur-beispiel.at", wunschtermin: "15.11." + y, vorbilder: "", social: "Instagram @friseurbeispiel", dateienLink: "", beschreibung: "Große Fotos von unseren Arbeiten, Preisliste gut sichtbar, Terminbuchung direkt auf der Startseite. Bitte kein Rot."},
         dateien: [], nachricht: "", checkliste: {}}},
-      {collection: "auftraege", id: "a2", data: {eingang: d(9), status: "in_arbeit", quelle: "website", paket: "Premium", preis: 999, bearbeiter: ids.mitarbeiter, rechnungen: [y + "-002"],
+      {collection: "auftraege", id: "a2", data: {eingang: d(9), status: "in_arbeit", quelle: "website", paket: "Premium", preis: 199, bearbeiter: ids.mitarbeiter, rechnungen: [y + "-002"],
         kunde: {name: "Thomas Beispiel", firma: "Tischlerei Beispiel", email: "office@tischlerei-beispiel.at", telefon: "", adresse: "Werkstraße 7\n4910 Ried im Innkreis"},
         briefing: {vorlage: "Werkstatt", branche: "Handwerk", ziel: "Aufträge für Küchen und Möbel", seiten: "Startseite, Leistungen, Referenzen, Über uns, Kontakt", funktionen: "Kontaktformular, Bildergalerie, Google Maps", stil: "Natürlich & warm", farben: "Holztöne, dunkelgrün", logo: "Ja, soll aber überarbeitet werden", texte: "Bitte Texte für mich schreiben", domain: "Habe schon eine Domain: tischlerei-beispiel.at", beschreibung: "Referenzprojekte mit Vorher-Nachher-Fotos."},
         dateien: [], nachricht: "Kunde liefert Fotos bis Freitag.", checkliste: {briefing: true, material: true, domain: true, entwurf: true}}},
-      {collection: "auftraege", id: "a3", data: {eingang: d(2), status: "fertig", quelle: "website", paket: "Basic", preis: 299, bearbeiter: ids.mitarbeiter, rechnungen: [y + "-001"],
+      {collection: "auftraege", id: "a3", data: {eingang: d(2), status: "fertig", quelle: "website", paket: "Basic", preis: 99, bearbeiter: ids.mitarbeiter, rechnungen: [y + "-001"],
         kunde: {name: "Lisa Beispiel", firma: "SV Beispiel", email: "obfrau@sv-beispiel.at", telefon: "", adresse: "Sportplatzweg 1\n4910 Ried im Innkreis"},
         briefing: {vorlage: "Verein", branche: "Verein", stil: "Verspielt & bunt", beschreibung: "Spielplan und Mitglied-werden-Formular."},
         dateien: [], nachricht: "", checkliste: {briefing: true, material: true, domain: true, entwurf: true, freigabe: true, umsetzung: true, test: true, online: true, google: true, uebergabe: true}}},
       {collection: "rechnungen", id: "r1", data: {nr: y + "-001", datum: d(5), faellig: d(19), leistung: "Website Basic", auftragId: "a3", kunde: {name: "SV Beispiel", adresse: "Lisa Beispiel\nSportplatzweg 1\n4910 Ried im Innkreis", email: "obfrau@sv-beispiel.at"},
-        positionen: [{text: "Website Basic-Paket (Onepager, Kontaktformular, Google-Grundlagen)", menge: 1, preis: 299}], zahlungen: [{datum: d(8), betrag: 299, quelle: "bank"}], notiz: ""}},
+        positionen: [{text: "Website Basic-Paket (Onepager, Kontaktformular, Google-Grundlagen)", menge: 1, preis: 99}], zahlungen: [{datum: d(8), betrag: 99, quelle: "bank"}], notiz: ""}},
       {collection: "rechnungen", id: "r2", data: {nr: y + "-002", datum: d(10), faellig: d(24), leistung: "", auftragId: "a2", kunde: {name: "Tischlerei Beispiel", adresse: "Thomas Beispiel\nWerkstraße 7\n4910 Ried im Innkreis", email: "office@tischlerei-beispiel.at"},
         positionen: [{text: "Website Premium-Paket – Anzahlung 50 %", menge: 1, preis: 499.5}], zahlungen: [], notiz: "Anzahlung laut Auftrag."}},
       {collection: "buchungen", id: "b1", data: {typ: "ausgabe", datum: d(3), betrag: 15, text: "Domain vionda.at (Beispiel)", kategorie: "Software & Domains"}},
