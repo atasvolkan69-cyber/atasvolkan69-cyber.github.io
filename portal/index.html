@@ -720,10 +720,11 @@ var PAKETE=[{name:"Basic",text:"Website Basic-Paket (Onepager, Kontaktformular, 
   {name:"Standard",text:"Website Standard-Paket (bis 5 Unterseiten, Google Maps, Galerie, Google-Unternehmensprofil)",preis:79},
   {name:"Premium",text:"Website Premium-Paket (individuelles Design, Terminbuchung/Shop)",preis:99},
   {name:"Discord",text:"Discord-Server-Einrichtung (Rollen, Bots, Tickets, Verifizierung)",preis:49},
+  {name:"Domain",text:"Domain-Service (Registrierung & Verlängerung, 1 Jahr)",preis:20},
   {name:"Wartung",text:"Website-Wartung (monatlich)",preis:25},
   {name:"Offen",text:"Beratung – Paket noch offen",preis:0}];
 var ORD_ST={neu:["Neu","offen"],in_arbeit:["In Arbeit","teil"],wartet:["Wartet auf Kunde","storniert"],fertig:["Fertig","bezahlt"],abgesagt:["Abgesagt","storniert"]};
-function paketBy(n){n=String(n||"").toLowerCase();return PAKETE.find(function(p){return n.indexOf(p.name.toLowerCase())>=0})||PAKETE[5]}
+function paketBy(n){n=String(n||"").toLowerCase();return PAKETE.find(function(p){return n.indexOf(p.name.toLowerCase())>=0})||PAKETE[PAKETE.length-1]}
 function renderOrders(){
   var f=$("#ordFilter").value,list=auftraege.filter(function(a){var done=a.status==="fertig"||a.status==="abgesagt";
     if(f==="alle")return true;if(f==="fertig")return done;if(f==="meine")return !done&&myId&&a.bearbeiter===myId;if(f==="frei")return !done&&!a.bearbeiter;return !done});
