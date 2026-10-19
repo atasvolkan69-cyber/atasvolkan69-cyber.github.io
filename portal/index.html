@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vionda Portal</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12202E">
+<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vionda Team">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+/* Layout: Kopfzeile mit Marke + Tabs, darunter ein Arbeitsbereich pro Tab; Zahlen rechtsbündig in Tabellen */
+:root{
+  --paper:#F4F6F7; --surface:#FFFFFF; --ink:#12202E; --muted:#5A687B; --line:#DDE3E9;
+  --teal:#0E9A86; --teal-soft:#E1F4F0; --amber:#C98316; --amber-soft:#FCF0DC;
+  --red:#C2410C; --red-soft:#FDE9E1; --green:#15803D; --green-soft:#E3F4E8;
+  --display:'Bricolage Grotesque','Arial Rounded MT Bold',Arial,sans-serif;
+  --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0D1620; --surface:#14212E; --ink:#E8EEF3; --muted:#9AAABB; --line:#26384C;
+  --teal:#2CC7AE; --teal-soft:#123A36; --amber:#F2B04D; --amber-soft:#3A2C12;
+  --red:#F28B63; --red-soft:#3D1E14; --green:#5BD48A; --green-soft:#133222; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --paper:#0D1620; --surface:#14212E; --ink:#E8EEF3; --muted:#9AAABB; --line:#26384C;
+  --teal:#2CC7AE; --teal-soft:#123A36; --amber:#F2B04D; --amber-soft:#3A2C12;
+  --red:#F28B63; --red-soft:#3D1E14; --green:#5BD48A; --green-soft:#133222; color-scheme:dark; }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{background:var(--paper);color:var(--ink);font:15px/1.5 var(--body);margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.3rem;letter-spacing:-.03em}
+.brand svg{width:32px;height:32px}
+.brand small{font:600 .72rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-left:2px}
+.who{display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted);min-width:0}
+.who img{width:26px;height:26px;border-radius:50%}
+.who span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.76rem;font-weight:600;white-space:nowrap}
+.pill.offen{background:var(--amber-soft);color:var(--amber)}
+.pill.teil{background:var(--teal-soft);color:var(--teal)}
+.pill.bezahlt{background:var(--green-soft);color:var(--green)}
+.pill.storniert{background:var(--line);color:var(--muted)}
+.pill.ueber{background:var(--red-soft);color:var(--red)}
+.pill.role{background:var(--teal-soft);color:var(--teal)}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs button{background:none;border:0;padding:10px 14px;border-bottom:2.5px solid transparent;color:var(--muted);font-weight:600;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--teal)}
+main{padding-block:24px 64px}
+h1,h2,h3{font-family:var(--display);letter-spacing:-.02em;text-wrap:balance;margin:0}
+h2{font-size:1.5rem}
+h3{font-size:1.1rem}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stack{display:grid;gap:16px}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.teal{background:var(--teal);color:#fff;border-color:var(--teal)}
+.btn.danger{color:var(--red)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:5px 10px;font-size:.84rem;border-radius:8px}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.kpi{background:var(--surface);padding:16px 18px;min-width:0}
+.kpi .l{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.kpi .v{font-family:var(--display);font-size:1.7rem;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px}
+.kpi .s{font-size:.82rem;color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.click{cursor:pointer}
+tr.click:hover td{background:color-mix(in srgb,var(--teal-soft) 50%,transparent)}
+.mono{font-family:var(--mono);font-size:.85rem}
+.empty{padding:36px 20px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-family:var(--display);font-size:1.15rem;margin-bottom:4px}
+label.f{display:grid;gap:4px;font-size:.84rem;font-weight:600;color:var(--muted)}
+input,select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink)}
+textarea{min-height:70px;resize:vertical}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fgrid .full{grid-column:1/-1}
+.meter{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--teal);border-radius:99px}
+.meter.warn i{background:var(--amber)}
+.meter.over i{background:var(--red)}
+.note{border-left:3px solid var(--amber);background:var(--amber-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.9rem}
+.note.info{border-color:var(--teal);background:var(--teal-soft)}
+#grenzen th{white-space:normal}
+#grenzen table{min-width:0}
+.taxline{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.taxline:last-child{border-bottom:0}
+.taxline.total{font-weight:700;font-size:1.05rem}
+.overlay{position:fixed;inset:0;background:rgba(10,18,28,.55);z-index:20;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:max(24px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 24px max(12px,env(safe-area-inset-left,0px))}
+.modal{background:var(--surface);border-radius:18px;width:min(760px,100%);padding:22px;display:grid;gap:16px;border:1px solid var(--line)}
+.pos{display:grid;grid-template-columns:minmax(0,1fr) 70px 110px 34px;gap:8px;align-items:center}
+.pos.h{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;z-index:30;font-weight:600;font-size:.9rem;max-width:calc(100% - 32px)}
+.bars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:150px;padding-top:8px}
+.bars div{display:grid;gap:4px;align-items:end;height:100%;grid-template-rows:1fr auto}
+.bars .b{background:var(--teal);border-radius:5px 5px 2px 2px;min-height:2px;align-self:end}
+.bars .b.zero{background:var(--line)}
+.bars span{font-size:.7rem;color:var(--muted);text-align:center}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.88rem}
+@media(max-width:820px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}}
+@media(max-width:520px){.fgrid{grid-template-columns:1fr}.pos{grid-template-columns:minmax(0,1fr) 54px 84px 30px}.kpi .v{font-size:1.35rem}.who span{display:none}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+.login-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px max(16px,env(safe-area-inset-left,0px))}
+.login-card{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;display:grid;gap:14px}
+.login-card h1{font-size:1.6rem;text-align:center}
+.login-card>p{text-align:center;margin:0}
+.linkbtn{background:none;border:0;color:var(--teal);font-weight:600;cursor:pointer;padding:4px 0}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../config.js"></script>
+</head>
+<body>
+<div id="login" class="login-wrap">
+  <div class="login-card">
+    <div class="brand" style="justify-content:center">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#12202E"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#14B8A0" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>
+      vionda <small>Portal</small>
+    </div>
+    <h1 id="lTitle">Anmelden</h1>
+    <p class="small muted" id="lSub">Für das Vionda-Team: Aufträge, Rechnungen und Buchhaltung.</p>
+    <form id="lForm" class="stack" style="gap:12px">
+      <label class="f" for="l-email" id="lEmailWrap">E-Mail<input id="l-email" type="email" autocomplete="username" required></label>
+      <label class="f" for="l-pw" id="lPwWrap">Passwort<input id="l-pw" type="password" autocomplete="current-password" minlength="8" required></label>
+      <button class="btn primary" type="submit" id="lBtn" style="justify-content:center">Anmelden</button>
+      <p class="small" id="lMsg" role="status" style="margin:0"></p>
+    </form>
+    <div class="row small" id="lLinks" style="justify-content:space-between">
+      <button class="linkbtn" type="button" data-mode="signup">Konto erstellen</button>
+      <button class="linkbtn" type="button" data-mode="reset">Passwort vergessen?</button>
+    </div>
+    <div id="lPending" class="stack" hidden>
+      <div class="note">Dein Konto ist noch nicht freigeschaltet. Bitte den Inhaber, dich unter „Team & Firma“ mit genau dieser E-Mail-Adresse einzuladen. Danach hier neu anmelden.</div>
+      <button class="btn" type="button" id="lLogout2">Abmelden</button>
+    </div>
+  </div>
+  <p class="small muted" style="text-align:center;max-width:420px;margin:0">Tipp: Im Browser-Menü „Zum Home-Bildschirm hinzufügen“ wählen – dann öffnet sich das Portal wie eine App, ganz ohne Download.</p>
+  <a class="small muted" href="../">← zurück zu vionda.at</a>
+</div>
+
+
+<div id="app" hidden>
+<header class="top">
+  <div class="wrap">
+    <div class="bar">
+      <div class="brand">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#12202E"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#14B8A0" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>
+        vionda <small>Portal</small>
+      </div>
+      <div class="row">
+        <select id="year" aria-label="Geschäftsjahr" style="width:auto"></select>
+        <div class="who" id="who"></div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs">
+      <button role="tab" class="fin" data-tab="uebersicht" aria-selected="true">Übersicht</button>
+      <button role="tab" data-tab="auftraege">Aufträge <span class="pill offen" id="newCount" hidden></span></button>
+      <button role="tab" class="fin" data-tab="rechnungen">Rechnungen</button>
+      <button role="tab" class="fin" data-tab="buchungen">Einnahmen & Ausgaben</button>
+      <button role="tab" class="fin" data-tab="bank">Bankabgleich</button>
+      <button role="tab" class="fin" data-tab="steuer">Steuer</button>
+      <button role="tab" class="fin" data-tab="team">Team & Firma</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="status" class="note" hidden></div>
+
+  <!-- ÜBERSICHT -->
+  <section id="t-uebersicht" class="stack">
+    <div class="spread"><h2>Übersicht <span id="yLabel" class="muted"></span></h2>
+      <button class="btn primary" data-act="newInvoice" data-w>Neue Rechnung</button></div>
+    <div class="kpis">
+      <div class="kpi"><div class="l">Eingenommen</div><div class="v" id="k-ein">0 €</div><div class="s" id="k-ein-s">bezahlt in diesem Jahr</div></div>
+      <div class="kpi"><div class="l">Offen</div><div class="v" id="k-offen">0 €</div><div class="s" id="k-offen-s">noch nicht bezahlt</div></div>
+      <div class="kpi"><div class="l">Gewinn</div><div class="v" id="k-gewinn">0 €</div><div class="s">Einnahmen minus Ausgaben</div></div>
+      <div class="kpi"><div class="l">Zur Seite legen</div><div class="v" id="k-steuer">0 €</div><div class="s">geschätzte Steuer + SVS</div></div>
+    </div>
+    <div class="grid2">
+      <div class="panel stack">
+        <div class="spread"><h3>Einnahmen pro Monat</h3><span class="small muted" id="chartMax"></span></div>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="panel stack">
+        <h3>Grenzen im Blick</h3>
+        <div class="stack" id="limits"></div>
+      </div>
+    </div>
+    <div class="panel stack">
+      <div class="spread"><h3>Offene Rechnungen</h3><button class="btn sm" data-goto="rechnungen">Alle Rechnungen</button></div>
+      <div id="openList"></div>
+    </div>
+  </section>
+
+  <!-- AUFTRÄGE -->
+  <section id="t-auftraege" class="stack" hidden>
+    <div class="spread"><h2>Aufträge</h2>
+      <div class="row"><select id="ordFilter" style="width:auto" aria-label="Filter"><option value="aktiv">Aktive</option><option value="meine">Meine Aufträge</option><option value="frei">Noch nicht übernommen</option><option value="alle">Alle</option><option value="fertig">Abgeschlossen</option></select>
+      <button class="btn" data-act="newOrder" data-wo>Auftrag manuell anlegen</button></div></div>
+    <div class="panel stack" id="importBox">
+      <div class="spread"><h3>Anfrage aus E-Mail oder WhatsApp übernehmen</h3><span class="small muted">Website-Anfragen kommen automatisch</span></div>
+      <p class="small muted" style="margin:0">Füge die Anfrage-E-Mail von deiner Website (oder eine WhatsApp-/Instagram-Nachricht) hier ein. Alle Angaben werden übernommen: Kontaktdaten, Paket, gewählte Vorlage, Seiten, Funktionen, Stil, Farben, Logo-Infos, Vorbilder, Domain, Termin und die genaue Beschreibung.</p>
+      <label class="f" for="importText">Anfrage einfügen<textarea id="importText" style="min-height:110px" placeholder="z. B.&#10;name: Anna Huber&#10;email: anna@friseur-huber.at&#10;firma: Friseur Huber&#10;adresse: Hauptplatz 3, 4910 Ried im Innkreis&#10;paket: Standard – 599 €" data-wo></textarea></label>
+      <div class="row"><button class="btn teal" id="importBtn" data-wo>Daten auslesen</button><span class="small muted" id="importState" role="status"></span></div>
+    </div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Eingang</th><th>Kunde</th><th>Paket</th><th>Status</th><th>Bearbeitet von</th><th class="num">Preis</th></tr></thead>
+      <tbody id="ordRows"></tbody></table></div>
+  </section>
+
+  <!-- RECHNUNGEN -->
+  <section id="t-rechnungen" class="stack" hidden>
+    <div class="spread"><h2>Rechnungen</h2>
+      <div class="row"><select id="invFilter" style="width:auto" aria-label="Filter"><option value="alle">Alle</option><option value="offen">Offen</option><option value="bezahlt">Bezahlt</option><option value="storniert">Storniert</option></select>
+      <button class="btn primary" data-act="newInvoice" data-w>Neue Rechnung</button></div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Nr.</th><th>Datum</th><th>Kunde</th><th>Status</th><th class="num">Betrag</th><th class="num">Bezahlt</th></tr></thead>
+      <tbody id="invRows"></tbody></table></div>
+    <p class="small muted">Tipp: Sag deinen Kunden, sie sollen die Rechnungsnummer als Verwendungszweck angeben. Dann erkennt der Bankabgleich die Zahlung automatisch.</p>
+  </section>
+
+  <!-- BUCHUNGEN -->
+  <section id="t-buchungen" class="stack" hidden>
+    <div class="spread"><h2>Einnahmen & Ausgaben</h2>
+      <div class="row"><button class="btn" data-act="newBooking" data-typ="einnahme" data-w>Einnahme ohne Rechnung</button>
+      <button class="btn primary" data-act="newBooking" data-typ="ausgabe" data-w>Ausgabe erfassen</button>
+      <button class="btn" data-act="exportCsv">CSV für Buchhaltung</button></div></div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Datum</th><th>Art</th><th>Beschreibung</th><th>Herkunft</th><th class="num">Betrag</th><th></th></tr></thead>
+      <tbody id="bookRows"></tbody></table></div>
+  </section>
+
+  <!-- BANK -->
+  <section id="t-bank" class="stack" hidden>
+    <h2>Bankabgleich</h2>
+    <div class="note info">Lade den Kontoauszug als CSV aus deinem Online-Banking (z. B. George, Raiffeisen ELBA, Bank Austria). Vionda Büro sucht in jeder Gutschrift nach der Rechnungsnummer und dem Betrag und bucht passende Zahlungen automatisch. Teilzahlungen (z. B. 50 % Anzahlung) werden erkannt.</div>
+    <div class="panel stack">
+      <label class="f" for="csvFile">Kontoauszug (.csv)<input type="file" id="csvFile" accept=".csv,text/csv,text/plain" data-w></label>
+      <div id="bankResult"></div>
+    </div>
+    <details class="panel"><summary><b>Warum nicht vollautomatisch?</b></summary>
+      <p class="muted">Damit Zahlungen ganz ohne Upload ankommen, braucht es einen Zahlungsanbieter mit eigenem Server (z. B. Stripe oder ein Bank-Schnittstellen-Dienst). Das kostet Gebühren pro Zahlung und lohnt sich erst bei vielen Kunden. Der CSV-Abgleich dauert 30 Sekunden pro Monat und ist kostenlos.</p></details>
+  </section>
+
+  <!-- STEUER -->
+  <section id="t-steuer" class="stack" hidden>
+    <div class="spread"><h2>Steuer-Schätzung <span id="yLabel2" class="muted"></span></h2></div>
+    <div class="grid2">
+      <div class="panel stack">
+        <h3>Einkommensteuer auf deinen Nebenverdienst</h3>
+        <label class="f" for="satz">Dein Steuersatz aus dem Hauptjob (Grenzsteuersatz)
+          <select id="satz" data-w>
+            <option value="0">0 % – Jahresgehalt unter ca. 13.500 €</option>
+            <option value="0.2">20 % – ca. 13.500 bis 22.000 €</option>
+            <option value="0.3" selected>30 % – ca. 22.000 bis 36.500 €</option>
+            <option value="0.4">40 % – ca. 36.500 bis 70.000 €</option>
+            <option value="0.48">48 % – darüber</option>
+          </select></label>
+        <div id="taxCalc"></div>
+      </div>
+      <div class="panel stack">
+        <h3>Sozialversicherung (SVS)</h3>
+        <div id="svsCalc"></div>
+      </div>
+    </div>
+    <div class="panel stack" id="grenzen"></div>
+    <p class="small muted">Schätzung nach den Werten 2026 (Veranlagungsfreibetrag 730 €, Gewinnfreibetrag 15 %, SVS-Versicherungsgrenze 6.613,20 €, Kleinunternehmergrenze 55.000 €). Keine Steuerberatung – im Zweifel WKO-Gründerservice oder Steuerberater fragen.</p>
+  </section>
+
+  <!-- TEAM -->
+  <section id="t-team" class="stack" hidden>
+    <h2>Team & Firma</h2>
+    <div class="grid2">
+      <div class="panel stack">
+        <h3>Firmendaten (erscheinen auf jeder Rechnung)</h3>
+        <form id="firmaForm" class="fgrid">
+          <label class="f full" for="fi-name">Firmenname<input id="fi-name" name="name" placeholder="Vionda"></label>
+          <label class="f full" for="fi-inhaber">Inhaber (Vor- und Nachname)<input id="fi-inhaber" name="inhaber"></label>
+          <label class="f full" for="fi-strasse">Straße und Hausnummer<input id="fi-strasse" name="strasse"></label>
+          <label class="f" for="fi-plz">PLZ<input id="fi-plz" name="plz" placeholder="4910"></label>
+          <label class="f" for="fi-ort">Ort<input id="fi-ort" name="ort" placeholder="Ried im Innkreis"></label>
+          <label class="f" for="fi-email">E-Mail<input id="fi-email" name="email" placeholder="hallo@vionda.at"></label>
+          <label class="f" for="fi-web">Website<input id="fi-web" name="web" placeholder="www.vionda.at"></label>
+          <label class="f full" for="fi-iban">IBAN<input id="fi-iban" name="iban" placeholder="AT.."></label>
+          <label class="f" for="fi-bic">BIC<input id="fi-bic" name="bic"></label>
+          <label class="f" for="fi-bank">Bank<input id="fi-bank" name="bank"></label>
+          <label class="f" for="fi-gisa">GISA-Zahl<input id="fi-gisa" name="gisa"></label>
+          <label class="f" for="fi-ziel">Zahlungsziel (Tage)<input id="fi-ziel" name="ziel" type="number" min="0" value="14"></label>
+          <div class="full row"><button class="btn primary" type="submit" data-w>Firmendaten speichern</button></div>
+        </form>
+      </div>
+      <div class="panel stack">
+        <h3>Team & Zugänge</h3>
+        <div id="meBox" class="small"></div>
+        <div id="teamOwner" class="stack" hidden>
+          <p class="small muted" style="margin:0">Lade hier Buchhaltung und Mitarbeiter ein. Danach öffnen sie <b>vionda.at/portal</b>, tippen auf „Konto erstellen“ und verwenden genau diese E-Mail-Adresse. Nach dem Bestätigen der E-Mail haben sie automatisch die richtigen Rechte.</p>
+          <form id="inviteForm" class="fgrid">
+            <label class="f" for="inv-name">Name<input id="inv-name" required placeholder="Laura"></label>
+            <label class="f" for="inv-rolle">Rolle<select id="inv-rolle"><option value="mitarbeiter">Mitarbeiter</option><option value="buchhaltung">Buchhaltung</option></select></label>
+            <label class="f full" for="inv-email">E-Mail-Adresse<input id="inv-email" type="email" required placeholder="laura.buchhaltung@vionda.at"></label>
+            <div class="full"><button class="btn primary" type="submit">Einladen</button></div>
+          </form>
+        </div>
+        <div id="teamList" class="stack" style="gap:0"></div>
+        <div class="taxline"><span><b>Buchhaltung</b><br><span class="muted small">sieht alle Rechnungen, Zahlungen, Ausgaben und Steuerzahlen, lädt PDFs und CSV herunter, kann an den Finanzen nichts ändern</span></span><span class="pill role">Lesen</span></div>
+        <div class="taxline"><span><b>Mitarbeiter</b><br><span class="muted small">sieht nur „Aufträge“: übernehmen, bearbeiten, Dateien hochladen. Rechnungen, Einnahmen und Steuer bleiben unsichtbar</span></span><span class="pill role">Aufträge</span></div>
+        <div class="taxline"><span><b>Inhaber</b><br><span class="muted small">darf als Einziger Rechnungen schreiben, Zahlungen buchen, Firmendaten ändern und das Team verwalten</span></span><span class="pill role">Alles</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="modalRoot"></div>
+</div>
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script>
+window.startApp=function(){
+"use strict";
+var LOGO_INK="#12202E", LOGO_TEAL="#14B8A0", LOGO_AMBER="#F2A93B";
+var db=null, user=null, downloads=null, sample=null, assets=null, myId=null, canWrite=null, canWriteOrders=null, role=null;
+var firma={}, rechnungen=[], buchungen=[], auftraege=[];
+var year=new Date().getFullYear();
+var MONTHS=["Jän","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
+
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function eur(n){return (Math.round((n||0)*100)/100).toLocaleString("de-AT",{style:"currency",currency:"EUR"})}
+function eur0(n){return Math.round(n||0).toLocaleString("de-AT")+" €"}
+function r2(n){return Math.round((n||0)*100)/100}
+function today(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function fmtD(iso){if(!iso)return "–";var p=iso.split("-");return p[2]+"."+p[1]+"."+p[0]}
+function addDays(iso,n){var d=new Date(iso+"T12:00:00");d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)}
+function toast(t){var el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(function(){el.hidden=true},2600)}
+function status(t){var el=$("#status");if(!t){el.hidden=true;return}el.textContent=t;el.hidden=false}
+function parseNum(s){if(typeof s==="number")return s;s=String(s||"").trim().replace(/\s|€|EUR/g,"");if(!s)return NaN;
+  if(/,\d{1,2}$/.test(s))s=s.replace(/\./g,"").replace(",",".");else s=s.replace(/,/g,"");return parseFloat(s)}
+
+/* ---------- Rechnungs-Logik ---------- */
+function invTotal(r){return r2((r.positionen||[]).reduce(function(a,p){return a+(+p.menge||0)*(+p.preis||0)},0))}
+function invPaid(r){return r2((r.zahlungen||[]).reduce(function(a,z){return a+(+z.betrag||0)},0))}
+function invStatus(r){if(r.storniert)return "storniert";var t=invTotal(r),p=invPaid(r);if(p<=0)return t>0&&r.faellig&&r.faellig<today()?"ueber":"offen";return p+0.005>=t?"bezahlt":"teil"}
+var ST_LABEL={offen:"Offen",teil:"Teilbezahlt",bezahlt:"Bezahlt",storniert:"Storniert",ueber:"Überfällig"};
+function nextNr(){var y=String(new Date().getFullYear()),max=0;rechnungen.forEach(function(r){var m=/^(\d{4})-(\d+)$/.exec(r.nr||"");if(m&&m[1]===y)max=Math.max(max,+m[2])});return y+"-"+String(max+1).padStart(3,"0")}
+
+/* ---------- Jahreszahlen ---------- */
+function yearData(y){
+  var ys=String(y),ein=0,aus=0,months=new Array(12).fill(0),offen=0,offenN=0,umsatz=0;
+  rechnungen.forEach(function(r){
+    (r.zahlungen||[]).forEach(function(z){if((z.datum||"").slice(0,4)===ys){ein+=+z.betrag||0;months[+z.datum.slice(5,7)-1]+=+z.betrag||0}});
+    var st=invStatus(r);if(st!=="storniert"&&st!=="bezahlt"){offen+=invTotal(r)-invPaid(r);offenN++}
+  });
+  buchungen.forEach(function(b){if((b.datum||"").slice(0,4)!==ys)return;
+    if(b.typ==="einnahme"){ein+=+b.betrag||0;months[+b.datum.slice(5,7)-1]+=+b.betrag||0}else aus+=+b.betrag||0});
+  umsatz=ein;
+  return {ein:r2(ein),aus:r2(aus),gewinn:r2(ein-aus),months:months,offen:r2(offen),offenN:offenN,umsatz:r2(umsatz)};
+}
+function tax(gewinn,satz){
+  var g=Math.max(gewinn,0),gfb=Math.min(g*0.15,4950),nach=g-gfb,stpfl;
+  if(nach<=730)stpfl=0;else if(nach<=1460)stpfl=(nach-730)*2;else stpfl=nach;
+  return {gfb:r2(gfb),nach:r2(nach),stpfl:r2(stpfl),steuer:r2(stpfl*satz)};
+}
+var FREI_BIS=858.82, VOLL_AB=1717.65, NUR_SELBST=13539, SVS_GRENZE=6613.20, SVS_SATZ=0.2683, UV_JAHR=155.40, KU_GRENZE=55000;
+function svs(gewinn){return gewinn>SVS_GRENZE?r2(gewinn*SVS_SATZ):0}
+function satz(){return parseFloat($("#satz").value)||0}
+
+/* ---------- Rendern ---------- */
+function render(){
+  $("#yLabel").textContent=year;$("#yLabel2").textContent=year;
+  var d=yearData(year),t=tax(d.gewinn,satz()),s=svs(d.gewinn);
+  $("#k-ein").textContent=eur0(d.ein);
+  $("#k-offen").textContent=eur0(d.offen);$("#k-offen-s").textContent=d.offenN===1?"1 Rechnung offen":d.offenN+" Rechnungen offen";
+  $("#k-gewinn").textContent=eur0(d.gewinn);
+  $("#k-steuer").textContent=eur0(t.steuer+s);
+  renderBars(d);renderLimits(d);renderOpen();renderInvoices();renderBookings();renderTax(d,t,s);renderOrders();
+}
+function renderBars(d){
+  var max=Math.max.apply(null,d.months.concat([1]));
+  $("#chartMax").textContent=d.ein>0?"höchster Monat "+eur0(max):"";
+  $("#bars").innerHTML=d.months.map(function(v,i){var h=v>0?Math.max(4,v/max*100):2;
+    return '<div title="'+MONTHS[i]+': '+eur(v)+'"><i class="b'+(v>0?"":" zero")+'" style="height:'+h+'%"></i><span>'+MONTHS[i]+'</span></div>'}).join("");
+}
+function meter(label,val,limit,hint){
+  var pct=Math.min(100,val/limit*100),cls=pct>=100?"over":pct>=80?"warn":"";
+  return '<div class="stack" style="gap:6px"><div class="spread small"><b>'+esc(label)+'</b><span class="num">'+eur0(val)+' / '+eur0(limit)+'</span></div><div class="meter '+cls+'"><i style="width:'+pct+'%"></i></div><span class="small muted">'+hint+'</span></div>';
+}
+function renderLimits(d){
+  $("#limits").innerHTML=
+    meter("Steuerfrei (Gewinn)",Math.max(d.gewinn,0),FREI_BIS,d.gewinn<=FREI_BIS?"Bis 858,82 € Gewinn im Jahr zahlst du neben deinem Job keine Einkommensteuer.":"Über 858,82 € – ab jetzt fällt Einkommensteuer an. Details im Tab Steuer.")+
+    meter("SVS-Versicherungsgrenze",Math.max(d.gewinn,0),SVS_GRENZE,d.gewinn<=SVS_GRENZE?"Darunter reicht die Kleinunternehmer-Ausnahme (nur 12,95 €/Monat).":"Grenze überschritten – volle SVS-Pflicht, Ausnahme gilt nicht mehr.")+
+    meter("Kleinunternehmer (Umsatz)",d.umsatz,KU_GRENZE,"Bis 55.000 € Umsatz keine Umsatzsteuer auf deinen Rechnungen.");
+}
+function invRowHtml(r){var st=invStatus(r);return '<tr class="click" data-inv="'+esc(r._id)+'"><td class="mono">'+esc(r.nr)+'</td><td>'+fmtD(r.datum)+'</td><td>'+esc(r.kunde&&r.kunde.name)+'</td><td><span class="pill '+st+'">'+ST_LABEL[st]+'</span></td><td class="num">'+eur(invTotal(r))+'</td><td class="num">'+eur(invPaid(r))+'</td></tr>'}
+function renderOpen(){
+  var list=rechnungen.filter(function(r){var s=invStatus(r);return s!=="bezahlt"&&s!=="storniert"});
+  if(!list.length){$("#openList").innerHTML='<div class="empty"><b>Nichts offen</b>Alle Rechnungen sind bezahlt'+(rechnungen.length?"":" – oder du hast noch keine geschrieben. Leg mit „Neue Rechnung“ los")+'.</div>';return}
+  $("#openList").innerHTML='<div class="tablewrap"><table><thead><tr><th>Nr.</th><th>Datum</th><th>Kunde</th><th>Status</th><th class="num">Betrag</th><th class="num">Bezahlt</th></tr></thead><tbody>'+list.map(invRowHtml).join("")+'</tbody></table></div>';
+}
+function renderInvoices(){
+  var f=$("#invFilter").value,list=rechnungen.filter(function(r){var s=invStatus(r);
+    if(f==="alle")return true;if(f==="offen")return s==="offen"||s==="teil"||s==="ueber";return s===f});
+  $("#invRows").innerHTML=list.length?list.map(invRowHtml).join(""):'<tr><td colspan="6"><div class="empty"><b>Noch keine Rechnungen</b>Mit „Neue Rechnung“ schreibst du die erste. Nummer, Datum und Firmendaten werden automatisch eingetragen.</div></td></tr>';
+}
+function bookingList(){
+  var ys=String(year),rows=[];
+  rechnungen.forEach(function(r){(r.zahlungen||[]).forEach(function(z){if((z.datum||"").slice(0,4)===ys)rows.push({datum:z.datum,typ:"einnahme",text:"Rechnung "+r.nr+" – "+((r.kunde&&r.kunde.name)||""),herkunft:z.quelle==="bank"?"Bankabgleich":"Zahlung erfasst",betrag:+z.betrag||0,nr:r.nr})})});
+  buchungen.forEach(function(b){if((b.datum||"").slice(0,4)===ys)rows.push({datum:b.datum,typ:b.typ,text:b.text,herkunft:b.kategorie||"Manuell",betrag:+b.betrag||0,id:b._id})});
+  rows.sort(function(a,b){return a.datum<b.datum?1:-1});return rows;
+}
+function renderBookings(){
+  var rows=bookingList();
+  $("#bookRows").innerHTML=rows.length?rows.map(function(b){
+    return '<tr><td>'+fmtD(b.datum)+'</td><td><span class="pill '+(b.typ==="einnahme"?"bezahlt":"offen")+'">'+(b.typ==="einnahme"?"Einnahme":"Ausgabe")+'</span></td><td>'+esc(b.text)+'</td><td class="small muted">'+esc(b.herkunft)+'</td><td class="num">'+(b.typ==="ausgabe"?"− ":"")+eur(b.betrag)+'</td><td>'+(b.id&&canWrite!==false?'<button class="btn sm danger" data-delbook="'+esc(b.id)+'">Löschen</button>':"")+'</td></tr>'}).join("")
+   :'<tr><td colspan="6"><div class="empty"><b>Noch keine Buchungen '+year+'</b>Bezahlte Rechnungen erscheinen hier automatisch. Ausgaben wie Domain, Software oder SVS-Beiträge trägst du mit „Ausgabe erfassen“ ein – sie senken deine Steuer.</div></td></tr>';
+}
+function renderGrenzen(d){
+  var g=Math.max(d.gewinn,0),zone=g<=FREI_BIS?0:g<=VOLL_AB?1:2;
+  function row(i,a,b){return '<tr'+(i===zone?' style="background:var(--teal-soft)"':'')+'><td>'+a+'</td><td>'+b+(i===zone?' <span class="pill bezahlt">hier bist du</span>':'')+'</td></tr>'}
+  var stand=zone===0?"Dein Gewinn "+year+": <b>"+eur(g)+"</b>. Du zahlst keine Einkommensteuer. Du kannst noch <b>"+eur(FREI_BIS-g)+"</b> Gewinn machen, bevor Steuer anfällt.":
+    zone===1?"Dein Gewinn "+year+": <b>"+eur(g)+"</b>. Ein Teil davon wird besteuert. Ab "+eur(VOLL_AB)+" Gewinn wird alles besteuert.":
+    "Dein Gewinn "+year+": <b>"+eur(g)+"</b>. Der ganze Gewinn wird mit deinem Steuersatz besteuert.";
+  $("#grenzen").innerHTML='<h3>Ab wann muss ich Steuer zahlen?</h3><div class="note info">'+stand+'</div>'+
+    '<div class="tablewrap"><table><thead><tr><th>Dein Gewinn im Jahr<br><span style="text-transform:none;letter-spacing:0">(Einnahmen minus Ausgaben)</span></th><th>Einkommensteuer – neben deinem Job</th></tr></thead><tbody>'+
+    row(0,"bis <b>858,82 €</b>","<b>keine Steuer</b>")+
+    row(1,"858,83 € bis 1.717,65 €","nur ein Teil wird besteuert (Einschleifregelung)")+
+    row(2,"ab <b>1.717,66 €</b>","der ganze Gewinn wird zu deinem Gehalt dazugerechnet und mit deinem Steuersatz besteuert")+
+    '</tbody></table></div>'+
+    '<p class="small muted" style="margin:0">Warum 858,82 € und nicht 730 €? Vom Gewinn werden automatisch 15 % Gewinnfreibetrag abgezogen: 858,82 € minus 15 % = 730 €. Steuerfrei sind 730 € Nebeneinkünfte im Jahr neben einem Job mit Lohnsteuer. Hättest du keinen Job, wären bis 13.539 € Einkommen im Jahr steuerfrei.</p>'+
+    '<div class="tablewrap"><table><thead><tr><th>Grenze</th><th>Was gilt</th></tr></thead><tbody>'+
+    '<tr'+(g<=SVS_GRENZE?' style="background:var(--teal-soft)"':'')+'><td>Gewinn bis <b>6.613,20 €</b></td><td>SVS: nur Unfallversicherung <b>12,95 € im Monat</b> (mit Kleinunternehmer-Ausnahme)</td></tr>'+
+    '<tr'+(g>SVS_GRENZE?' style="background:var(--amber-soft)"':'')+'><td>Gewinn über 6.613,20 €</td><td>SVS: volle Versicherung, rund <b>26,83 %</b> vom Gewinn</td></tr>'+
+    '<tr'+(d.umsatz<=KU_GRENZE?' style="background:var(--teal-soft)"':'')+'><td>Umsatz bis <b>55.000 €</b></td><td>keine Umsatzsteuer auf deinen Rechnungen (Kleinunternehmer)</td></tr>'+
+    '</tbody></table></div>'+
+    '<p class="small" style="margin:0"><b>Termin:</b> Die Einkommensteuererklärung für '+year+' machst du über FinanzOnline, online bis 30. Juni '+(year+1)+'. Auch wenn keine Steuer anfällt, musst du sie abgeben, sobald das Finanzamt dich dazu auffordert.</p>';
+}
+function renderTax(d,t,s){
+  renderGrenzen(d);
+  var sz=satz();
+  $("#taxCalc").innerHTML=
+    '<div class="taxline"><span>Einnahmen</span><span class="num">'+eur(d.ein)+'</span></div>'+
+    '<div class="taxline"><span>− Ausgaben</span><span class="num">'+eur(d.aus)+'</span></div>'+
+    '<div class="taxline"><span>= Gewinn</span><span class="num">'+eur(d.gewinn)+'</span></div>'+
+    '<div class="taxline"><span>− Gewinnfreibetrag (15 %)</span><span class="num">'+eur(t.gfb)+'</span></div>'+
+    '<div class="taxline"><span>Steuerpflichtig nach 730-€-Regel</span><span class="num">'+eur(t.stpfl)+'</span></div>'+
+    '<div class="taxline total"><span>Geschätzte Einkommensteuer ('+Math.round(sz*100)+' %)</span><span class="num">'+eur(t.steuer)+'</span></div>'+
+    (t.nach<=730?'<p class="small muted">Nach Freibetrag unter 730 € – keine Steuer. Eine Steuererklärung musst du trotzdem abgeben, wenn das Finanzamt dich auffordert.</p>':
+     t.nach<=1460?'<p class="small muted">Zwischen 730 und 1.460 € wird nur ein Teil besteuert (Einschleifregelung).</p>':
+     '<p class="small muted">Der volle Gewinn wird zu deinem Gehalt dazugerechnet. Einkommensteuererklärung bis 30. April des Folgejahres (über FinanzOnline).</p>');
+  $("#svsCalc").innerHTML=
+    '<div class="taxline"><span>Unfallversicherung (fix)</span><span class="num">'+eur(UV_JAHR)+' / Jahr</span></div>'+
+    '<div class="taxline"><span>Kranken- & Pensionsversicherung</span><span class="num">'+(d.gewinn>SVS_GRENZE?eur(s):"0,00 € (Ausnahme)")+'</span></div>'+
+    (d.gewinn>SVS_GRENZE?'<div class="note">Dein Gewinn liegt über 6.613,20 €. Die Kleinunternehmer-Ausnahme gilt dann nicht. Die SVS schreibt rund 26,83 % vom Gewinn vor – oft erst Jahre später als Nachzahlung. Leg das Geld zur Seite.</div>':
+     '<p class="small muted">Solange der Gewinn unter 6.613,20 € bleibt und du die Ausnahme beantragt hast, zahlst du nur die Unfallversicherung. Trag die 12,95 € pro Monat als Ausgabe ein.</p>');
+}
+
+/* ---------- Tabs ---------- */
+function showTab(name){
+  $$("#tabs button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.tab===name?"true":"false")});
+  $$("main > section").forEach(function(s){s.hidden=s.id!=="t-"+name});
+  try{localStorage.setItem("vionda-tab",name)}catch(e){}
+  window.scrollTo(0,0);
+}
+$("#tabs").addEventListener("click",function(e){var b=e.target.closest("button[data-tab]");if(b)showTab(b.dataset.tab)});
+
+/* ---------- Modal ---------- */
+function openModal(html,onMount){var root=$("#modalRoot");root.innerHTML='<div class="overlay"><div class="modal" role="dialog" aria-modal="true">'+html+'</div></div>';
+  root.querySelector(".overlay").addEventListener("click",function(e){if(e.target.classList.contains("overlay"))closeModal()});if(onMount)onMount(root.querySelector(".modal"))}
+function closeModal(){$("#modalRoot").innerHTML=""}
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal()});
+
+function invoiceEditor(r,pre){
+  var isNew=!r, f=firma||{}, auftragId=pre&&pre.auftragId;
+  r=r?JSON.parse(JSON.stringify(r)):Object.assign({nr:nextNr(),datum:today(),faellig:addDays(today(),+(f.ziel||14)),leistung:"",kunde:{name:"",adresse:"",email:""},positionen:[{text:"Website Standard-Paket",menge:1,preis:599}],zahlungen:[],notiz:""},pre?pre.fields:{});
+  if(auftragId)r.auftragId=auftragId;
+  var ro=canWrite===false;
+  openModal(
+    '<div class="spread"><h2>'+(isNew?"Neue Rechnung":"Rechnung "+esc(r.nr))+'</h2>'+(isNew?"":'<span class="pill '+invStatus(r)+'">'+ST_LABEL[invStatus(r)]+'</span>')+'</div>'+
+    '<div class="fgrid">'+
+      '<label class="f" for="e-nr">Rechnungsnummer<input id="e-nr" class="mono" value="'+esc(r.nr)+'"></label>'+
+      '<label class="f" for="e-datum">Rechnungsdatum<input id="e-datum" type="date" value="'+esc(r.datum)+'"></label>'+
+      '<label class="f" for="e-faellig">Zahlbar bis<input id="e-faellig" type="date" value="'+esc(r.faellig)+'"></label>'+
+      '<label class="f" for="e-leistung">Leistungszeitraum<input id="e-leistung" placeholder="z. B. 01.–15.11.2026" value="'+esc(r.leistung)+'"></label>'+
+      '<label class="f full" for="e-kname">Kunde (Name / Firma)<input id="e-kname" value="'+esc(r.kunde.name)+'"></label>'+
+      '<label class="f full" for="e-kadr">Adresse des Kunden<textarea id="e-kadr" placeholder="Straße Nr.&#10;PLZ Ort">'+esc(r.kunde.adresse)+'</textarea></label>'+
+      '<label class="f full" for="e-kmail">E-Mail des Kunden<input id="e-kmail" type="email" value="'+esc(r.kunde.email)+'"></label>'+
+    '</div>'+
+    '<div class="stack" style="gap:8px"><div class="pos h"><span>Leistung</span><span>Menge</span><span>Preis €</span><span></span></div><div id="posList" class="stack" style="gap:8px"></div>'+
+    '<div class="spread"><button class="btn sm" id="addPos" type="button">+ Position</button><b>Summe: <span id="sum" class="num"></span></b></div></div>'+
+    '<label class="f" for="e-notiz">Hinweis auf der Rechnung (optional)<input id="e-notiz" placeholder="z. B. 50 % Anzahlung laut Angebot" value="'+esc(r.notiz)+'"></label>'+
+    (isNew?"":'<div class="panel stack" style="gap:8px"><b>Zahlungen</b><div id="payList"></div>'+
+      (ro?"":'<div class="row"><input id="p-betrag" type="number" step="0.01" placeholder="Betrag" style="width:130px"><input id="p-datum" type="date" value="'+today()+'" style="width:160px"><button class="btn sm teal" id="addPay" type="button">Zahlung erfassen</button></div>')+'</div>')+
+    '<div class="spread"><div class="row">'+
+      (isNew?"":'<button class="btn" id="pdfBtn" type="button">PDF herunterladen</button>')+
+      (isNew||ro?"":(r.storniert?'<button class="btn" id="stornoBtn" type="button">Storno aufheben</button>':'<span class="confirm" id="stornoWrap"><button class="btn danger" id="stornoBtn" type="button">Stornieren</button></span>'))+
+    '</div><div class="row"><button class="btn" type="button" id="cancelBtn">Schließen</button>'+(ro?"":'<button class="btn primary" type="button" id="saveBtn">'+(isNew?"Rechnung anlegen":"Speichern")+'</button>')+'</div></div>',
+  function(m){
+    function drawPos(){
+      $("#posList",m).innerHTML=r.positionen.map(function(p,i){return '<div class="pos"><input aria-label="Leistung" data-i="'+i+'" data-k="text" value="'+esc(p.text)+'"><input aria-label="Menge" type="number" step="0.5" data-i="'+i+'" data-k="menge" value="'+esc(p.menge)+'"><input aria-label="Preis" type="number" step="0.01" data-i="'+i+'" data-k="preis" value="'+esc(p.preis)+'"><button class="btn sm" type="button" aria-label="Position entfernen" data-rm="'+i+'">×</button></div>'}).join("");
+      $("#sum",m).textContent=eur(invTotal(r));
+    }
+    function drawPay(){var el=$("#payList",m);if(!el)return;
+      el.innerHTML=(r.zahlungen||[]).length?r.zahlungen.map(function(z,i){return '<div class="spread small"><span>'+fmtD(z.datum)+' · '+(z.quelle==="bank"?"Bankabgleich":"manuell")+'</span><span class="row"><b class="num">'+eur(z.betrag)+'</b>'+(ro?"":'<button class="btn sm danger" type="button" data-rmpay="'+i+'">Entfernen</button>')+'</span></div>'}).join("")+'<div class="small muted">Noch offen: '+eur(Math.max(0,invTotal(r)-invPaid(r)))+'</div>':'<span class="small muted">Noch keine Zahlung eingegangen. Offen: '+eur(invTotal(r))+'</span>'}
+    drawPos();drawPay();
+    if(ro)$$("input,textarea",m).forEach(function(i){i.readOnly=true});
+    m.addEventListener("input",function(e){var t=e.target;if(t.dataset.k){var p=r.positionen[+t.dataset.i];p[t.dataset.k]=t.dataset.k==="text"?t.value:parseFloat(t.value)||0;$("#sum",m).textContent=eur(invTotal(r))}});
+    m.addEventListener("click",function(e){var t=e.target;
+      if(t.dataset.rm){r.positionen.splice(+t.dataset.rm,1);drawPos()}
+      if(t.dataset.rmpay){r.zahlungen.splice(+t.dataset.rmpay,1);drawPay();save(false)}
+    });
+    $("#addPos",m).onclick=function(){r.positionen.push({text:"",menge:1,preis:0});drawPos()};
+    $("#cancelBtn",m).onclick=closeModal;
+    function collect(){r.nr=$("#e-nr",m).value.trim();r.datum=$("#e-datum",m).value;r.faellig=$("#e-faellig",m).value;r.leistung=$("#e-leistung",m).value.trim();
+      r.kunde={name:$("#e-kname",m).value.trim(),adresse:$("#e-kadr",m).value.trim(),email:$("#e-kmail",m).value.trim()};r.notiz=$("#e-notiz",m).value.trim();
+      r.positionen=r.positionen.filter(function(p){return p.text||p.preis});r.summe=invTotal(r);}
+    async function save(close){
+      collect();
+      if(!r.nr||!r.kunde.name||!r.positionen.length){toast("Bitte Nummer, Kunde und mindestens eine Position ausfüllen");return false}
+      if(rechnungen.some(function(x){return x.nr===r.nr&&x._id!==r._id})){toast("Die Rechnungsnummer "+r.nr+" gibt es schon");return false}
+      var body=Object.assign({},r);delete body._id;body.geaendertVon=myId||null;body.geaendertAm=new Date().toISOString();
+      if(!r._id){body.erstelltVon=myId||null}
+      try{
+        if(r._id)await db.collection("rechnungen").doc(r._id).set(body);
+        else{var ref=db.collection("rechnungen").doc();await ref.set(body);r._id=ref.id;
+          if(auftragId){var a=auftraege.find(function(x){return x._id===auftragId});
+            try{await db.collection("auftraege").doc(auftragId).update({rechnungen:((a&&a.rechnungen)||[]).concat([r.nr]),status:a&&a.status==="neu"?"in_arbeit":(a&&a.status)||"in_arbeit"})}catch(e){}}}
+        toast(isNew?"Rechnung "+r.nr+" angelegt":"Gespeichert");if(close)closeModal();return true;
+      }catch(err){writeError(err);return false}
+    }
+    if($("#saveBtn",m))$("#saveBtn",m).onclick=function(){save(true)};
+    if($("#addPay",m))$("#addPay",m).onclick=function(){var b=parseFloat($("#p-betrag",m).value);if(!(b>0)){toast("Betrag eingeben");return}
+      r.zahlungen=r.zahlungen||[];r.zahlungen.push({datum:$("#p-datum",m).value||today(),betrag:r2(b),quelle:"manuell"});$("#p-betrag",m).value="";drawPay();save(false)};
+    if($("#pdfBtn",m))$("#pdfBtn",m).onclick=function(){collect();invoicePdf(r)};
+    var sb=$("#stornoBtn",m);
+    if(sb)sb.onclick=function(){
+      if(r.storniert){r.storniert=false;save(true);return}
+      $("#stornoWrap",m).innerHTML='<span>Wirklich stornieren?</span><button class="btn sm danger" id="stornoYes" type="button">Ja, stornieren</button><button class="btn sm" id="stornoNo" type="button">Nein</button>';
+      $("#stornoYes",m).onclick=function(){r.storniert=true;save(true)};
+      $("#stornoNo",m).onclick=function(){$("#stornoWrap",m).innerHTML='<button class="btn danger" type="button" disabled>Stornieren</button>'};
+    };
+  });
+}
+
+function bookingEditor(typ){
+  openModal('<h2>'+(typ==="einnahme"?"Einnahme ohne Rechnung":"Ausgabe erfassen")+'</h2>'+
+    '<div class="fgrid"><label class="f" for="b-datum">Datum<input id="b-datum" type="date" value="'+today()+'"></label>'+
+    '<label class="f" for="b-betrag">Betrag in €<input id="b-betrag" type="number" step="0.01" min="0"></label>'+
+    '<label class="f full" for="b-text">Beschreibung<input id="b-text" placeholder="'+(typ==="einnahme"?"z. B. Discord-Setup Barzahlung":"z. B. Domain vionda.at")+'"></label>'+
+    (typ==="ausgabe"?'<label class="f full" for="b-kat">Kategorie<select id="b-kat"><option>Software & Domains</option><option>Hardware</option><option>SVS-Beiträge</option><option>WKO-Umlage</option><option>Werbung</option><option>Fahrtkosten</option><option>Sonstiges</option></select></label>':"")+
+    '</div><div class="row" style="justify-content:flex-end"><button class="btn" id="bCancel" type="button">Abbrechen</button><button class="btn primary" id="bSave" type="button">Speichern</button></div>',
+  function(m){
+    $("#bCancel",m).onclick=closeModal;
+    $("#bSave",m).onclick=async function(){var b=parseFloat($("#b-betrag",m).value),t=$("#b-text",m).value.trim();
+      if(!(b>0)||!t){toast("Betrag und Beschreibung ausfüllen");return}
+      try{await db.collection("buchungen").doc().set({typ:typ,datum:$("#b-datum",m).value||today(),betrag:r2(b),text:t,kategorie:typ==="ausgabe"?$("#b-kat",m).value:"Einnahme ohne Rechnung",erstelltVon:myId||null});
+        toast(typ==="einnahme"?"Einnahme gespeichert":"Ausgabe gespeichert");closeModal()}catch(err){writeError(err)}};
+  });
+}
+
+/* ---------- PDF ---------- */
+function hex(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
+async function invoicePdf(r){
+  if(!window.jspdf){toast("PDF-Modul lädt noch – gleich nochmal versuchen");return}
+  var f=firma||{},doc=new window.jspdf.jsPDF({unit:"mm",format:"a4"}),L=20,R=190,y;
+  doc.setFillColor.apply(doc,hex(LOGO_INK));doc.roundedRect(L,16,15,15,3.6,3.6,"F");
+  doc.setDrawColor.apply(doc,hex(LOGO_TEAL));doc.setLineWidth(1.75);doc.setLineCap("round");doc.setLineJoin("round");
+  doc.lines([[3.5,6.3],[3.5,-6.3]],L+4,20.5,[1,1],"S",false);
+  doc.setFillColor.apply(doc,hex(LOGO_AMBER));doc.circle(L+11.5,19.5,1.2,"F");
+  doc.setFont("helvetica","bold");doc.setFontSize(20);doc.setTextColor.apply(doc,hex(LOGO_INK));doc.text((f.name||"Vionda").toLowerCase(),L+19,27.5);
+  doc.setFont("helvetica","normal");doc.setFontSize(9);doc.setTextColor(90,104,123);
+  var abs=[f.inhaber,f.strasse,[f.plz,f.ort].filter(Boolean).join(" "),f.email,f.web].filter(Boolean);
+  abs.forEach(function(t,i){doc.text(t,R,18+i*4.4,{align:"right"})});
+  doc.setFontSize(7.5);doc.text([f.name||"Vionda",f.inhaber,f.strasse,[f.plz,f.ort].filter(Boolean).join(" ")].filter(Boolean).join(" · "),L,50);
+  doc.setFontSize(11);doc.setTextColor(18,32,46);
+  var kl=[r.kunde.name].concat((r.kunde.adresse||"").split("\n")).filter(Boolean);
+  kl.forEach(function(t,i){doc.text(t,L,57+i*5.2)});
+  y=57;var meta=[["Rechnungsnummer",r.nr],["Rechnungsdatum",fmtD(r.datum)],["Leistungszeitraum",r.leistung||fmtD(r.datum)],["Zahlbar bis",fmtD(r.faellig)]];
+  doc.setFontSize(9);meta.forEach(function(m,i){doc.setTextColor(90,104,123);doc.text(m[0],140,y+i*5.2);doc.setTextColor(18,32,46);doc.text(String(m[1]),R,y+i*5.2,{align:"right"})});
+  y=Math.max(57+kl.length*5.2,y+4*5.2)+14;
+  doc.setFont("helvetica","bold");doc.setFontSize(18);doc.text("Rechnung "+r.nr,L,y);y+=10;
+  doc.setFontSize(8.5);doc.setTextColor(90,104,123);doc.text("LEISTUNG",L,y);doc.text("MENGE",128,y,{align:"right"});doc.text("EINZELPREIS",158,y,{align:"right"});doc.text("GESAMT",R,y,{align:"right"});
+  y+=2.5;doc.setDrawColor(221,227,233);doc.setLineWidth(0.3);doc.line(L,y,R,y);y+=6;
+  doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setTextColor(18,32,46);
+  r.positionen.forEach(function(p){var lines=doc.splitTextToSize(p.text||"",100);doc.text(lines,L,y);
+    doc.text(String(p.menge).replace(".",","),128,y,{align:"right"});doc.text(eur(p.preis),158,y,{align:"right"});doc.text(eur((+p.menge||0)*(+p.preis||0)),R,y,{align:"right"});
+    y+=lines.length*5+3;if(y>250){doc.addPage();y=25}});
+  doc.line(L,y-1,R,y-1);y+=6;
+  doc.setFont("helvetica","bold");doc.setFontSize(12);doc.text("Gesamtbetrag",128,y,{align:"right"});doc.text(eur(invTotal(r)),R,y,{align:"right"});
+  var paid=invPaid(r);if(paid>0){y+=6;doc.setFont("helvetica","normal");doc.setFontSize(10);doc.text("bereits bezahlt",128,y,{align:"right"});doc.text("− "+eur(paid),R,y,{align:"right"});y+=6;doc.setFont("helvetica","bold");doc.text("Offener Betrag",128,y,{align:"right"});doc.text(eur(Math.max(0,invTotal(r)-paid)),R,y,{align:"right"})}
+  y+=12;doc.setFont("helvetica","normal");doc.setFontSize(9.5);doc.setTextColor(90,104,123);
+  doc.text("Gemäß § 6 Abs. 1 Z 27 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmer).",L,y);y+=6;
+  if(r.notiz){doc.setTextColor(18,32,46);var nl=doc.splitTextToSize(r.notiz,170);doc.text(nl,L,y);y+=nl.length*5+2}
+  doc.setTextColor(18,32,46);
+  var pay="Bitte überweise den Betrag bis "+fmtD(r.faellig)+" auf das unten angegebene Konto. Verwendungszweck: "+r.nr;
+  var pl=doc.splitTextToSize(pay,170);doc.text(pl,L,y);
+  doc.setDrawColor(221,227,233);doc.line(L,272,R,272);doc.setFontSize(7.8);doc.setTextColor(90,104,123);
+  doc.text([[f.name||"Vionda",f.inhaber].filter(Boolean).join(" – Inhaber: "),[f.strasse,[f.plz,f.ort].filter(Boolean).join(" ")].filter(Boolean).join(", ")].filter(Boolean),L,277);
+  doc.text([f.bank?"Bank: "+f.bank:"",f.iban?"IBAN: "+f.iban:"IBAN: bitte in Firmendaten eintragen",f.bic?"BIC: "+f.bic:""].filter(Boolean),105,277);
+  doc.text([f.gisa?"GISA-Zahl: "+f.gisa:"",f.email||"",f.web||""].filter(Boolean),R,277,{align:"right"});
+  await saveFile("Rechnung_"+r.nr+".pdf",doc.output("blob"));
+}
+async function saveFile(name,data){
+  if(!downloads){toast("Herunterladen ist in dieser Ansicht nicht möglich");return}
+  try{await downloads.save({filename:name,data:data});toast("Heruntergeladen: "+name)}
+  catch(e){if(e&&e.code==="declined")return;toast(e&&e.code==="rate_limited"?"Einen Moment, dann nochmal":"Download nicht möglich")}
+}
+function exportCsv(){
+  var rows=bookingList().slice().reverse(),lines=["Datum;Art;Beschreibung;Herkunft;Betrag EUR"];
+  rows.forEach(function(b){lines.push([fmtD(b.datum),b.typ==="einnahme"?"Einnahme":"Ausgabe",'"'+String(b.text||"").replace(/"/g,'""')+'"',b.herkunft,(b.typ==="ausgabe"?-b.betrag:b.betrag).toFixed(2).replace(".",",")].join(";"))});
+  var d=yearData(year);lines.push("");lines.push(";;Summe Einnahmen;;"+d.ein.toFixed(2).replace(".",","));lines.push(";;Summe Ausgaben;;"+(-d.aus).toFixed(2).replace(".",","));lines.push(";;Gewinn;;"+d.gewinn.toFixed(2).replace(".",","));
+  saveFile("Vionda_Einnahmen_Ausgaben_"+year+".csv","﻿"+lines.join("\r\n"));
+}
+
+/* ---------- Bankabgleich ---------- */
+function parseCsv(text){
+  var first=text.split(/\r?\n/)[0]||"",sep=(first.split(";").length>=first.split(",").length)?";":",";
+  if(first.split("\t").length>first.split(sep).length)sep="\t";
+  var rows=[],row=[],cell="",q=false;
+  for(var i=0;i<text.length;i++){var c=text[i];
+    if(q){if(c==='"'){if(text[i+1]==='"'){cell+='"';i++}else q=false}else cell+=c}
+    else if(c==='"')q=true;else if(c===sep){row.push(cell);cell=""}
+    else if(c==="\n"||c==="\r"){if(c==="\r"&&text[i+1]==="\n")i++;row.push(cell);rows.push(row);row=[];cell=""}
+    else cell+=c}
+  if(cell||row.length){row.push(cell);rows.push(row)}
+  return rows.filter(function(r){return r.some(function(c){return c.trim()})});
+}
+function findDate(cells){for(var i=0;i<cells.length;i++){var c=cells[i].trim(),m;
+  if((m=/^(\d{1,2})\.(\d{1,2})\.(\d{4})/.exec(c)))return m[3]+"-"+m[2].padStart(2,"0")+"-"+m[1].padStart(2,"0");
+  if((m=/^(\d{4})-(\d{2})-(\d{2})/.exec(c)))return m[0]}return null}
+function analyzeBank(text){
+  var rows=parseCsv(text);if(!rows.length)return {err:"Die Datei ist leer."};
+  var head=rows[0].map(function(h){return h.toLowerCase()}),amtCol=-1;
+  head.forEach(function(h,i){if(amtCol<0&&/betrag|amount|umsatz/.test(h)&&!/saldo/.test(h))amtCol=i});
+  var data=amtCol>=0?rows.slice(1):rows,credits=[];
+  data.forEach(function(cells){
+    var amt=NaN;
+    if(amtCol>=0)amt=parseNum(cells[amtCol]);
+    else{for(var i=0;i<cells.length;i++){var c=cells[i].trim();if(/^[+-]?\d{1,3}([.\s]?\d{3})*(,\d{2})$|^[+-]?\d+\.\d{2}$/.test(c)){amt=parseNum(c);break}}}
+    if(!(amt>0))return;
+    credits.push({datum:findDate(cells)||today(),betrag:r2(amt),text:cells.join(" ").replace(/\s+/g," ").trim()});
+  });
+  var matches=[],unmatched=[],used={};
+  credits.forEach(function(c){
+    var hay=c.text.toUpperCase().replace(/\s+/g,""),hit=null;
+    rechnungen.forEach(function(r){if(hit||r.storniert||!r.nr)return;
+      var nr=r.nr.toUpperCase().replace(/\s+/g,"");if(hay.indexOf(nr)<0)return;
+      var dup=(r.zahlungen||[]).some(function(z){return z.datum===c.datum&&Math.abs(z.betrag-c.betrag)<0.01});
+      var offen=invTotal(r)-invPaid(r)-(used[r._id]||0);
+      if(dup)hit={r:r,dup:true};else if(c.betrag<=offen+0.01)hit={r:r}});
+    if(hit&&!hit.dup){used[hit.r._id]=(used[hit.r._id]||0)+c.betrag;matches.push({c:c,r:hit.r})}
+    else if(!hit)unmatched.push(c);
+  });
+  return {credits:credits.length,matches:matches,unmatched:unmatched};
+}
+$("#csvFile").addEventListener("change",function(e){
+  var file=e.target.files[0];if(!file)return;var rd=new FileReader();
+  rd.onload=function(){var txt=String(rd.result);if(txt.indexOf(String.fromCharCode(65533))>=0){var rd2=new FileReader();rd2.onload=function(){showBank(analyzeBank(String(rd2.result)))};rd2.readAsText(file,"windows-1252")}else showBank(analyzeBank(txt))};
+  rd.readAsText(file,"utf-8");
+});
+function showBank(res){
+  var el=$("#bankResult");
+  if(res.err){el.innerHTML='<div class="note">'+esc(res.err)+'</div>';return}
+  var h='<p class="small muted">'+res.credits+' Gutschriften gefunden, davon '+res.matches.length+' passend zu offenen Rechnungen.</p>';
+  if(res.matches.length){
+    h+='<div class="tablewrap"><table><thead><tr><th>Datum</th><th>Rechnung</th><th>Kunde</th><th class="num">Betrag</th></tr></thead><tbody>'+
+      res.matches.map(function(m){return '<tr><td>'+fmtD(m.c.datum)+'</td><td class="mono">'+esc(m.r.nr)+'</td><td>'+esc(m.r.kunde&&m.r.kunde.name)+'</td><td class="num">'+eur(m.c.betrag)+'</td></tr>'}).join("")+
+      '</tbody></table></div><div class="row"><button class="btn teal" id="applyBank" data-w>'+res.matches.length+' Zahlung'+(res.matches.length===1?"":"en")+' buchen</button></div>';
+  }else h+='<div class="note info">Keine neuen Zahlungen zu offenen Rechnungen gefunden.</div>';
+  if(res.unmatched.length){
+    h+='<details><summary class="small"><b>'+res.unmatched.length+' Gutschriften ohne Rechnungsnummer</b></summary><div class="stack" style="gap:6px;margin-top:8px">'+
+      res.unmatched.slice(0,30).map(function(c,i){return '<div class="spread small"><span style="min-width:0;overflow-wrap:anywhere">'+fmtD(c.datum)+' · '+esc(c.text.slice(0,90))+'</span><span class="row"><b class="num">'+eur(c.betrag)+'</b><button class="btn sm" data-asinc="'+i+'" data-w>Als Einnahme buchen</button></span></div>'}).join("")+'</div></details>';
+  }
+  el.innerHTML=h;applyRO();
+  var ab=$("#applyBank");if(ab)ab.onclick=async function(){ab.disabled=true;
+    var byInv={};res.matches.forEach(function(m){(byInv[m.r._id]=byInv[m.r._id]||[]).push(m.c)});
+    try{for(var id in byInv){var r=rechnungen.find(function(x){return x._id===id});if(!r)continue;
+        var z=(r.zahlungen||[]).concat(byInv[id].map(function(c){return {datum:c.datum,betrag:c.betrag,quelle:"bank"}}));
+        await db.collection("rechnungen").doc(id).update({zahlungen:z,geaendertVon:myId||null,geaendertAm:new Date().toISOString()})}
+      toast("Zahlungen gebucht");el.innerHTML='<div class="note info">Erledigt – die Rechnungen sind aktualisiert.</div>';$("#csvFile").value=""}
+    catch(err){ab.disabled=false;writeError(err)}};
+  $$("[data-asinc]",el).forEach(function(b){b.onclick=async function(){var c=res.unmatched[+b.dataset.asinc];b.disabled=true;
+    try{await db.collection("buchungen").doc().set({typ:"einnahme",datum:c.datum,betrag:c.betrag,text:c.text.slice(0,120),kategorie:"Bankabgleich",erstelltVon:myId||null});b.textContent="Gebucht"}catch(err){b.disabled=false;writeError(err)}}});
+}
+
+/* ---------- Firma ---------- */
+function fillFirma(){var f=$("#firmaForm");Object.keys(firma||{}).forEach(function(k){var i=f.elements[k];if(i&&document.activeElement!==i)i.value=firma[k]==null?"":firma[k]})}
+$("#firmaForm").addEventListener("submit",async function(e){e.preventDefault();var f=e.target,o={};
+  ["name","inhaber","strasse","plz","ort","email","web","iban","bic","bank","gisa","ziel"].forEach(function(k){o[k]=f.elements[k].value.trim()});
+  o.iban=o.iban.replace(/\s+/g,"").replace(/(.{4})/g,"$1 ").trim();
+  try{await db.doc("config/firma").set(o);toast("Firmendaten gespeichert")}catch(err){writeError(err)}});
+
+/* ---------- Aufträge ---------- */
+var PAKETE=[{name:"Basic",text:"Website Basic-Paket (Onepager, Kontaktformular, Google-Grundlagen)",preis:299},
+  {name:"Standard",text:"Website Standard-Paket (bis 5 Unterseiten, Google Maps, Galerie, Google-Unternehmensprofil)",preis:599},
+  {name:"Premium",text:"Website Premium-Paket (individuelles Design, Terminbuchung/Shop)",preis:999},
+  {name:"Discord",text:"Discord-Server-Einrichtung (Rollen, Bots, Tickets, Verifizierung)",preis:49},
+  {name:"Wartung",text:"Website-Wartung (monatlich)",preis:25},
+  {name:"Offen",text:"Beratung – Paket noch offen",preis:0}];
+var ORD_ST={neu:["Neu","offen"],in_arbeit:["In Arbeit","teil"],wartet:["Wartet auf Kunde","storniert"],fertig:["Fertig","bezahlt"],abgesagt:["Abgesagt","storniert"]};
+function paketBy(n){n=String(n||"").toLowerCase();return PAKETE.find(function(p){return n.indexOf(p.name.toLowerCase())>=0})||PAKETE[5]}
+function renderOrders(){
+  var f=$("#ordFilter").value,list=auftraege.filter(function(a){var done=a.status==="fertig"||a.status==="abgesagt";
+    if(f==="alle")return true;if(f==="fertig")return done;if(f==="meine")return !done&&myId&&a.bearbeiter===myId;if(f==="frei")return !done&&!a.bearbeiter;return !done});
+  var nNew=auftraege.filter(function(a){return a.status==="neu"}).length,nc=$("#newCount");nc.hidden=!nNew;nc.textContent=nNew;
+  $("#ordRows").innerHTML=list.length?list.map(function(a){var st=ORD_ST[a.status]||ORD_ST.neu,done=Object.keys(a.checkliste||{}).filter(function(k){return a.checkliste[k]}).length;
+    return '<tr class="click" data-ord="'+esc(a._id)+'"><td>'+fmtD(a.eingang)+'</td><td>'+esc(a.kunde&&a.kunde.name)+(a.kunde&&a.kunde.firma?'<br><span class="small muted">'+esc(a.kunde.firma)+'</span>':"")+'</td><td>'+esc(a.paket)+(a.briefing&&a.briefing.vorlage?'<br><span class="small muted">Vorlage '+esc(a.briefing.vorlage)+'</span>':"")+'</td><td><span class="pill '+st[1]+'">'+st[0]+'</span><br><span class="small muted">'+done+'/'+SCHRITTE.length+' Schritte</span></td><td><span class="who-cell" data-uid="'+esc(a.bearbeiter||"")+'">'+(a.bearbeiter?"…":'<span class="pill offen">frei</span>')+'</span></td><td class="num">'+(a.preis?eur(a.preis):"–")+'</td></tr>'}).join("")
+   :'<tr><td colspan="6"><div class="empty"><b>'+(f==="meine"?"Du hast gerade keinen Auftrag":"Keine Aufträge")+'</b>'+(f==="meine"?"Unter „Noch nicht übernommen“ findest du freie Aufträge.":"Wenn eine Anfrage über die Website reinkommt, füge sie oben ein. Der Auftrag wird mit allen Kundendaten angelegt.")+'</div></td></tr>';
+  fillNames();
+}
+async function fillNames(){
+  var cells=$$(".who-cell[data-uid]").filter(function(c){return c.dataset.uid}),ids=cells.map(function(c){return c.dataset.uid});
+  if(!ids.length)return;
+  var ps=user&&user.profiles?await user.profiles(ids):{};
+  cells.forEach(function(c){var p=ps[c.dataset.uid];c.textContent=c.dataset.uid===myId?"Du":((p&&p.name)||"Teammitglied")});
+}
+var SCHRITTE=[["briefing","Briefing gelesen, offene Fragen mit Kunde geklärt"],["material","Logo, Fotos und Texte vom Kunden erhalten"],["domain","Domain registriert bzw. Zugang erhalten"],
+  ["entwurf","Design-Entwurf erstellt und an Kunden geschickt"],["freigabe","Kunde hat Entwurf freigegeben"],["umsetzung","Alle Seiten und Funktionen umgesetzt"],
+  ["test","Auf Handy und PC getestet, Impressum & Datenschutz drin"],["online","Website online"],["google","Google-Unternehmensprofil & Search Console eingerichtet"],["uebergabe","Kunde informiert, Restrechnung angestoßen"]];
+var BRIEF=[["vorlage","Gewählte Vorlage",0],["branche","Branche",0],["ziel","Ziel der Website",1],["seiten","Seiten",1],["funktionen","Funktionen",1],["stil","Stil",0],["farben","Farben",0],
+  ["logo","Logo",0],["texte","Texte",0],["domain","Domain",0],["wunschtermin","Wunschtermin",0],["vorbilder","Vorbilder (Websites)",1],["social","Social Media",0],
+  ["dateienLink","Link zu Dateien des Kunden",0],["beschreibung","Genaue Beschreibung des Kunden",2]];
+function colorChips(t){var m=String(t||"").match(/#[0-9a-fA-F]{6}\b/g);return m?'<span class="row" style="gap:6px">'+m.map(function(c){return '<span title="'+c+'" style="display:inline-block;width:22px;height:22px;border-radius:6px;border:1px solid var(--line);background:'+c+'"></span>'}).join("")+'</span>':""}
+function orderEditor(a,isNew){
+  a=JSON.parse(JSON.stringify(a||{eingang:today(),status:"neu",paket:"Standard",preis:599,kunde:{name:"",firma:"",email:"",telefon:"",adresse:""},nachricht:"",briefing:{},dateien:[]}));
+  a.kunde=a.kunde||{};a.briefing=a.briefing||{};a.dateien=a.dateien||[];
+  var owner=role==="owner";
+  openModal('<div class="spread"><h2>'+(isNew?"Auftrag prüfen":"Auftrag")+'</h2>'+(isNew?'<span class="small muted">Bitte kurz kontrollieren</span>':"")+'</div>'+
+    '<div class="fgrid">'+
+    '<label class="f" for="o-name">Name<input id="o-name" value="'+esc(a.kunde.name)+'"></label>'+
+    '<label class="f" for="o-firma">Firma / Verein<input id="o-firma" value="'+esc(a.kunde.firma)+'"></label>'+
+    '<label class="f" for="o-email">E-Mail<input id="o-email" type="email" value="'+esc(a.kunde.email)+'"></label>'+
+    '<label class="f" for="o-tel">Telefon<input id="o-tel" value="'+esc(a.kunde.telefon)+'"></label>'+
+    '<label class="f full" for="o-adr">Rechnungsadresse<textarea id="o-adr" placeholder="Straße Nr.&#10;PLZ Ort">'+esc(a.kunde.adresse)+'</textarea></label>'+
+    '<label class="f" for="o-paket">Paket<select id="o-paket">'+PAKETE.map(function(p){return '<option'+(p.name===a.paket?" selected":"")+'>'+p.name+'</option>'}).join("")+'</select></label>'+
+    '<label class="f" for="o-preis">Preis €<input id="o-preis" type="number" step="0.01" value="'+esc(a.preis)+'"></label>'+
+    '<label class="f" for="o-status">Status<select id="o-status">'+Object.keys(ORD_ST).map(function(k){return '<option value="'+k+'"'+(k===a.status?" selected":"")+'>'+ORD_ST[k][0]+'</option>'}).join("")+'</select></label>'+
+    '<label class="f" for="o-eingang">Eingang<input id="o-eingang" type="date" value="'+esc(a.eingang)+'"></label>'+
+    '</div>'+
+    '<div class="panel stack" style="gap:10px"><div class="spread"><b>Projekt-Briefing des Kunden</b>'+colorChips(a.briefing.farben)+'</div><div class="fgrid">'+
+      BRIEF.map(function(b){var v=a.briefing[b[0]]||"",id="ob-"+b[0];
+        return '<label class="f'+(b[2]?" full":"")+'" for="'+id+'">'+b[1]+(b[2]?'<textarea id="'+id+'" data-brief="'+b[0]+'"'+(b[2]===2?' style="min-height:120px"':"")+'>'+esc(v)+'</textarea>':'<input id="'+id+'" data-brief="'+b[0]+'" value="'+esc(v)+'">')+'</label>'}).join("")+
+    '<label class="f full" for="o-msg">Interne Notizen (sieht der Kunde nie)<textarea id="o-msg">'+esc(a.nachricht)+'</textarea></label></div></div>'+
+    (!isNew?'<div class="panel stack" style="gap:10px"><div class="spread"><b>Bearbeitung</b><span id="bearbeiterTxt" class="small"></span></div><div class="row" id="takeRow"></div>'+
+      '<div class="stack" style="gap:6px">'+SCHRITTE.map(function(x){return '<label class="small" style="display:flex;gap:8px;align-items:flex-start;cursor:pointer"><input type="checkbox" data-step="'+x[0]+'" style="width:auto;margin-top:3px"'+(a.checkliste&&a.checkliste[x[0]]?" checked":"")+'> '+esc(x[1])+'</label>'}).join("")+'</div></div>':"")+
+    '<div class="panel stack" style="gap:10px"><div class="spread"><b>Logo & Bilder</b>'+(assets?'<label class="btn sm" for="o-files" style="cursor:pointer">Dateien hinzufügen<input id="o-files" type="file" multiple accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,application/pdf" hidden></label>':"")+'</div><div id="fileList" class="row" style="gap:10px;align-items:flex-start"></div><span class="small muted" id="fileState"></span></div>'+
+    (owner&&!isNew?'<div class="panel stack" style="gap:8px"><b>Rechnung aus diesem Auftrag</b><span class="small muted">Alle Kundendaten werden übernommen – nichts abtippen.</span><div class="row"><button class="btn teal" type="button" id="invHalf">Anzahlung 50 %</button><button class="btn" type="button" id="invRest">Restbetrag 50 %</button><button class="btn" type="button" id="invFull">Voller Betrag</button></div>'+((a.rechnungen||[]).length?'<span class="small">Bereits erstellt: <span class="mono">'+esc(a.rechnungen.join(", "))+'</span></span>':"")+'</div>':"")+
+    '<div class="spread"><span>'+(!isNew&&owner?'<span class="confirm" id="delWrap"><button class="btn danger" type="button" id="oDel">Löschen</button></span>':"")+'</span><div class="row"><button class="btn" type="button" id="oCancel">Schließen</button><button class="btn primary" type="button" id="oSave">'+(isNew?"Auftrag anlegen":"Speichern")+'</button></div></div>',
+  function(m){
+    $("#o-paket",m).onchange=function(){var p=paketBy(this.value);if(p.preis)$("#o-preis",m).value=p.preis};
+    function drawFiles(){var el=$("#fileList",m);
+      el.innerHTML=a.dateien.length?a.dateien.map(function(f,i){var src=window.VIONDA_BLOB(f.id),img=/^image\//.test(f.typ);
+        return '<figure style="margin:0;width:110px;display:grid;gap:4px"><a href="'+src+'" target="_blank" rel="noopener" style="display:block">'+(img?'<img src="'+src+'" alt="" style="width:110px;height:110px;object-fit:contain;border-radius:10px;border:1px solid var(--line);background:#fff">':'<span style="display:grid;place-items:center;width:110px;height:110px;border-radius:10px;border:1px solid var(--line);font-weight:700">PDF</span>')+'</a><figcaption class="small" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(f.name)+'</figcaption>'+(assets?'<button class="btn sm danger" type="button" data-rmfile="'+i+'">Entfernen</button>':"")+'</figure>'}).join("")
+        :'<span class="small muted">Noch keine Dateien. Lade hier Logo und Fotos des Kunden hoch, damit alle im Team sie finden.</span>'}
+    drawFiles();
+    async function drawTake(){var row=$("#takeRow",m),txt=$("#bearbeiterTxt",m);if(!row)return;
+      if(!a.bearbeiter){txt.textContent="Noch niemand zuständig";row.innerHTML='<button class="btn teal" type="button" id="takeBtn">Ich übernehme diesen Auftrag</button>'}
+      else if(a.bearbeiter===myId){txt.textContent="Zuständig: du";row.innerHTML='<button class="btn sm" type="button" id="dropBtn">Auftrag wieder abgeben</button>'}
+      else{var ps=user&&user.profiles?await user.profiles([a.bearbeiter]):{};txt.textContent="Zuständig: "+((ps[a.bearbeiter]&&ps[a.bearbeiter].name)||"Teammitglied");row.innerHTML='<button class="btn sm" type="button" id="takeBtn">Selbst übernehmen</button>'}
+      var tb=$("#takeBtn",m),dbn=$("#dropBtn",m);
+      if(tb)tb.onclick=async function(){if(!myId){toast("Bitte anmelden");return}a.bearbeiter=myId;if(a.status==="neu"){a.status="in_arbeit";$("#o-status",m).value="in_arbeit"}a.gestartetAm=a.gestartetAm||today();if(await save())drawTake()};
+      if(dbn)dbn.onclick=async function(){a.bearbeiter=null;if(await save())drawTake()};}
+    drawTake();
+    $$("[data-step]",m).forEach(function(cb){cb.onchange=function(){a.checkliste=a.checkliste||{};a.checkliste[cb.dataset.step]=cb.checked;
+      var all=SCHRITTE.every(function(x){return a.checkliste[x[0]]});if(all&&a.status!=="fertig"){a.status="fertig";$("#o-status",m).value="fertig";toast("Alle Schritte erledigt – Auftrag ist fertig")}save()}});
+    var fi=$("#o-files",m);
+    if(fi)fi.onchange=async function(){var files=[].slice.call(fi.files),st=$("#fileState",m);
+      for(var i=0;i<files.length;i++){var f=files[i];st.textContent="Lade "+f.name+" hoch…";
+        try{var r=await assets.upload(f);a.dateien.push({id:r.id,name:f.name,typ:r.contentType});drawFiles()}
+        catch(e){st.textContent=e&&e.code==="too_large"?f.name+" ist zu groß (max. 20 MB).":e&&e.code==="unsupported_type"?f.name+": Dateityp nicht unterstützt.":"Upload von "+f.name+" fehlgeschlagen.";fi.value="";return}}
+      st.textContent="Hochgeladen – vergiss nicht zu speichern.";fi.value=""};
+    m.addEventListener("click",function(e){var t=e.target;if(t.dataset.rmfile){a.dateien.splice(+t.dataset.rmfile,1);drawFiles();$("#fileState",m).textContent="Entfernt – speichern nicht vergessen."}});
+    function collect(){a.kunde={name:$("#o-name",m).value.trim(),firma:$("#o-firma",m).value.trim(),email:$("#o-email",m).value.trim(),telefon:$("#o-tel",m).value.trim(),adresse:$("#o-adr",m).value.trim()};
+      a.paket=$("#o-paket",m).value;a.preis=parseFloat($("#o-preis",m).value)||0;a.status=$("#o-status",m).value;a.eingang=$("#o-eingang",m).value||today();a.nachricht=$("#o-msg",m).value.trim();
+      $$("[data-brief]",m).forEach(function(el){a.briefing[el.dataset.brief]=el.value.trim()})}
+    async function save(){collect();if(!a.kunde.name){toast("Name fehlt");return false}
+      var body=Object.assign({},a);delete body._id;body.geaendertVon=myId||null;
+      try{if(a._id)await db.collection("auftraege").doc(a._id).set(body);else{body.erstelltVon=myId||null;var ref=db.collection("auftraege").doc();await ref.set(body);a._id=ref.id}
+        toast(isNew?"Auftrag angelegt":"Gespeichert");return true}catch(err){writeError(err,true);return false}}
+    $("#oCancel",m).onclick=closeModal;
+    $("#oSave",m).onclick=async function(){if(await save()){closeModal();if(isNew)$("#importText").value=""}};
+    function mkInv(anteil,label){return async function(){if(!(await save()))return;closeModal();var p=paketBy(a.paket),k=a.kunde;
+      var adr=[k.firma&&k.firma!==k.name?k.name:"",k.adresse].filter(Boolean).join("\n");
+      invoiceEditor(null,{auftragId:a._id,fields:{kunde:{name:k.firma||k.name,adresse:adr,email:k.email},
+        positionen:[{text:p.text+(label?" – "+label:""),menge:1,preis:r2(a.preis*anteil)}],
+        notiz:label==="Anzahlung 50 %"?"Anzahlung laut Auftrag vom "+fmtD(a.eingang)+". Der Restbetrag wird nach Fertigstellung verrechnet.":label==="Restbetrag 50 %"?"Schlussrechnung – die Anzahlung wurde bereits verrechnet.":""}})}}
+    if($("#invHalf",m)){$("#invHalf",m).onclick=mkInv(0.5,"Anzahlung 50 %");$("#invRest",m).onclick=mkInv(0.5,"Restbetrag 50 %");$("#invFull",m).onclick=mkInv(1,"")}
+    var od=$("#oDel",m);if(od)od.onclick=function(){$("#delWrap",m).innerHTML='<span>Auftrag löschen?</span><button class="btn sm danger" type="button" id="oYes">Ja</button><button class="btn sm" type="button" id="oNo">Nein</button>';
+      $("#oYes",m).onclick=async function(){try{await db.collection("auftraege").doc(a._id).delete();toast("Auftrag gelöscht");closeModal()}catch(err){writeError(err,true)}};
+      $("#oNo",m).onclick=closeModal};
+  });
+}
+var LABELS={"name":"name","vor- und nachname":"name","e-mail":"email","email":"email","telefon":"telefon","firma / verein":"firma","firma":"firma","branche":"branche",
+  "rechnungsadresse":"adresse","adresse":"adresse","paket":"paket","ziel der website":"ziel","ziel":"ziel","seiten":"seiten","funktionen":"funktionen","stil":"stil",
+  "farben":"farben","logo":"logo","logo_status":"logo","fotos":"fotos","dateien-link":"dateienLink","dateien_link":"dateienLink","vorbilder":"vorbilder","texte":"texte",
+  "domain":"domain","wunschtermin":"wunschtermin","social media":"social","social_media":"social","beschreibung":"beschreibung","nachricht":"beschreibung","vorlage":"vorlage","gewählte vorlage":"vorlage"};
+function localExtract(t){var o={},key=null;
+  t.split(/\r?\n/).forEach(function(line){var m=/^\s*([A-Za-zÄÖÜäöüß_\- \/]{2,30})\s*:\s*(.*)$/.exec(line),k=m&&LABELS[m[1].trim().toLowerCase()];
+    if(k){key=k;o[k]=(o[k]?o[k]+", ":"")+m[2].trim()}else if(key==="beschreibung"&&line.trim())o[key]+="\n"+line.trim()});
+  if(!o.email){var e=/([\w.+-]+@[\w-]+\.[\w.-]+)/.exec(t);if(e)o.email=e[1]}
+  if(o.adresse&&o.adresse.indexOf("\n")<0)o.adresse=o.adresse.replace(/,\s*(?=\d{4}\b)/,"\n");
+  return o}
+$("#importBtn").addEventListener("click",async function(){
+  var txt=$("#importText").value.trim(),st=$("#importState"),btn=this;if(!txt){toast("Erst eine Anfrage einfügen");return}
+  btn.disabled=true;st.textContent="Lese Daten aus…";
+  var o=localExtract(txt),filled=Object.keys(o).length;
+  if(sample&&filled<6){try{var ai=await sample.json("Lies aus dieser Kundenanfrage für eine Webdesign-Firma alle Angaben aus. Antworte NUR mit einem JSON-Objekt mit genau diesen Feldern als Strings (leerer String, wenn nicht vorhanden; nichts erfinden, Wortlaut des Kunden möglichst behalten): "+
+      '{"vorlage":"","name":"","firma":"","email":"","telefon":"","adresse":"Straße Nr\\nPLZ Ort","paket":"eines von: Basic, Standard, Premium, Discord, Wartung, Offen","branche":"","ziel":"","seiten":"","funktionen":"","stil":"","farben":"","logo":"","texte":"","domain":"","wunschtermin":"","vorbilder":"","social":"","dateienLink":"","beschreibung":"alles weitere, was der Kunde sich wünscht"}'+
+      "\n\nAnfrage:\n"+txt.slice(0,12000),{modelTier:"quick"});if(ai&&typeof ai==="object")Object.keys(ai).forEach(function(k){if(ai[k]&&!o[k])o[k]=String(ai[k])})}
+    catch(e){if(e&&(e.code==="not_granted"||e.code==="sampling_disabled"))sample=null}}
+  btn.disabled=false;st.textContent="";
+  var p=paketBy(o.paket),br={};BRIEF.forEach(function(b){if(o[b[0]])br[b[0]]=String(o[b[0]])});
+  if(o.fotos)br.logo=(br.logo?br.logo+" · ":"")+"Fotos: "+o.fotos;
+  orderEditor({eingang:today(),status:"neu",paket:p.name,preis:p.preis,kunde:{name:String(o.name||""),firma:String(o.firma||""),email:String(o.email||""),telefon:String(o.telefon||""),adresse:String(o.adresse||"")},nachricht:"",briefing:br,dateien:[],quelle:txt.slice(0,6000)},true);
+});
+$("#ordFilter").addEventListener("change",renderOrders);
+
+/* ---------- Allgemeine Klicks ---------- */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-act],[data-goto],[data-inv],[data-delbook],[data-ord]");if(!t)return;
+  if(t.dataset.goto)showTab(t.dataset.goto);
+  if(t.dataset.ord){var o=auftraege.find(function(x){return x._id===t.dataset.ord});if(o)orderEditor(o,false)}
+  if(t.dataset.act==="newOrder"){if(!db){toast("Speichern ist hier nicht verfügbar");return}orderEditor(null,true)}
+  if(t.dataset.inv){var r=rechnungen.find(function(x){return x._id===t.dataset.inv});if(r)invoiceEditor(r)}
+  if(t.dataset.act==="newInvoice"){if(!db){toast("Speichern ist hier nicht verfügbar");return}invoiceEditor(null)}
+  if(t.dataset.act==="newBooking"){if(!db){toast("Speichern ist hier nicht verfügbar");return}bookingEditor(t.dataset.typ)}
+  if(t.dataset.act==="exportCsv")exportCsv();
+  if(t.dataset.delbook){var id=t.dataset.delbook,cell=t.parentNode;
+    cell.innerHTML='<span class="confirm"><button class="btn sm danger" data-yes>Löschen</button><button class="btn sm" data-no>Behalten</button></span>';
+    cell.querySelector("[data-yes]").onclick=async function(){try{await db.collection("buchungen").doc(id).delete();toast("Gelöscht")}catch(err){writeError(err)}};
+    cell.querySelector("[data-no]").onclick=function(){renderBookings();applyRO()}}
+});
+$("#invFilter").addEventListener("change",renderInvoices);
+$("#satz").addEventListener("change",async function(){render();try{if(db&&canWrite!==false)await db.doc("config/steuer").set({satz:$("#satz").value})}catch(e){}});
+$("#year").addEventListener("change",function(){year=+this.value;render();applyRO()});
+
+function writeError(err,orders){
+  if(err&&err.code==="invalid_argument"){if(orders)canWriteOrders=false;else canWrite=false;applyRO();toast("Dafür hast du keine Berechtigung")}
+  else if(err&&err.code==="quota_exceeded")toast("Speicher voll – bitte alte Einträge löschen");
+  else toast("Speichern fehlgeschlagen – bitte nochmal versuchen");
+}
+function applyRO(){$$("[data-w]").forEach(function(el){el.disabled=canWrite===false||!db});$$("[data-wo]").forEach(function(el){el.disabled=canWriteOrders===false||!db})}
+function fillYears(){var ys={},cy=new Date().getFullYear();ys[cy]=1;
+  rechnungen.forEach(function(r){(r.zahlungen||[]).forEach(function(z){if(z.datum)ys[z.datum.slice(0,4)]=1});if(r.datum)ys[r.datum.slice(0,4)]=1});
+  buchungen.forEach(function(b){if(b.datum)ys[b.datum.slice(0,4)]=1});
+  var list=Object.keys(ys).map(Number).sort(function(a,b){return b-a}),sel=$("#year");
+  sel.innerHTML=list.map(function(y){return '<option value="'+y+'"'+(y===year?" selected":"")+'>'+y+'</option>'}).join("")}
+
+/* ---------- Start ---------- */
+try{var saved=localStorage.getItem("vionda-tab");if(saved&&document.getElementById("t-"+saved))showTab(saved)}catch(e){}
+fillYears();render();applyRO();
+
+(async function boot(){
+  var RT=window.VIONDA_RT;if(!RT){status("Bitte anmelden.");return}
+  var res=await Promise.all([RT.use("db"),RT.use("user"),RT.use("downloads"),RT.use("sample"),RT.use("assets")]);
+  db=res[0];user=res[1];downloads=res[2];sample=res[3];assets=res[4];
+  if(!db){status("Bitte melde dich an, um dein Büro zu öffnen.");applyRO();return}
+  var me=user?await user.me():{isOwner:false,canEdit:false,name:"",avatarUrl:""};
+  myId=user?await user.id():null;
+  role=me.isOwner?"owner":me.canEdit?"buchhaltung":"mitarbeiter";
+  canWrite=role==="owner";
+  canWriteOrders=null;
+  var label={owner:"Inhaber",buchhaltung:"Buchhaltung",mitarbeiter:"Mitarbeiter"}[role];
+  $("#who").innerHTML='<img alt="" src="'+esc(me.avatarUrl)+'"><span></span><span class="pill role"></span>';
+  $("#who span").textContent=me.name||"Du";$("#who .pill").textContent=label;
+  $("#meBox").innerHTML='Du bist hier als <b></b> angemeldet – Rolle: <span class="pill role"></span>';$("#meBox b").textContent=me.name||"Nutzer";$("#meBox .pill").textContent=label;
+  if(role==="mitarbeiter"){
+    $$("#tabs button.fin").forEach(function(b){b.hidden=true});$("#year").hidden=true;
+    $$("main > section").forEach(function(s){if(s.id!=="t-auftraege"){s.hidden=true;s.innerHTML=""}});
+    showTab("auftraege");
+  }
+  if(role==="buchhaltung")status("Buchhaltungs-Zugang: du siehst alle Rechnungen, Zahlungen, Ausgaben und Steuerzahlen und kannst PDFs und CSV herunterladen. Ändern kann nur der Inhaber.");
+  applyRO();
+  db.collection("auftraege").onSnapshot(function(s){auftraege=s.docs.map(function(d){return Object.assign({_id:d.id},d.data())}).sort(function(a,b){return (b.eingang||"").localeCompare(a.eingang||"")});renderOrders();applyRO()},function(e){status("Aufträge konnten nicht geladen werden.")});
+  if(role==="mitarbeiter")return;
+  db.doc("config/firma").onSnapshot(function(s){firma=s.exists?Object.assign({},s.data()):{};fillFirma()},function(){});
+  db.doc("config/steuer").onSnapshot(function(s){if(s.exists&&s.data().satz!=null){$("#satz").value=String(s.data().satz);render()}},function(){});
+  db.collection("rechnungen").onSnapshot(function(s){rechnungen=s.docs.map(function(d){return Object.assign({_id:d.id},d.data())}).sort(function(a,b){return (b.nr||"").localeCompare(a.nr||"")});fillYears();render();applyRO()},function(e){status("Rechnungen konnten nicht geladen werden.")});
+  db.collection("buchungen").onSnapshot(function(s){buchungen=s.docs.map(function(d){return Object.assign({_id:d.id},d.data())});fillYears();render();applyRO()},function(e){status("Buchungen konnten nicht geladen werden.")});
+})();
+};
+</script>
+<script>
+/* ================= Vionda Portal: Anmeldung, Datenbank, Team ================= */
+(function(){
+"use strict";
+var CFG = window.VIONDA_CONFIG || {};
+var PORTAL_URL = location.origin + location.pathname;
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function uuid(){return (crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2)).replace(/-/g,"")}
+var msg = $("#lMsg");
+function say(t, ok){msg.textContent=t||"";msg.style.color=ok?"var(--green)":"var(--red)"}
+
+var DEMO = !CFG.SUPABASE_URL || !CFG.SUPABASE_ANON_KEY || !window.supabase;
+var sb = null;
+if (!DEMO) {
+  sb = window.supabase.createClient(CFG.SUPABASE_URL, CFG.SUPABASE_ANON_KEY);
+  window.VIONDA_BLOB = function(id){ return CFG.SUPABASE_URL + "/storage/v1/object/public/dateien/" + String(id).split("/").map(encodeURIComponent).join("/"); };
+}
+
+/* ---------- Login-Ansicht ---------- */
+var mode = "login";
+function setMode(m){
+  mode = m; say("");
+  var t = {login:["Anmelden","Für das Vionda-Team: Aufträge, Rechnungen und Buchhaltung.","Anmelden"],
+           signup:["Konto erstellen","Nur für eingeladene Teammitglieder. Verwende die E-Mail-Adresse, mit der du eingeladen wurdest.","Konto erstellen"],
+           reset:["Passwort vergessen","Du bekommst eine E-Mail mit einem Link, um ein neues Passwort zu setzen.","Link senden"],
+           newpw:["Neues Passwort","Wähle ein neues Passwort mit mindestens 8 Zeichen.","Passwort speichern"]}[m];
+  $("#lTitle").textContent = t[0]; $("#lSub").textContent = t[1]; $("#lBtn").textContent = t[2];
+  $("#lEmailWrap").hidden = m === "newpw"; $("#l-email").required = m !== "newpw";
+  $("#lPwWrap").hidden = m === "reset"; $("#l-pw").required = m !== "reset";
+  $("#l-pw").autocomplete = m === "login" ? "current-password" : "new-password";
+  $("#lLinks").innerHTML = m === "login"
+    ? '<button class="linkbtn" type="button" data-mode="signup">Konto erstellen</button><button class="linkbtn" type="button" data-mode="reset">Passwort vergessen?</button>'
+    : '<button class="linkbtn" type="button" data-mode="login">Zurück zur Anmeldung</button>';
+}
+$("#lLinks").addEventListener("click", function(e){ var b = e.target.closest("[data-mode]"); if (b) setMode(b.dataset.mode); });
+$("#lForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  var email = $("#l-email").value.trim(), pw = $("#l-pw").value, btn = $("#lBtn"), r;
+  btn.disabled = true; say("");
+  try {
+    if (mode === "login") {
+      r = await sb.auth.signInWithPassword({email: email, password: pw});
+      if (r.error) say(/confirm/i.test(r.error.message) ? "Bitte bestätige zuerst deine E-Mail-Adresse (Link in deinem Postfach)." : "E-Mail oder Passwort stimmt nicht.");
+    } else if (mode === "signup") {
+      if (pw.length < 8) { say("Das Passwort braucht mindestens 8 Zeichen."); return; }
+      r = await sb.auth.signUp({email: email, password: pw, options: {emailRedirectTo: PORTAL_URL}});
+      if (r.error) say(/registered/i.test(r.error.message) ? "Für diese E-Mail gibt es schon ein Konto. Bitte anmelden." : "Konto konnte nicht erstellt werden: " + r.error.message);
+      else { say("Fast geschafft: Wir haben dir eine E-Mail geschickt. Klick auf den Link darin, dann kannst du dich anmelden.", true); setTimeout(function(){ if (mode === "signup") { mode = "login"; $("#lTitle").textContent = "Anmelden"; $("#lBtn").textContent = "Anmelden"; } }, 0); }
+    } else if (mode === "reset") {
+      r = await sb.auth.resetPasswordForEmail(email, {redirectTo: PORTAL_URL});
+      say(r.error ? "Das hat nicht geklappt. Bitte später nochmal versuchen." : "Falls ein Konto existiert, ist die E-Mail unterwegs.", !r.error);
+    } else if (mode === "newpw") {
+      if (pw.length < 8) { say("Das Passwort braucht mindestens 8 Zeichen."); return; }
+      r = await sb.auth.updateUser({password: pw});
+      if (r.error) say("Passwort konnte nicht gespeichert werden."); else { say("Passwort gespeichert.", true); start(); }
+    }
+  } finally { btn.disabled = false; }
+});
+async function logout(){ if (sb) await sb.auth.signOut(); location.reload(); }
+$("#lLogout2").addEventListener("click", logout);
+
+/* ---------- Datenbank-Adapter (gleiche Schnittstelle wie im Büro) ---------- */
+function dbErr(e){ var rls = e && (e.code === "42501" || /row-level security|permission denied/i.test(e.message || "")); return {code: rls ? "invalid_argument" : "unavailable", message: e && e.message}; }
+function makeDb(uid){
+  var listeners = {}; // collection -> [refresh fn]
+  var channel = null;
+  function notify(coll){ (listeners[coll] || []).forEach(function(f){ f(); }); }
+  function listen(coll, f){
+    (listeners[coll] = listeners[coll] || []).push(f);
+    if (!channel) {
+      channel = sb.channel("docs-live").on("postgres_changes", {event: "*", schema: "public", table: "docs"}, function(p){
+        var c = (p.new && p.new.collection) || (p.old && p.old.collection); if (c) notify(c); else Object.keys(listeners).forEach(notify);
+      }).subscribe();
+    }
+    f();
+    var t = setInterval(f, 30000);
+    return function(){ clearInterval(t); listeners[coll] = (listeners[coll] || []).filter(function(x){ return x !== f; }); };
+  }
+  function snapDoc(id, data){ return {id: id, exists: data !== undefined && data !== null, data: function(){ return data || undefined; }, metadata: {fromCache: false, hasPendingWrites: false}}; }
+  function docRef(coll, id){
+    var ref = {
+      id: id, path: coll + "/" + id,
+      get: async function(){ var r = await sb.from("docs").select("data").eq("collection", coll).eq("id", id).maybeSingle(); if (r.error) throw dbErr(r.error); return snapDoc(id, r.data && r.data.data); },
+      set: async function(data){ var r = await sb.from("docs").upsert({collection: coll, id: id, data: data, updated_at: new Date().toISOString(), updated_by: uid}); if (r.error) throw dbErr(r.error); notify(coll); },
+      update: async function(patch){ var cur = await ref.get(); if (!cur.exists) throw {code: "invalid_argument", message: "missing"}; await ref.set(Object.assign({}, cur.data(), patch)); },
+      delete: async function(){ var r = await sb.from("docs").delete().eq("collection", coll).eq("id", id).select("id"); if (r.error) throw dbErr(r.error); if (!r.data || !r.data.length) throw {code: "invalid_argument", message: "not allowed"}; notify(coll); },
+      onSnapshot: function(next, error){
+        return listen(coll, async function(){ try { next(await ref.get()); } catch (e) { if (error) error(e); } });
+      }
+    };
+    return ref;
+  }
+  function collRef(coll){
+    return {
+      path: coll,
+      doc: function(id){ return docRef(coll, id || uuid()); },
+      get: async function(){ var r = await sb.from("docs").select("id,data").eq("collection", coll); if (r.error) throw dbErr(r.error);
+        var docs = r.data.map(function(x){ return snapDoc(x.id, x.data); }); return {docs: docs, size: docs.length, empty: !docs.length}; },
+      onSnapshot: function(next, error){ var c = this; return listen(coll, async function(){ try { next(await c.get()); } catch (e) { if (error) error(e); } }); }
+    };
+  }
+  return {
+    collection: collRef,
+    doc: function(path){ var p = path.split("/"); return docRef(p[0], p[1]); }
+  };
+}
+
+/* ---------- Team & Nutzer ---------- */
+var team = {}; // user_id -> {name,email,rolle}
+async function loadTeam(){ var r = await sb.from("team").select("user_id,name,email,rolle"); if (!r.error) { team = {}; r.data.forEach(function(t){ team[t.user_id] = t; }); } }
+function initialsAvatar(name, color){
+  var ini = (name || "?").split(/[^A-Za-zÄÖÜäöüß]+/).filter(Boolean).slice(0, 2).map(function(s){ return s[0].toUpperCase(); }).join("");
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><rect width="40" height="40" rx="20" fill="' + color + '"/><text x="20" y="25" font-family="Arial" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">' + esc(ini) + '</text></svg>';
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+function makeUser(uid, me){
+  return {
+    id: async function(){ return uid; },
+    can: async function(){ return null; },
+    canEdit: async function(){ return me.rolle === "buchhaltung"; },
+    isOwner: async function(){ return me.rolle === "inhaber"; },
+    me: async function(){ var n = me.name || me.email; return {id: uid, name: n, email: me.email, avatarUrl: initialsAvatar(n, "#0E9A86"), color: "#0E9A86", isOwner: me.rolle === "inhaber", canEdit: me.rolle === "buchhaltung"}; },
+    profiles: async function(ids){ if ((ids || []).some(function(i){ return !team[i]; })) await loadTeam();
+      var o = {}; [].concat(ids || []).forEach(function(i){ var t = team[i]; o[i] = {id: i, name: t ? (t.name || t.email) : "", email: t ? t.email : null, isMe: i === uid, guest: false, avatarUrl: initialsAvatar(t ? t.name : "?", "#56657A"), color: "#56657A"}; }); return o; }
+  };
+}
+var downloads = {save: async function(req){
+  var blob = req.data instanceof Blob ? req.data : new Blob([req.data]);
+  var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = req.filename; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1500); return {status: "saved"};
+}};
+function makeAssets(){
+  return {upload: async function(file){
+    var safe = String(file.name || "datei").toLowerCase().replace(/[^a-z0-9._-]+/g, "-").slice(-80);
+    var path = "auftraege/" + uuid() + "-" + safe;
+    if (file.size > 20 * 1024 * 1024) throw {code: "too_large"};
+    var r = await sb.storage.from("dateien").upload(path, file, {contentType: file.type || "application/octet-stream", upsert: false});
+    if (r.error) throw {code: /mime|type/i.test(r.error.message) ? "unsupported_type" : "upstream_error", message: r.error.message};
+    return {id: path, url: window.VIONDA_BLOB(path), sizeBytes: file.size, contentType: file.type};
+  }};
+}
+
+/* ---------- Team-Verwaltung (Inhaber) ---------- */
+async function renderTeamPanel(me){
+  var list = $("#teamList"); if (!list) return;
+  await loadTeam();
+  var inv = me.rolle === "inhaber" ? await sb.from("team_einladungen").select("email,name,rolle").order("erstellt") : {data: []};
+  var active = {}; Object.keys(team).forEach(function(k){ active[team[k].email.toLowerCase()] = team[k]; });
+  var rows = Object.keys(team).map(function(k){ return team[k]; }).filter(function(t){ return t.rolle === "inhaber"; })
+    .map(function(t){ return {email: t.email, name: t.name, rolle: t.rolle, aktiv: true, owner: true}; });
+  (inv.data || []).forEach(function(i){ rows.push({email: i.email, name: i.name, rolle: i.rolle, aktiv: !!active[i.email.toLowerCase()]}); });
+  if (me.rolle !== "inhaber") Object.keys(team).forEach(function(k){ var t = team[k]; if (t.rolle !== "inhaber") rows.push({email: t.email, name: t.name, rolle: t.rolle, aktiv: true}); });
+  var R = {inhaber: "Inhaber", buchhaltung: "Buchhaltung", mitarbeiter: "Mitarbeiter"};
+  list.innerHTML = rows.map(function(t, i){
+    return '<div class="taxline"><span><b>' + esc(t.name || t.email) + '</b><br><span class="muted small">' + esc(t.email) + ' · ' + R[t.rolle] + '</span></span><span class="row">' +
+      '<span class="pill ' + (t.aktiv ? "bezahlt" : "offen") + '">' + (t.aktiv ? "aktiv" : "eingeladen") + '</span>' +
+      (me.rolle === "inhaber" && !t.owner ? '<span class="confirm" data-wrap="' + i + '"><button class="btn sm danger" type="button" data-rm="' + i + '">Zugang entfernen</button></span>' : "") + '</span></div>';
+  }).join("");
+  list.onclick = function(e){
+    var b = e.target.closest("[data-rm]"); if (!b) return; var t = rows[+b.dataset.rm], w = list.querySelector('[data-wrap="' + b.dataset.rm + '"]');
+    w.innerHTML = '<span class="small">Sicher?</span><button class="btn sm danger" type="button" data-yes>Ja, entfernen</button><button class="btn sm" type="button" data-no>Nein</button>';
+    w.querySelector("[data-yes]").onclick = async function(){ var r = await sb.from("team_einladungen").delete().eq("email", t.email); if (r.error) alertMsg("Konnte nicht entfernt werden."); renderTeamPanel(me); };
+    w.querySelector("[data-no]").onclick = function(){ renderTeamPanel(me); };
+  };
+}
+function alertMsg(t){ var el = $("#toast"); if (!el) return; el.textContent = t; el.hidden = false; setTimeout(function(){ el.hidden = true; }, 2800); }
+
+/* ---------- Demo-Modus (nur wenn noch keine Datenbank verbunden ist) ---------- */
+function makeDemo(role){
+  var y = new Date().getFullYear(), m = String(new Date().getMonth() + 1).padStart(2, "0");
+  function d(day){ return y + "-" + m + "-" + String(day).padStart(2, "0"); }
+  var ids = {inhaber: "demo-inhaber", buchhaltung: "demo-buchhaltung", mitarbeiter: "demo-mitarbeiter"};
+  var store = {
+    team: [
+      {user_id: ids.inhaber, email: "inhaber@vionda.at", name: "Inhaber (Demo)", rolle: "inhaber"},
+      {user_id: ids.buchhaltung, email: "buchhaltung@vionda.at", name: "Sarah Beispiel", rolle: "buchhaltung"},
+      {user_id: ids.mitarbeiter, email: "max@vionda.at", name: "Max Beispiel", rolle: "mitarbeiter"}],
+    team_einladungen: [
+      {email: "buchhaltung@vionda.at", name: "Sarah Beispiel", rolle: "buchhaltung"},
+      {email: "max@vionda.at", name: "Max Beispiel", rolle: "mitarbeiter"}],
+    docs: [
+      {collection: "config", id: "firma", data: {name: "Vionda", inhaber: "Vorname Nachname (Beispiel)", strasse: "Musterstraße 1", plz: "4910", ort: "Ried im Innkreis", email: "hallo@vionda.at", web: "www.vionda.at", iban: "AT00 0000 0000 0000 0000", bic: "", bank: "Beispielbank", gisa: "", ziel: "14"}},
+      {collection: "auftraege", id: "a1", data: {eingang: d(18), status: "neu", quelle: "website", paket: "Standard", preis: 599,
+        kunde: {name: "Anna Beispiel", firma: "Friseur Beispiel", email: "anna@beispiel.at", telefon: "0664 000000", adresse: "Hauptplatz 3\n4910 Ried im Innkreis"},
+        briefing: {vorlage: "Salon", branche: "Friseur & Kosmetik", ziel: "Mehr Online-Termine und neue Kundinnen aus der Region", seiten: "Startseite, Leistungen, Preise, Team, Galerie, Kontakt", funktionen: "Online-Terminbuchung, Google Maps, Öffnungszeiten, Google-Bewertungen", stil: "Elegant & hochwertig", farben: "#1c1917 (Haupt), #e8c4b8 (Zweit)", logo: "Ja, Logo ist vorhanden", texte: "Teils – Grundlagen liefere ich", domain: "Brauche eine neue Domain: friseur-beispiel.at", wunschtermin: "15.11." + y, vorbilder: "", social: "Instagram @friseurbeispiel", dateienLink: "", beschreibung: "Große Fotos von unseren Arbeiten, Preisliste gut sichtbar, Terminbuchung direkt auf der Startseite. Bitte kein Rot."},
+        dateien: [], nachricht: "", checkliste: {}}},
+      {collection: "auftraege", id: "a2", data: {eingang: d(9), status: "in_arbeit", quelle: "website", paket: "Premium", preis: 999, bearbeiter: ids.mitarbeiter, rechnungen: [y + "-002"],
+        kunde: {name: "Thomas Beispiel", firma: "Tischlerei Beispiel", email: "office@tischlerei-beispiel.at", telefon: "", adresse: "Werkstraße 7\n4910 Ried im Innkreis"},
+        briefing: {vorlage: "Werkstatt", branche: "Handwerk", ziel: "Aufträge für Küchen und Möbel", seiten: "Startseite, Leistungen, Referenzen, Über uns, Kontakt", funktionen: "Kontaktformular, Bildergalerie, Google Maps", stil: "Natürlich & warm", farben: "Holztöne, dunkelgrün", logo: "Ja, soll aber überarbeitet werden", texte: "Bitte Texte für mich schreiben", domain: "Habe schon eine Domain: tischlerei-beispiel.at", beschreibung: "Referenzprojekte mit Vorher-Nachher-Fotos."},
+        dateien: [], nachricht: "Kunde liefert Fotos bis Freitag.", checkliste: {briefing: true, material: true, domain: true, entwurf: true}}},
+      {collection: "auftraege", id: "a3", data: {eingang: d(2), status: "fertig", quelle: "website", paket: "Basic", preis: 299, bearbeiter: ids.mitarbeiter, rechnungen: [y + "-001"],
+        kunde: {name: "Lisa Beispiel", firma: "SV Beispiel", email: "obfrau@sv-beispiel.at", telefon: "", adresse: "Sportplatzweg 1\n4910 Ried im Innkreis"},
+        briefing: {vorlage: "Verein", branche: "Verein", stil: "Verspielt & bunt", beschreibung: "Spielplan und Mitglied-werden-Formular."},
+        dateien: [], nachricht: "", checkliste: {briefing: true, material: true, domain: true, entwurf: true, freigabe: true, umsetzung: true, test: true, online: true, google: true, uebergabe: true}}},
+      {collection: "rechnungen", id: "r1", data: {nr: y + "-001", datum: d(5), faellig: d(19), leistung: "Website Basic", auftragId: "a3", kunde: {name: "SV Beispiel", adresse: "Lisa Beispiel\nSportplatzweg 1\n4910 Ried im Innkreis", email: "obfrau@sv-beispiel.at"},
+        positionen: [{text: "Website Basic-Paket (Onepager, Kontaktformular, Google-Grundlagen)", menge: 1, preis: 299}], zahlungen: [{datum: d(8), betrag: 299, quelle: "bank"}], notiz: ""}},
+      {collection: "rechnungen", id: "r2", data: {nr: y + "-002", datum: d(10), faellig: d(24), leistung: "", auftragId: "a2", kunde: {name: "Tischlerei Beispiel", adresse: "Thomas Beispiel\nWerkstraße 7\n4910 Ried im Innkreis", email: "office@tischlerei-beispiel.at"},
+        positionen: [{text: "Website Premium-Paket – Anzahlung 50 %", menge: 1, preis: 499.5}], zahlungen: [], notiz: "Anzahlung laut Auftrag."}},
+      {collection: "buchungen", id: "b1", data: {typ: "ausgabe", datum: d(3), betrag: 15, text: "Domain vionda.at (Beispiel)", kategorie: "Software & Domains"}},
+      {collection: "buchungen", id: "b2", data: {typ: "ausgabe", datum: d(1), betrag: 12.95, text: "SVS Unfallversicherung (Beispiel)", kategorie: "SVS-Beiträge"}}
+    ]
+  };
+  var session = {user: {id: ids[role], email: store.team.filter(function(t){ return t.rolle === role; })[0].email}};
+  var subs = [];
+  function canSee(r){ return role !== "mitarbeiter" || r.collection === "auftraege"; }
+  function canWrite(r){ return role === "inhaber" || r.collection === "auftraege"; }
+  function q(table){
+    var st = {filters: [], op: "select", payload: null, single: false};
+    var api = {
+      select: function(){ return api; }, order: function(){ return api; },
+      eq: function(k, v){ st.filters.push([k, v]); return api; },
+      maybeSingle: function(){ st.single = true; return api; },
+      upsert: function(p){ st.op = "upsert"; st.payload = p; return api; },
+      insert: function(p){ st.op = "insert"; st.payload = p; return api; },
+      delete: function(){ st.op = "delete"; return api; },
+      then: function(ok, no){ return Promise.resolve(run()).then(ok, no); }
+    };
+    function match(r){ return st.filters.every(function(f){ return String(r[f[0]]) === String(f[1]); }); }
+    function key(r){ return table === "docs" ? r.collection + "/" + r.id : table === "team_einladungen" ? r.email : r.user_id; }
+    function run(){
+      var t = store[table] = store[table] || [];
+      if (st.op === "select") {
+        var out = t.filter(match).filter(function(r){ return table !== "docs" || canSee(r); }).map(function(r){ return JSON.parse(JSON.stringify(r)); });
+        if (table === "team_einladungen" && role !== "inhaber") out = [];
+        return {data: st.single ? (out[0] || null) : out, error: null};
+      }
+      if (st.op === "upsert" || st.op === "insert") {
+        var p = [].concat(st.payload);
+        for (var i = 0; i < p.length; i++) {
+          if ((table === "docs" && !canWrite(p[i])) || (table === "team_einladungen" && role !== "inhaber")) return {error: {code: "42501", message: "row-level security"}};
+          var idx = t.findIndex(function(r){ return key(r) === key(p[i]); });
+          var row = JSON.parse(JSON.stringify(p[i]));
+          if (idx >= 0) t[idx] = Object.assign({}, t[idx], row); else t.push(row);
+          if (table === "team_einladungen") { var ex = store.team.find(function(x){ return x.email === row.email; }); if (!ex) store.team.push({user_id: "demo-" + row.email, email: row.email, name: row.name, rolle: row.rolle}); }
+        }
+        setTimeout(function(){ subs.forEach(function(f){ f({new: {collection: p[0].collection}}); }); }, 0);
+        return {data: null, error: null};
+      }
+      if (st.op === "delete") {
+        var del = t.filter(match).filter(function(r){ return table === "docs" ? role === "inhaber" : role === "inhaber"; });
+        store[table] = t.filter(function(r){ return del.indexOf(r) < 0; });
+        if (table === "team_einladungen") del.forEach(function(r){ store.team = store.team.filter(function(x){ return x.email !== r.email; }); });
+        return {data: del.map(function(r){ return {id: r.id}; }), error: null};
+      }
+    }
+    return api;
+  }
+  var blobs = {};
+  window.VIONDA_BLOB = function(id){ return blobs[id] || "data:image/svg+xml;charset=utf-8," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="110" height="110"><rect width="110" height="110" fill="#eef1f4"/><text x="55" y="60" font-family="Arial" font-size="12" text-anchor="middle" fill="#56657A">Beispiel</text></svg>'); };
+  return {
+    auth: {
+      getSession: async function(){ return {data: {session: session}}; },
+      signInWithPassword: async function(){ return {error: null}; }, signUp: async function(){ return {error: null}; },
+      resetPasswordForEmail: async function(){ return {error: null}; }, updateUser: async function(){ return {error: null}; },
+      signOut: async function(){ session = null; }, onAuthStateChange: function(){}
+    },
+    from: q,
+    channel: function(){ var ch = {on: function(a, b, f){ subs.push(f); return ch; }, subscribe: function(){ return ch; }}; return ch; },
+    storage: {from: function(){ return {upload: async function(path, file){ blobs[path] = URL.createObjectURL(file); return {data: {path: path}, error: null}; }}; }}
+  };
+}
+
+/* ---------- Start nach Anmeldung ---------- */
+var started = false;
+async function start(){
+  var s = await sb.auth.getSession(); var session = s.data && s.data.session;
+  if (!session) { $("#login").hidden = false; return; }
+  var uid = session.user.id;
+  var r = await sb.from("team").select("name,email,rolle").eq("user_id", uid).maybeSingle();
+  if (!r.data) {
+    $("#login").hidden = false; $("#lForm").hidden = true; $("#lLinks").hidden = true; $("#lPending").hidden = false;
+    $("#lTitle").textContent = "Noch nicht freigeschaltet"; $("#lSub").textContent = session.user.email; return;
+  }
+  if (started) return; started = true;
+  var me = r.data; me.email = me.email || session.user.email;
+  await loadTeam();
+  var db = makeDb(uid), user = makeUser(uid, me), assets = makeAssets();
+  window.VIONDA_RT = {use: async function(name){ return {db: db, user: user, downloads: downloads, assets: assets}[name] || null; }};
+  $("#login").hidden = true; $("#app").hidden = false;
+  window.startApp();
+  // Abmelden-Knopf und Team-Verwaltung
+  var who = $("#who"); var lo = document.createElement("button"); lo.className = "btn sm"; lo.type = "button"; lo.textContent = "Abmelden"; lo.onclick = logout;
+  lo.style.marginLeft = "8px"; document.querySelector(".bar").appendChild(lo);
+  if (me.rolle === "inhaber") {
+    $("#teamOwner").hidden = false;
+    $("#inviteForm").addEventListener("submit", async function(e){
+      e.preventDefault();
+      var email = $("#inv-email").value.trim().toLowerCase(), name = $("#inv-name").value.trim(), rolle = $("#inv-rolle").value;
+      if (!email || !name) return;
+      var x = await sb.from("team_einladungen").upsert({email: email, name: name, rolle: rolle});
+      if (x.error) { alertMsg("Einladung fehlgeschlagen."); return; }
+      e.target.reset(); alertMsg(name + " ist eingeladen – schick ihr/ihm den Link zum Portal."); renderTeamPanel(me);
+    });
+  }
+  renderTeamPanel(me);
+}
+setMode("login");
+if (DEMO) {
+  $("#lForm").hidden = true; $("#lLinks").hidden = true;
+  $("#lTitle").textContent = "Portal-Demo";
+  $("#lSub").textContent = "Die Datenbank ist noch nicht verbunden. Sieh dir das Portal mit Beispieldaten an – wähle, als wer du dich umsehen willst:";
+  var box = document.createElement("div"); box.className = "stack"; box.style.gap = "8px";
+  box.innerHTML = '<button class="btn primary" type="button" data-demo="inhaber" style="justify-content:center">Als Inhaber ansehen</button>' +
+    '<button class="btn" type="button" data-demo="buchhaltung" style="justify-content:center">Als Buchhaltung ansehen</button>' +
+    '<button class="btn" type="button" data-demo="mitarbeiter" style="justify-content:center">Als Mitarbeiter ansehen</button>' +
+    '<p class="small muted" style="margin:0;text-align:center">Beispieldaten – nichts wird gespeichert.</p>';
+  $("#lSub").after(box);
+  box.addEventListener("click", async function(e){
+    var b = e.target.closest("[data-demo]"); if (!b) return;
+    sb = makeDemo(b.dataset.demo);
+    await start();
+    var bar = document.createElement("div"); bar.className = "note small";
+    bar.innerHTML = '<b>Demo-Modus</b> mit Beispieldaten – nichts wird gespeichert. <button class="linkbtn" type="button">Andere Rolle ansehen</button>';
+    bar.querySelector("button").onclick = function(){ location.reload(); };
+    var main = document.querySelector("main"); main.insertBefore(bar, main.firstChild);
+  });
+} else {
+  sb.auth.onAuthStateChange(function(event){
+    if (event === "PASSWORD_RECOVERY") { $("#login").hidden = false; $("#app").hidden = true; setMode("newpw"); return; }
+    if (event === "SIGNED_IN" && mode !== "newpw") start();
+  });
+  start();
+}
+})();
+</script>
+</body>
+</html>

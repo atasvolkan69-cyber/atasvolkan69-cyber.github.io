@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64" role="img" aria-label="Vionda">
+  <rect x="0" y="0" width="64" height="64" rx="16" fill="#12202E"/>
+  <path d="M17 19 L32 46 L47 19" fill="none" stroke="#14B8A0" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="49" cy="15" r="5" fill="#F2A93B"/>
+  <text x="80" y="44" font-family="'Bricolage Grotesque', 'Arial Rounded MT Bold', Arial, sans-serif" font-size="38" font-weight="800" letter-spacing="-1" fill="#12202E">vionda</text>
+</svg>
