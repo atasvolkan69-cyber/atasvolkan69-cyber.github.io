@@ -72,11 +72,10 @@ h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:14px}
 .nav ul{background:#fff}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;text-transform:uppercase;line-height:1;font-size:1.05rem}
 .brand small{display:block;font-weight:600;font-size:.68rem;letter-spacing:.16em;color:var(--muted)}
-.brand .mk{width:40px;height:40px;background:var(--navy);display:grid;place-items:center}
+.brand .mk{width:46px;height:46px;background:var(--navy);display:grid;place-items:center}
 .nav ul a{font-weight:600;font-size:.95rem}
-.hero{background:linear-gradient(115deg,var(--deep) 0 55%,var(--navy) 55%);color:#fff;position:relative;overflow:hidden;padding-block:clamp(60px,10vw,120px)}
-.hero::after{content:"";position:absolute;right:-6%;top:0;bottom:0;width:48%;background:
-  repeating-linear-gradient(135deg,rgba(255,255,255,.05) 0 2px,transparent 2px 22px);pointer-events:none}
+.hero{background:linear-gradient(100deg,rgba(15,30,51,.97) 0 42%,rgba(15,30,51,.72) 62%,rgba(15,30,51,.35)),url(img/werk-hero.webp) 70% 50%/cover;color:#fff;position:relative;overflow:hidden;padding-block:clamp(60px,10vw,120px)}
+
 .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;z-index:1}
 .hero h1{font-size:clamp(2.8rem,7.5vw,5.6rem);margin:6px 0 22px}
 .hero h1 span{color:var(--yel)}
@@ -101,6 +100,13 @@ h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:14px}
 .svc p{color:var(--muted);font-size:.95rem}
 .ba{background:var(--paper)}
 .ba .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,60px);align-items:center}
+.checks{list-style:none;display:grid;gap:10px;margin-top:22px}
+.checks li{display:flex;gap:10px;font-weight:500}
+.checks li::before{content:"✓";background:var(--yel);color:var(--deep);font-weight:800;width:22px;height:22px;display:grid;place-items:center;flex:none;font-size:.8rem;margin-top:2px}
+.ba-img{position:relative}
+.ba-img img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.ba-tag{position:absolute;left:-20px;bottom:24px;background:var(--yel);padding:16px 20px;font-weight:600}
+.ba-tag b{display:block;font-size:1.8rem;font-weight:800;line-height:1}
 .cmp{position:relative;aspect-ratio:16/10;overflow:hidden;user-select:none;touch-action:pan-y}
 .cmp .pane{position:absolute;inset:0}
 .cmp .before{background:linear-gradient(180deg,#9aa0a3 0 62%,#7b7366 62%);}
@@ -115,7 +121,7 @@ h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:14px}
 .cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4;margin:0}
 .refs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
 .refs article{border:2px solid var(--line)}
-.refs .img{aspect-ratio:4/3;position:relative}
+.refs .img{aspect-ratio:4/3;position:relative;overflow:hidden;background:var(--line)}.refs .img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.refs article:hover .img img{transform:scale(1.05)}
 .refs .img em{position:absolute;left:0;bottom:0;background:var(--yel);font-style:normal;font-weight:800;font-size:.75rem;padding:5px 10px;text-transform:uppercase}
 .refs div.t{padding:18px 20px}
 .refs h3{font-size:1.05rem;margin-bottom:6px}
@@ -125,6 +131,10 @@ h2{font-size:clamp(2rem,4.6vw,3.2rem);margin-bottom:14px}
 .steps li::before{content:"0" counter(s);font-weight:800;font-size:2.4rem;color:var(--yel);-webkit-text-stroke:1px var(--deep);display:block;line-height:1;margin-bottom:10px}
 .steps b{display:block;text-transform:uppercase;margin-bottom:4px}
 .steps span{color:var(--muted);font-size:.94rem}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center}
+.about-img img{width:100%;aspect-ratio:5/4;object-fit:cover;box-shadow:16px 16px 0 var(--yel)}
+.cert{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.cert span{border:2px solid var(--navy);color:var(--navy);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;padding:6px 10px}
 .form-sec{background:var(--deep);color:#fff}
 .form-sec .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,60px)}
 .form-sec .kick{color:#c7d3e2}.form-sec .lead{color:#c7d3e2}
@@ -142,8 +152,9 @@ footer{background:#0a1526;color:#8fa1b6;padding:44px 0;font-size:.92rem}
 footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
 footer b{color:#fff;display:block;margin-bottom:8px;text-transform:uppercase}
 @media (max-width:860px){
-  .hero{background:var(--deep)}
-  .hero .wrap,.ba .wrap,.form-sec .wrap{grid-template-columns:1fr}
+  .hero{background:linear-gradient(rgba(15,30,51,.88),rgba(15,30,51,.92)),url(img/werk-hero.webp) center/cover}
+  .hero .wrap,.ba .wrap,.form-sec .wrap,.about .wrap{grid-template-columns:1fr}
+  .ba-tag{left:0}
   .stats .wrap{grid-template-columns:repeat(2,1fr)}
   .svc,.refs{grid-template-columns:1fr}
   .steps{grid-template-columns:1fr 1fr}
@@ -163,7 +174,7 @@ footer b{color:#fff;display:block;margin-bottom:8px;text-transform:uppercase}
 
 <div class="topline"><div class="wrap"><span>Notdienst rund um die Uhr: <b>0664 000 00 00</b></span><span>Mo–Fr 7–17 Uhr · Musterweg 4, 4910 Ried im Innkreis</span></div></div>
 <header class="nav"><div class="wrap">
-  <a class="brand" href="#top"><span class="mk"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 21 12 3l9 18z" fill="#f5b700"/></svg></span><span>Steinbach<small>Haustechnik</small></span></a>
+  <a class="brand" href="#top"><span class="mk"><svg width="30" height="30" viewBox="0 0 40 40"><path d="M6 20 20 7l14 13" fill="none" stroke="#fff" stroke-width="3.2" stroke-linejoin="round"/><path d="M11 18v15h18V18" fill="none" stroke="#fff" stroke-width="3.2"/><path d="M20 21c-3 4-4 6-4 8a4 4 0 0 0 8 0c0-2-1-4-4-8z" fill="#f5b700"/></svg></span><span>Steinbach<small>Haustechnik</small></span></a>
   <ul id="menu"><li><a href="#leistungen">Leistungen</a></li><li><a href="#projekte">Projekte</a></li><li><a href="#ablauf">Ablauf</a></li><li><a href="#anfrage">Kontakt</a></li></ul>
   <a class="btn dark cta-nav" href="#anfrage">Angebot anfordern</a>
   <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
@@ -190,23 +201,29 @@ footer b{color:#fff;display:block;margin-bottom:8px;text-transform:uppercase}
 </div></section>
 
 <section class="ba"><div class="wrap">
-  <div class="reveal"><span class="kick">Vorher / Nachher</span><h2>Badsanierung in 9 Tagen</h2>
-    <p class="lead">Zieh den Regler und sieh selbst: aus einem 70er-Jahre-Bad wird ein helles, barrierefreies Bad mit bodengleicher Dusche.</p></div>
-  <div class="cmp reveal" id="cmp" style="--x:50%">
-    <div class="pane before"></div><div class="pane after"></div>
-    <span class="lbl" style="left:14px">Vorher</span><span class="lbl" style="right:14px">Nachher</span>
-    <div class="handle"></div><input type="range" min="0" max="100" value="50" aria-label="Vorher-Nachher-Regler">
-  </div>
+  <div class="reveal"><span class="kick">Badsanierung</span><h2>Ihr neues Bad in 9 Tagen</h2>
+    <p class="lead">Fliesen, Dusche, Möbel, Elektrik und Licht – alles aus einer Hand und mit einem fixen Endtermin. Sie bekommen vorab eine 3D-Planung und wissen genau, was Sie erwartet.</p>
+    <ul class="checks"><li>Bodengleiche Duschen &amp; barrierefreie Lösungen</li><li>Staubschutz und tägliche Endreinigung</li><li>Förderung bis 30 % für altersgerechten Umbau</li><li>Fixpreis – auch wenn es länger dauert</li></ul>
+    <a class="btn dark" href="#anfrage" style="margin-top:26px">Badberatung vereinbaren</a></div>
+  <div class="ba-img reveal"><img src="img/werk-bad2.webp" alt="Modernes Badezimmer mit Holzwand, Waschtisch und Badewanne" loading="lazy"><div class="ba-tag"><b>9 Tage</b>vom Abriss bis zur Übergabe</div></div>
 </div></section>
 
 <section id="projekte"><div class="wrap">
   <span class="kick">Referenzen</span>
   <h2>Aktuelle Projekte</h2>
   <div class="refs">
-    <article class="reveal"><div class="img" style="background:linear-gradient(160deg,#c9d4df,#1e3a5f)"><em>Wärmepumpe</em></div><div class="t"><h3>Einfamilienhaus, Hohenzell</h3><p>Umstieg von Öl auf Luft-Wärmepumpe inkl. Förderung – 38 % weniger Heizkosten.</p></div></article>
-    <article class="reveal"><div class="img" style="background:linear-gradient(200deg,#f1e6c8,#a68a3a)"><em>Photovoltaik</em></div><div class="t"><h3>Bauernhof, Mehrnbach</h3><p>24 kWp-Anlage mit 15 kWh-Speicher auf dem Stalldach.</p></div></article>
-    <article class="reveal"><div class="img" style="background:linear-gradient(140deg,#eef2f5,#8aa0b5)"><em>Bad</em></div><div class="t"><h3>Wohnung, Ried im Innkreis</h3><p>Barrierefreies Bad mit bodengleicher Dusche und Wand-WC.</p></div></article>
+    <article class="reveal"><div class="img"><img src="img/werk-rohr.webp" alt="Installateur montiert Rohrleitungen" loading="lazy"><em>Wärmepumpe</em></div><div class="t"><h3>Einfamilienhaus, Hohenzell</h3><p>Umstieg von Öl auf Luft-Wärmepumpe inkl. Förderung – 38 % weniger Heizkosten.</p></div></article>
+    <article class="reveal"><div class="img"><img src="img/werk-pv.webp" alt="Techniker montiert Solarmodule auf dem Dach" loading="lazy"><em>Photovoltaik</em></div><div class="t"><h3>Bauernhof, Mehrnbach</h3><p>24 kWp-Anlage mit 15 kWh-Speicher auf dem Stalldach.</p></div></article>
+    <article class="reveal"><div class="img"><img src="img/werk-bad.webp" alt="Modernes Bad mit Glasdusche" loading="lazy"><em>Bad</em></div><div class="t"><h3>Wohnung, Ried im Innkreis</h3><p>Barrierefreies Bad mit bodengleicher Dusche und Wand-WC.</p></div></article>
   </div>
+</div></section>
+
+<section class="about"><div class="wrap">
+  <div class="about-img reveal"><img src="img/werk-thermo.webp" alt="Hand stellt Thermostat am Heizkörper ein" loading="lazy"></div>
+  <div class="reveal"><span class="kick">Über uns</span><h2>Familienbetrieb in zweiter Generation</h2>
+    <p class="lead">1998 hat Johann Steinbach den Betrieb mit einem Lieferwagen und viel Ehrgeiz gegründet. Heute führt sein Sohn Markus das Unternehmen mit 14 Mitarbeitern – darunter drei Lehrlinge, auf die wir besonders stolz sind.</p>
+    <p class="lead" style="margin-top:14px">Was gleich geblieben ist: Wir sagen, was es kostet, und wir kommen, wann wir es versprechen. Darum empfehlen uns 9 von 10 Kunden weiter.</p>
+    <div class="cert"><span>Meisterbetrieb</span><span>Klimaaktiv-Partner</span><span>Lehrbetrieb</span><span>ÖNORM-geprüft</span></div></div>
 </div></section>
 
 <section id="ablauf" style="background:var(--paper)"><div class="wrap">
@@ -249,7 +266,7 @@ footer b{color:#fff;display:block;margin-bottom:8px;text-transform:uppercase}
   var y=document.querySelectorAll('[data-year]');y.forEach(function(n){n.textContent=new Date().getFullYear();});
 })();
 
-var c=document.getElementById('cmp');c.querySelector('input').addEventListener('input',function(e){c.style.setProperty('--x',e.target.value+'%');});
+var c=document.getElementById('cmp');if(c)c.querySelector('input').addEventListener('input',function(e){c.style.setProperty('--x',e.target.value+'%');});
 </script>
 </body>
 </html>

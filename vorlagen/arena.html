@@ -72,8 +72,9 @@ h2{font-size:clamp(2.1rem,5vw,3.3rem);margin-bottom:12px}
 .nav ul a{font:600 .92rem 'Chakra Petch',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .nav ul a:hover{color:var(--cy)}
 .hero{position:relative;overflow:hidden;padding-block:clamp(70px,12vw,140px)}
+.hero{background:linear-gradient(100deg,rgba(11,15,26,.97) 0 38%,rgba(11,15,26,.7) 65%,rgba(11,15,26,.45)),url(img/arena-hero.webp) center/cover}
 .hero::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(40% 50% at 80% 30%,rgba(34,211,238,.22),transparent 70%),radial-gradient(35% 45% at 15% 85%,rgba(244,63,94,.18),transparent 70%),
+  radial-gradient(35% 45% at 15% 85%,rgba(244,63,94,.16),transparent 70%),
   linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/40px 40px}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
 .live{display:inline-flex;align-items:center;gap:8px;background:rgba(244,63,94,.12);color:#fda4af;border:1px solid rgba(244,63,94,.4);padding:6px 12px;font:600 .8rem 'Chakra Petch',sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
@@ -117,12 +118,19 @@ h2{font-size:clamp(2.1rem,5vw,3.3rem);margin-bottom:12px}
 .game .res{font:700 1.3rem 'Chakra Petch',sans-serif;min-width:70px;text-align:center}
 .game .st{justify-self:end;font:600 .72rem 'Chakra Petch',sans-serif;letter-spacing:.12em;padding:4px 10px;text-transform:uppercase}
 .st.w{background:rgba(34,211,238,.12);color:var(--cy)}.st.l{background:rgba(244,63,94,.12);color:#fda4af}.st.u{background:#1f2a3d;color:var(--muted)}
+.house .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center}
+.h-imgs{display:grid;grid-template-columns:1.4fr 1fr;gap:12px;align-items:center}
+.h-imgs img{width:100%;object-fit:cover;border:1px solid var(--line)}
+.h-imgs img:first-child{aspect-ratio:4/5}.h-imgs img:last-child{aspect-ratio:3/4}
+.hl{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.hl li{background:var(--panel);border:1px solid var(--line);padding:14px;font-size:.85rem;color:var(--muted)}
+.hl b{display:block;font:700 1.6rem 'Chakra Petch',sans-serif;color:var(--cy)}
 .comm{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .box{background:var(--panel);border:1px solid var(--line);padding:clamp(22px,4vw,32px)}
 .discord{background:linear-gradient(150deg,#5865f2,#3c45a5);border:0}
 .discord .lead{color:#dfe3ff}
 .discord .btn{background:#fff;color:#3c45a5}
-.stream{aspect-ratio:16/9;background:radial-gradient(60% 60% at 50% 50%,#1b2540,#0b0f1a);display:grid;place-items:center;border:1px solid var(--line);margin-top:14px;position:relative}
+.stream{aspect-ratio:16/9;background:linear-gradient(rgba(11,15,26,.55),rgba(11,15,26,.55)),url(img/arena-setup2.webp) center/cover;display:grid;place-items:center;border:1px solid var(--line);margin-top:14px;position:relative}
 .stream span{position:absolute;left:12px;top:12px}
 .stream button{width:70px;height:70px;border-radius:50%;border:0;background:#9146ff;color:#fff;font-size:1.6rem;cursor:pointer}
 .tryout{background:var(--panel);border-block:1px solid var(--line)}
@@ -135,7 +143,7 @@ footer{padding:32px 0;color:var(--muted);font-size:.88rem}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media (max-width:960px){.roster{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:860px){
-  .hero .wrap,.comm,.tryout .wrap{grid-template-columns:1fr}
+  .hero .wrap,.comm,.tryout .wrap,.house .wrap{grid-template-columns:1fr}
   .stats .wrap{grid-template-columns:repeat(2,1fr)}
   .stats div:nth-child(2){border-right:0}
   .game{grid-template-columns:1fr auto;gap:6px 12px}
@@ -176,6 +184,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   <span class="tagx">Roster</span><h2>Unser Team</h2>
   <div class="tabs" role="tablist"><button role="tab" aria-selected="true" data-r="EA FC Pro Clubs">EA FC Pro Clubs</button><button role="tab" aria-selected="false" data-r="Valorant">Valorant</button></div>
   <div class="roster" id="roster"><div class="pl"><div class="av" data-n="09" style="background:linear-gradient(160deg,#22d3ee,#0e7490)"><svg viewBox="0 0 100 100"><circle cx="50" cy="38" r="20" fill="rgba(255,255,255,.85)"/><path d="M12 100c4-24 20-36 38-36s34 12 38 36z" fill="rgba(255,255,255,.85)"/></svg></div><div class="t"><b>Nox</b><small>Kapitän</small><br><span class="pos">ST</span></div></div><div class="pl"><div class="av" data-n="10" style="background:linear-gradient(160deg,#a78bfa,#5b21b6)"><svg viewBox="0 0 100 100"><circle cx="50" cy="38" r="20" fill="rgba(255,255,255,.85)"/><path d="M12 100c4-24 20-36 38-36s34 12 38 36z" fill="rgba(255,255,255,.85)"/></svg></div><div class="t"><b>Viper</b><small>Spielmacher</small><br><span class="pos">ZOM</span></div></div><div class="pl"><div class="av" data-n="11" style="background:linear-gradient(160deg,#f43f5e,#9f1239)"><svg viewBox="0 0 100 100"><circle cx="50" cy="38" r="20" fill="rgba(255,255,255,.85)"/><path d="M12 100c4-24 20-36 38-36s34 12 38 36z" fill="rgba(255,255,255,.85)"/></svg></div><div class="t"><b>Kairo</b><small>Flügel</small><br><span class="pos">LF</span></div></div><div class="pl"><div class="av" data-n="04" style="background:linear-gradient(160deg,#38bdf8,#1e3a8a)"><svg viewBox="0 0 100 100"><circle cx="50" cy="38" r="20" fill="rgba(255,255,255,.85)"/><path d="M12 100c4-24 20-36 38-36s34 12 38 36z" fill="rgba(255,255,255,.85)"/></svg></div><div class="t"><b>Brick</b><small>Abwehrchef</small><br><span class="pos">IV</span></div></div><div class="pl"><div class="av" data-n="01" style="background:linear-gradient(160deg,#facc15,#a16207)"><svg viewBox="0 0 100 100"><circle cx="50" cy="38" r="20" fill="rgba(255,255,255,.85)"/><path d="M12 100c4-24 20-36 38-36s34 12 38 36z" fill="rgba(255,255,255,.85)"/></svg></div><div class="t"><b>Wall</b><small>Torwart</small><br><span class="pos">TW</span></div></div></div>
+</div></section>
+
+<section class="house"><div class="wrap">
+  <div class="h-imgs reveal"><img src="img/arena-room.webp" alt="Gaming-Raum mit mehreren PCs und Gaming-Stühlen" loading="lazy"><img src="img/arena-setup.webp" alt="Gaming-Setup mit Neonbeleuchtung" loading="lazy"></div>
+  <div class="reveal"><span class="tagx">Über uns</span><h2>Vom Freundeskreis zum Team</h2>
+    <p class="lead">Angefangen hat alles 2021 mit fünf Freunden und einem Discord-Server. Heute spielt Arena Nova in zwei Titeln, trainiert viermal pro Woche und hat eine Community mit über 1.200 Mitgliedern.</p>
+    <p class="lead" style="margin-top:12px">Wir setzen auf Teamgeist statt toxischer Stimmung: Feste Trainingszeiten, VOD-Reviews nach jedem Ligaspiel und ein Coach, der Spieler weiterbringt.</p>
+    <ul class="hl"><li><b>4×</b>Training pro Woche</li><li><b>2</b>Coaches &amp; Analysten</li><li><b>LAN</b>Bootcamps 2× im Jahr</li></ul></div>
 </div></section>
 
 <section id="spiele" style="padding-top:0"><div class="wrap">

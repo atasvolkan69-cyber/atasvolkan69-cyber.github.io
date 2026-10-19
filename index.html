@@ -341,6 +341,13 @@ input[type=file]{padding:10px;cursor:pointer}
 .only-domain{display:flex;gap:14px;align-items:flex-start;margin-top:22px;background:color-mix(in srgb,var(--teal) 9%,var(--surface));border:1.5px solid color-mix(in srgb,var(--teal) 35%,transparent);border-radius:18px;padding:18px 20px}
 .only-domain svg{flex:none;color:var(--teal);margin-top:2px}
 .only-domain p{margin:0;color:var(--muted)}.only-domain b{color:var(--ink)}
+.shot{background:#fff;border-bottom:1px solid var(--line)}
+.sbar{display:flex;align-items:center;gap:5px;padding:8px 12px;background:var(--sand)}
+.sbar i{width:8px;height:8px;border-radius:50%;background:#cbbfae}
+.sbar span{margin-left:10px;font-size:.72rem;color:var(--muted);background:var(--surface);border-radius:6px;padding:2px 10px;flex:1;max-width:180px}
+.shot img{display:block;width:100%;height:auto;aspect-ratio:800/538;object-fit:cover;object-position:top;transition:transform .5s}
+.tpl-live{overflow:hidden}
+.tpl-live:hover .shot img{transform:scale(1.03)}
 .tpl-live{display:block;text-decoration:none;color:inherit;position:relative}
 .tpl-live::after{content:"Live ansehen ↗";position:absolute;right:12px;bottom:12px;background:var(--ink);color:var(--paper);font:600 .8rem var(--body);padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(6px);transition:.2s}
 .tpl-live:hover::after,.tpl-live:focus-visible::after{opacity:1;transform:none}
@@ -504,12 +511,7 @@ input[type=file]{padding:10px;cursor:pointer}
     <div class="tpl-grid">
 
       <article class="tpl" style="--a:#1c1917;--b:#e8c4b8;--c:#faf6f3;--t:#1c1917">
-        <a class="tpl-live" href="vorlagen/salon.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
-          <div class="mbar"><i></i><i></i><i></i></div>
-          <div class="mnav"><b>SALON</b><span></span><span></span><span></span><em>Termin</em></div>
-          <div class="mhero split"><div><p class="mh">Dein Look.<br>Unser Handwerk.</p><p class="ms"></p><em>Jetzt buchen</em></div><div class="mimg"></div></div>
-          <div class="mrow three"><div></div><div></div><div></div></div>
-        </div></a>
+        <a class="tpl-live" href="vorlagen/salon.html" aria-label="Vorlage Salon live ansehen"><div class="shot"><div class="sbar"><i></i><i></i><i></i><span>salon-beispiel.at</span></div><img src="vorlagen/img/vorschau-salon.webp" alt="Vorschau der Vorlage Salon" loading="lazy" width="800" height="538"></div></a>
         <div class="tpl-body">
           <h3>Salon</h3>
           <p>Elegant und ruhig – für Friseure, Kosmetik, Nagel- und Beauty-Studios.</p>
@@ -519,12 +521,7 @@ input[type=file]{padding:10px;cursor:pointer}
       </article>
 
       <article class="tpl" style="--a:#1e3a5f;--b:#f5b700;--c:#f3f5f8;--t:#0f1e33">
-        <a class="tpl-live" href="vorlagen/werkstatt.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
-          <div class="mbar"><i></i><i></i><i></i></div>
-          <div class="mnav dark"><b>WERKSTATT</b><span></span><span></span><span></span><em>Anrufen</em></div>
-          <div class="mhero dark"><p class="mh">Meisterbetrieb seit 1998</p><p class="ms"></p><em>Angebot anfordern</em></div>
-          <div class="mrow four"><div></div><div></div><div></div><div></div></div>
-        </div></a>
+        <a class="tpl-live" href="vorlagen/werkstatt.html" aria-label="Vorlage Werkstatt live ansehen"><div class="shot"><div class="sbar"><i></i><i></i><i></i><span>werkstatt-beispiel.at</span></div><img src="vorlagen/img/vorschau-werkstatt.webp" alt="Vorschau der Vorlage Werkstatt" loading="lazy" width="800" height="538"></div></a>
         <div class="tpl-body">
           <h3>Werkstatt</h3>
           <p>Kräftig und vertrauenswürdig – für Handwerk, Bau, Elektro, Installateure und KFZ.</p>
@@ -534,12 +531,7 @@ input[type=file]{padding:10px;cursor:pointer}
       </article>
 
       <article class="tpl" style="--a:#5f7f6e;--b:#cfe0d6;--c:#f7faf8;--t:#22332b">
-        <a class="tpl-live" href="vorlagen/praxis.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
-          <div class="mbar"><i></i><i></i><i></i></div>
-          <div class="mnav"><b>PRAXIS</b><span></span><span></span><span></span><em>Termin</em></div>
-          <div class="mhero center"><p class="mh">Bewegung, die gut tut</p><p class="ms"></p><em>Termin vereinbaren</em></div>
-          <div class="mrow three soft"><div></div><div></div><div></div></div>
-        </div></a>
+        <a class="tpl-live" href="vorlagen/praxis.html" aria-label="Vorlage Praxis live ansehen"><div class="shot"><div class="sbar"><i></i><i></i><i></i><span>praxis-beispiel.at</span></div><img src="vorlagen/img/vorschau-praxis.webp" alt="Vorschau der Vorlage Praxis" loading="lazy" width="800" height="538"></div></a>
         <div class="tpl-body">
           <h3>Praxis</h3>
           <p>Freundlich und klar – für Physiotherapie, Ärzte, Massage, Coaching und Gesundheit.</p>
@@ -549,12 +541,7 @@ input[type=file]{padding:10px;cursor:pointer}
       </article>
 
       <article class="tpl" style="--a:#7a1f2b;--b:#e9d8b8;--c:#fbf7ef;--t:#3a0f15">
-        <a class="tpl-live" href="vorlagen/genuss.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
-          <div class="mbar"><i></i><i></i><i></i></div>
-          <div class="mnav"><b>GENUSS</b><span></span><span></span><span></span><em>Reservieren</em></div>
-          <div class="mhero img"><p class="mh">Regional. Saisonal. Gut.</p><em>Tisch reservieren</em></div>
-          <div class="mrow two"><div></div><div></div></div>
-        </div></a>
+        <a class="tpl-live" href="vorlagen/genuss.html" aria-label="Vorlage Genuss live ansehen"><div class="shot"><div class="sbar"><i></i><i></i><i></i><span>genuss-beispiel.at</span></div><img src="vorlagen/img/vorschau-genuss.webp" alt="Vorschau der Vorlage Genuss" loading="lazy" width="800" height="538"></div></a>
         <div class="tpl-body">
           <h3>Genuss</h3>
           <p>Warm und einladend – für Gasthäuser, Cafés, Restaurants, Bäckereien und Hofläden.</p>
@@ -564,12 +551,7 @@ input[type=file]{padding:10px;cursor:pointer}
       </article>
 
       <article class="tpl" style="--a:#15803d;--b:#fde047;--c:#f5faf6;--t:#0c2e17">
-        <a class="tpl-live" href="vorlagen/verein.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
-          <div class="mbar"><i></i><i></i><i></i></div>
-          <div class="mnav dark"><b>SV VEREIN</b><span></span><span></span><span></span><em>Mitglied werden</em></div>
-          <div class="mhero split"><div><p class="mh">Gemeinsam stark</p><p class="ms"></p><em>Termine</em></div><div class="mimg"></div></div>
-          <div class="mrow list"><div></div><div></div><div></div></div>
-        </div></a>
+        <a class="tpl-live" href="vorlagen/verein.html" aria-label="Vorlage Verein live ansehen"><div class="shot"><div class="sbar"><i></i><i></i><i></i><span>verein-beispiel.at</span></div><img src="vorlagen/img/vorschau-verein.webp" alt="Vorschau der Vorlage Verein" loading="lazy" width="800" height="538"></div></a>
         <div class="tpl-body">
           <h3>Verein</h3>
           <p>Lebendig und übersichtlich – für Sportvereine, Musikkapellen, Feuerwehr und Clubs.</p>
@@ -579,12 +561,7 @@ input[type=file]{padding:10px;cursor:pointer}
       </article>
 
       <article class="tpl" style="--a:#0b0f1a;--b:#22d3ee;--c:#111827;--t:#e5f6fb">
-        <a class="tpl-live" href="vorlagen/arena.html" aria-label="Vorlage live ansehen"><div class="mock night" aria-hidden="true">
-          <div class="mbar"><i></i><i></i><i></i></div>
-          <div class="mnav dark"><b>ARENA</b><span></span><span></span><span></span><em>Discord</em></div>
-          <div class="mhero dark glow"><p class="mh">Next Match: Samstag 20:00</p><p class="ms"></p><em>Team ansehen</em></div>
-          <div class="mrow four"><div></div><div></div><div></div><div></div></div>
-        </div></a>
+        <a class="tpl-live" href="vorlagen/arena.html" aria-label="Vorlage Arena live ansehen"><div class="shot"><div class="sbar"><i></i><i></i><i></i><span>arena-beispiel.at</span></div><img src="vorlagen/img/vorschau-arena.webp" alt="Vorschau der Vorlage Arena" loading="lazy" width="800" height="538"></div></a>
         <div class="tpl-body">
           <h3>Arena</h3>
           <p>Dunkel und energiegeladen – für Esports-Teams, Gaming-Communities, Streamer und Ligen.</p>
