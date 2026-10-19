@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SV Musterdorf – Vorlage „Verein“ von Vionda</title>
+<meta name="description" content="Beispiel-Website für Sportvereine, Musikkapellen und Clubs – Vorlage Verein von Vionda.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#15803d">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+section{padding-block:clamp(56px,9vw,104px)}
+/* Vionda-Demoleiste */
+.vbar{position:sticky;top:0;z-index:60;background:#17232D;color:#F3EDE3;font:500 14px/1.3 'Figtree',system-ui,sans-serif;
+  display:flex;align-items:center;gap:12px;padding:9px max(16px,env(safe-area-inset-left,0px));flex-wrap:wrap}
+.vbar .vb-logo{display:flex;align-items:center;gap:8px;font-weight:700;text-decoration:none}
+.vbar .vb-logo svg{width:22px;height:22px}
+.vbar .vb-txt{opacity:.8;flex:1;min-width:150px}
+.vbar .vb-txt b{opacity:1;color:#fff}
+.vbar a.vb-btn{text-decoration:none;border-radius:999px;padding:7px 14px;font-weight:600;white-space:nowrap}
+.vbar a.vb-back{border:1px solid #3d4a55}
+.vbar a.vb-go{background:#0E8F7D;color:#fff}
+.vbar .vb-sw{display:flex;gap:4px;align-items:center}
+.vbar select{background:#22303A;border:1px solid #3d4a55;border-radius:8px;padding:6px 8px;font-size:13px;color:#F3EDE3}
+@media (max-width:640px){.vbar .vb-txt,.vbar .vb-l,.vbar .vb-back{display:none}.vbar a.vb-btn{padding:7px 12px}.vbar{gap:8px}.vbar .vb-sw{flex:1}.vbar select{width:100%}}
+/* Navigation */
+.nav{position:sticky;top:var(--vbar,44px);z-index:50}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.nav ul{display:flex;gap:26px;list-style:none}
+.nav ul a{text-decoration:none}
+.burger{display:none;background:none;border:0;width:42px;height:42px;cursor:pointer;place-items:center}
+.burger span{display:block;width:22px;height:2px;background:currentColor;margin:4px 0;transition:.2s}
+@media (max-width:860px){
+  .nav ul{position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;padding:8px 20px 18px;display:none}
+  .nav ul a{display:block;padding:12px 0;font-size:1.1rem}
+  .nav.open ul{display:flex}
+  .burger{display:grid}
+  .nav .cta-nav{display:none}
+}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:#17232D;color:#fff;padding:14px 20px;border-radius:14px;
+  font:500 15px/1.4 'Figtree',system-ui,sans-serif;z-index:80;transition:transform .35s ease;max-width:calc(100% - 32px);box-shadow:0 20px 40px -15px rgba(0,0,0,.5)}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+
+:root{--g:#15803d;--gd:#0c2e17;--y:#fde047;--bg:#f5faf6;--ink:#0c2e17;--muted:#4b6354;--line:#d6e6da}
+body{font:400 17px/1.6 'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:'Oswald',Impact,sans-serif;font-weight:700;text-transform:uppercase;line-height:1;letter-spacing:.005em}
+h2{font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:12px}
+.lab{display:inline-block;background:var(--y);color:var(--gd);font:700 .8rem 'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;margin-bottom:14px;transform:skew(-8deg)}
+.lead{color:var(--muted);max-width:56ch}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--y);color:var(--gd);padding:14px 24px;border-radius:10px;font:700 1rem 'Oswald',sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer}
+.btn.g{background:var(--g);color:#fff}
+.btn.o{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.nav{background:var(--g);color:#fff}
+.nav ul{background:var(--g)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1.25rem 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.03em;line-height:1}
+.brand small{display:block;font-size:.68rem;letter-spacing:.14em;opacity:.8;font-weight:500}
+.crest{width:42px;height:48px}
+.nav ul a{font:600 .98rem 'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.hero{background:linear-gradient(160deg,var(--g),var(--gd));color:#fff;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 50% 120%,transparent 0 30%,rgba(255,255,255,.07) 30% 30.4%,transparent 30.4%),
+  linear-gradient(90deg,transparent calc(50% - 1px),rgba(255,255,255,.07) calc(50% - 1px) calc(50% + 1px),transparent calc(50% + 1px))}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(3rem,8.5vw,6.4rem);margin-bottom:16px}
+.hero h1 span{color:var(--y)}
+.hero .lead{color:#cfe8d6}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.match{background:#fff;color:var(--ink);border-radius:20px;padding:24px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.match .lab{transform:none}
+.teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;text-align:center;margin:10px 0 16px}
+.teams .t b{display:block;font:700 1.05rem 'Oswald',sans-serif;text-transform:uppercase;margin-top:8px}
+.teams .t i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin:0 auto;font:700 1.2rem 'Oswald',sans-serif;font-style:normal;color:#fff}
+.teams .vs{font:700 1.6rem 'Oswald',sans-serif;color:var(--muted)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center}
+.cd div{background:var(--bg);border-radius:10px;padding:8px 0}
+.cd b{display:block;font:700 1.6rem 'Oswald',sans-serif;color:var(--g)}
+.cd small{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.match p{text-align:center;margin-top:12px;color:var(--muted);font-size:.92rem}
+.news{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px;margin-top:36px}
+.news article{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
+.news .img{aspect-ratio:16/10;position:relative}
+.news article:first-child .img{aspect-ratio:16/9}
+.news .img span{position:absolute;left:12px;top:12px;background:var(--y);color:var(--gd);font:700 .72rem 'Oswald',sans-serif;padding:3px 8px;text-transform:uppercase;letter-spacing:.08em}
+.news .t{padding:18px}
+.news small{color:var(--muted)}
+.news h3{font-size:1.25rem;margin:4px 0 6px}
+.news article:first-child h3{font-size:1.7rem}
+.news p{color:var(--muted);font-size:.94rem}
+.table-wrap{background:#fff;border-radius:16px;border:1px solid var(--line);overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:460px}
+th,td{padding:12px 14px;text-align:center;border-bottom:1px solid var(--line)}
+th{font:600 .8rem 'Oswald',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+td:nth-child(2),th:nth-child(2){text-align:left}
+tr.us{background:#ecfdf2;font-weight:700}
+tr.us td:first-child{box-shadow:inset 4px 0 0 var(--g)}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:30px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 18px}
+.filters button{border:1.5px solid var(--line);background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer;font-weight:600;font-size:.9rem}
+.filters button[aria-pressed=true]{background:var(--g);color:#fff;border-color:var(--g)}
+.ev{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px;align-items:center}
+.ev .d{width:58px;text-align:center;flex:none;border-right:1px solid var(--line);padding-right:10px}
+.ev .d b{display:block;font:700 1.6rem 'Oswald',sans-serif;line-height:1;color:var(--g)}
+.ev .d small{text-transform:uppercase;font-size:.72rem;color:var(--muted)}
+.ev h3{font-size:1.05rem}
+.ev p{font-size:.88rem;color:var(--muted)}
+.ev[hidden]{display:none}
+.sponsors{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:30px}
+.sponsors div{aspect-ratio:3/2;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font:700 .95rem 'Oswald',sans-serif;color:#94a99b;text-transform:uppercase;letter-spacing:.06em}
+.join{background:var(--y)}
+.join .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center}
+.join .lead{color:#4a4a1a}
+.join form{background:#fff;border-radius:20px;padding:clamp(22px,4vw,32px);display:grid;gap:12px}
+.join input,.join select{border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:1rem;width:100%}
+footer{background:var(--gd);color:#9fbfaa;padding:36px 0;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:860px){
+  .hero .wrap,.two,.join .wrap{grid-template-columns:1fr}
+  .news{grid-template-columns:1fr}
+  .sponsors{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="vbar" role="region" aria-label="Vionda Vorschau">
+  <a class="vb-logo" href="../#vorlagen"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0E8F7D"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>vionda</a>
+  <span class="vb-txt"><b>Beispiel-Website</b> – so könnte deine Seite aussehen. Alle Namen und Inhalte sind erfunden.</span>
+  <span class="vb-sw"><select id="vbSel" aria-label="Andere Vorlage ansehen"><option value="salon">Vorlage: Salon</option><option value="werkstatt">Vorlage: Werkstatt</option><option value="praxis">Vorlage: Praxis</option><option value="genuss">Vorlage: Genuss</option><option value="verein" selected>Vorlage: Verein</option><option value="arena">Vorlage: Arena</option></select></span>
+  <a class="vb-btn vb-back" href="../#vorlagen">Zurück</a>
+  <a class="vb-btn vb-go" href="../?vorlage=Verein#anfrage">Diese Vorlage<span class="vb-l"> anfragen</span></a>
+</div>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top"><svg class="crest" viewBox="0 0 42 48"><path d="M3 4h36v20c0 12-9 19-18 22C12 43 3 36 3 24z" fill="#fde047"/><path d="M8 9h26v15c0 9-6 14-13 17-7-3-13-8-13-17z" fill="#15803d"/><text x="21" y="31" text-anchor="middle" font-family="Oswald,Impact" font-weight="700" font-size="13" fill="#fde047">SVM</text></svg><span>SV Musterdorf<small>Seit 1952 · Fußball &amp; Jugend</small></span></a>
+  <ul id="menu"><li><a href="#news">News</a></li><li><a href="#tabelle">Tabelle</a></li><li><a href="#termine">Termine</a></li><li><a href="#mitglied">Mitglied werden</a></li></ul>
+  <a class="btn cta-nav" href="#mitglied">Mitmachen</a>
+  <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu" style="color:#fff"><span></span><span></span><span></span></button>
+</div></header>
+<main id="top">
+<section class="hero"><div class="wrap">
+  <div class="reveal"><span class="lab">Saison 2026/27</span>
+    <h1>Gemeinsam <span>stark.</span><br>Seit 1952.</h1>
+    <p class="lead">320 Mitglieder, 9 Nachwuchsteams und eine Kampfmannschaft an der Tabellenspitze. Komm vorbei – zum Zuschauen, Mitspielen oder Mithelfen.</p>
+    <div class="row"><a class="btn" href="#mitglied">Mitglied werden</a><a class="btn o" href="#termine">Nächste Termine</a></div></div>
+  <div class="match reveal"><span class="lab">Nächstes Heimspiel</span>
+    <div class="teams"><div class="t"><i style="background:#15803d">SVM</i><b>SV Musterdorf</b></div><span class="vs">VS</span><div class="t"><i style="background:#1e40af">USV</i><b>USV Nachbarort</b></div></div>
+    <div class="cd" id="cd"><div><b>0</b><small>Tage</small></div><div><b>0</b><small>Std</small></div><div><b>0</b><small>Min</small></div><div><b>0</b><small>Sek</small></div></div>
+    <p>Samstag, 15:00 Uhr · Sportplatz Musterdorf · Eintritt 8 €, Jugend frei</p></div>
+</div></section>
+
+<section id="news"><div class="wrap">
+  <span class="lab">Aktuelles</span><h2>News aus dem Verein</h2>
+  <div class="news">
+    <article class="reveal"><div class="img" style="background:linear-gradient(150deg,#4ade80,#0c2e17)"><span>Spielbericht</span></div><div class="t"><small>19. Oktober</small><h3>3:1 im Derby – Tabellenführung ausgebaut!</h3><p>Vor 480 Zuschauern drehte unsere Kampfmannschaft das Spiel nach der Pause. Doppelpack von Kapitän Huber.</p></div></article>
+    <article class="reveal"><div class="img" style="background:linear-gradient(150deg,#fde047,#ca8a04)"><span>Jugend</span></div><div class="t"><small>15. Oktober</small><h3>U14 holt Herbstmeistertitel</h3><p>Ungeschlagen durch die Herbstsaison.</p></div></article>
+    <article class="reveal"><div class="img" style="background:linear-gradient(150deg,#bbf7d0,#15803d)"><span>Verein</span></div><div class="t"><small>10. Oktober</small><h3>Neue Flutlichtanlage</h3><p>Danke an alle Sponsoren und Helfer!</p></div></article>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap two">
+  <div id="tabelle"><span class="lab">Bezirksliga</span><h2>Tabelle</h2>
+    <div class="table-wrap reveal"><table><thead><tr><th>#</th><th>Verein</th><th>Sp</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>Pkt</th></tr></thead><tbody>
+    <tr class=us><td>1</td><td>SV Musterdorf</td><td>11</td><td>8</td><td>2</td><td>1</td><td>27:9</td><td><b>26</b></td></tr><tr><td>2</td><td>USV Nachbarort</td><td>11</td><td>7</td><td>3</td><td>1</td><td>22:10</td><td><b>24</b></td></tr><tr><td>3</td><td>ATSV Innstadt</td><td>11</td><td>6</td><td>2</td><td>3</td><td>19:14</td><td><b>20</b></td></tr><tr><td>4</td><td>Union Hügelberg</td><td>11</td><td>5</td><td>3</td><td>3</td><td>17:15</td><td><b>18</b></td></tr><tr><td>5</td><td>SK Waldhofen</td><td>11</td><td>4</td><td>3</td><td>4</td><td>15:16</td><td><b>15</b></td></tr><tr><td>6</td><td>FC Talheim</td><td>11</td><td>3</td><td>2</td><td>6</td><td>12:20</td><td><b>11</b></td></tr>
+    </tbody></table></div></div>
+  <div id="termine"><span class="lab">Kalender</span><h2>Termine</h2>
+    <div class="filters" id="filters"><button aria-pressed="true" data-f="alle">Alle</button><button aria-pressed="false" data-f="fussball">Spiele</button><button aria-pressed="false" data-f="jugend">Jugend</button><button aria-pressed="false" data-f="fest">Feste</button></div>
+    <div id="evs"><div class="ev" data-k="fussball"><div class="d"><small>Sa</small><b>25</b><small>Okt</small></div><div><h3>Heimspiel gegen USV Nachbarort</h3><p>Sportplatz · 15:00 Uhr · Kampfmannschaft</p></div></div><div class="ev" data-k="jugend"><div class="d"><small>Mi</small><b>29</b><small>Okt</small></div><div><h3>U12-Training mit Elternabend</h3><p>Kabine · 17:30 Uhr</p></div></div><div class="ev" data-k="fest"><div class="d"><small>Sa</small><b>08</b><small>Nov</small></div><div><h3>Vereinsball</h3><p>Gasthof zur Linde · 20:00 Uhr · Karten 15 €</p></div></div><div class="ev" data-k="fussball"><div class="d"><small>So</small><b>09</b><small>Nov</small></div><div><h3>Auswärts: ATSV Innstadt</h3><p>14:30 Uhr · Fanbus ab 13:15</p></div></div><div class="ev" data-k="jugend"><div class="d"><small>Sa</small><b>15</b><small>Nov</small></div><div><h3>Hallenturnier U10</h3><p>Sporthalle · 9:00 Uhr</p></div></div></div></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <span class="lab">Danke!</span><h2>Unsere Sponsoren</h2>
+  <div class="sponsors"><div>Bäckerei</div><div>Autohaus</div><div>Raiffeisen</div><div>Gasthof</div><div>Elektro</div><div>Tischlerei</div></div>
+</div></section>
+
+<section class="join" id="mitglied"><div class="wrap">
+  <div><span class="lab" style="background:var(--g);color:#fff">Werde Teil davon</span><h2>Mitglied werden</h2>
+    <p class="lead">Ob als Spieler, Trainer, Helfer beim Fest oder einfach als Unterstützer – jede Hand zählt. Mitgliedsbeitrag ab 30 € im Jahr, Kinder und Jugendliche 20 €.</p></div>
+  <form data-demo="Demo: Die Anmeldung landet in deiner echten Website direkt beim Vereinsvorstand.">
+    <input placeholder="Vor- und Nachname" required autocomplete="name">
+    <input type="email" placeholder="E-Mail" required autocomplete="email">
+    <select><option>Ich möchte spielen (Erwachsene)</option><option>Mein Kind möchte spielen</option><option>Ich möchte helfen</option><option>Unterstützendes Mitglied</option></select>
+    <button class="btn g" type="submit">Anmeldung absenden</button>
+  </form>
+</div></section>
+</main>
+<footer><div class="wrap"><span>SV Musterdorf · Sportplatzweg 1 · 4921 Musterdorf · ZVR 000000000</span><span>Impressum · Datenschutz · © <span data-year></span></span></div></footer>
+
+<script>
+(function(){
+  var vb=document.querySelector('.vbar');
+  function setV(){document.documentElement.style.setProperty('--vbar',vb.offsetHeight+'px');}
+  setV(); addEventListener('resize',setV);
+  var nav=document.querySelector('.nav'), bg=document.querySelector('.burger');
+  if(bg){bg.addEventListener('click',function(){nav.classList.toggle('open');bg.setAttribute('aria-expanded',nav.classList.contains('open'));});
+    nav.querySelectorAll('ul a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');});});}
+  document.getElementById('vbSel').addEventListener('change',function(e){location.href=e.target.value+'.html';});
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+  var t=document.createElement('div');t.className='toast';document.body.appendChild(t);var tm;
+  window.demoToast=function(msg){t.textContent=msg;t.classList.add('show');clearTimeout(tm);tm=setTimeout(function(){t.classList.remove('show');},4200);};
+  document.querySelectorAll('form[data-demo]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();
+    demoToast(f.dataset.demo||'Demo: In deiner echten Website landet diese Nachricht direkt in deinem Postfach.');f.reset();});});
+  var y=document.querySelectorAll('[data-year]');y.forEach(function(n){n.textContent=new Date().getFullYear();});
+})();
+
+var tg=new Date();tg.setDate(tg.getDate()+((6-tg.getDay()+7)%7||7));tg.setHours(15,0,0,0);
+var cd=document.querySelectorAll('#cd b');function tick(){var s=Math.max(0,(tg-new Date())/1000|0);[s/86400|0,s%86400/3600|0,s%3600/60|0,s%60].forEach(function(v,i){cd[i].textContent=v;});}
+tick();setInterval(tick,1000);
+var fs=document.getElementById('filters');fs.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  fs.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});b.setAttribute('aria-pressed','true');
+  document.querySelectorAll('#evs .ev').forEach(function(ev){ev.hidden=!(b.dataset.f==='alle'||ev.dataset.k===b.dataset.f);});});
+</script>
+</body>
+</html>

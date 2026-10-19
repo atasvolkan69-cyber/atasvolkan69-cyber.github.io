@@ -338,6 +338,13 @@ input[type=file]{padding:10px;cursor:pointer}
 .f-note{max-width:32ch;font-size:.95rem}
 .f-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid #2A3B4D;margin-top:40px;padding-top:20px;font-size:.88rem}
 @media(max-width:820px){.f-grid{grid-template-columns:1fr 1fr}.f-grid>div:first-child{grid-column:1/-1}}
+.only-domain{display:flex;gap:14px;align-items:flex-start;margin-top:22px;background:color-mix(in srgb,var(--teal) 9%,var(--surface));border:1.5px solid color-mix(in srgb,var(--teal) 35%,transparent);border-radius:18px;padding:18px 20px}
+.only-domain svg{flex:none;color:var(--teal);margin-top:2px}
+.only-domain p{margin:0;color:var(--muted)}.only-domain b{color:var(--ink)}
+.tpl-live{display:block;text-decoration:none;color:inherit;position:relative}
+.tpl-live::after{content:"Live ansehen ↗";position:absolute;right:12px;bottom:12px;background:var(--ink);color:var(--paper);font:600 .8rem var(--body);padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(6px);transition:.2s}
+.tpl-live:hover::after,.tpl-live:focus-visible::after{opacity:1;transform:none}
+.tpl-actions{display:flex;gap:8px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -355,7 +362,7 @@ input[type=file]{padding:10px;cursor:pointer}
       <li><a href="#referenzen">Referenzen</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <div class="nav-actions"><a href="portal/" class="btn alt small" aria-label="Team-Login"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="tl-long">Team-Login</span><span class="tl-short">Team</span></a><a href="#anfrage" class="btn small">Anfragen</a></div>
+    <div class="nav-actions"><a href="#anfrage" class="btn small">Anfragen</a></div>
   </div>
 </nav>
 
@@ -483,6 +490,8 @@ input[type=file]{padding:10px;cursor:pointer}
       <span class="chip">Discord-Server-Setup ab <b>49 €</b></span>
       <span class="chip">Domain ca. <b>15 €</b>/Jahr</span>
     </div>
+    <div class="only-domain"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <p><b>Einmal zahlen – danach nur noch die Domain.</b> Nach dem Paketpreis fallen nur ca. 15 € im Jahr für deine Domain (z. B. deinname.at) an. Kein Hosting-Abo, keine monatlichen Gebühren, keine versteckten Kosten. Wartung ist freiwillig.</p></div>
   </div>
 </section>
 
@@ -495,92 +504,92 @@ input[type=file]{padding:10px;cursor:pointer}
     <div class="tpl-grid">
 
       <article class="tpl" style="--a:#1c1917;--b:#e8c4b8;--c:#faf6f3;--t:#1c1917">
-        <div class="mock" aria-hidden="true">
+        <a class="tpl-live" href="vorlagen/salon.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
           <div class="mbar"><i></i><i></i><i></i></div>
           <div class="mnav"><b>SALON</b><span></span><span></span><span></span><em>Termin</em></div>
           <div class="mhero split"><div><p class="mh">Dein Look.<br>Unser Handwerk.</p><p class="ms"></p><em>Jetzt buchen</em></div><div class="mimg"></div></div>
           <div class="mrow three"><div></div><div></div><div></div></div>
-        </div>
+        </div></a>
         <div class="tpl-body">
           <h3>Salon</h3>
           <p>Elegant und ruhig – für Friseure, Kosmetik, Nagel- und Beauty-Studios.</p>
           <ul><li>Online-Terminbuchung</li><li>Preisliste</li><li>Galerie</li></ul>
-          <button class="btn alt small" type="button" data-vorlage="Salon">Diese Vorlage wählen</button>
+          <div class="tpl-actions"><a class="btn small" href="vorlagen/salon.html">Live ansehen</a><button class="btn alt small" type="button" data-vorlage="Salon">Diese Vorlage wählen</button></div>
         </div>
       </article>
 
       <article class="tpl" style="--a:#1e3a5f;--b:#f5b700;--c:#f3f5f8;--t:#0f1e33">
-        <div class="mock" aria-hidden="true">
+        <a class="tpl-live" href="vorlagen/werkstatt.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
           <div class="mbar"><i></i><i></i><i></i></div>
           <div class="mnav dark"><b>WERKSTATT</b><span></span><span></span><span></span><em>Anrufen</em></div>
           <div class="mhero dark"><p class="mh">Meisterbetrieb seit 1998</p><p class="ms"></p><em>Angebot anfordern</em></div>
           <div class="mrow four"><div></div><div></div><div></div><div></div></div>
-        </div>
+        </div></a>
         <div class="tpl-body">
           <h3>Werkstatt</h3>
           <p>Kräftig und vertrauenswürdig – für Handwerk, Bau, Elektro, Installateure und KFZ.</p>
           <ul><li>Leistungen mit Fotos</li><li>Referenzprojekte</li><li>Anfrage-Formular</li></ul>
-          <button class="btn alt small" type="button" data-vorlage="Werkstatt">Diese Vorlage wählen</button>
+          <div class="tpl-actions"><a class="btn small" href="vorlagen/werkstatt.html">Live ansehen</a><button class="btn alt small" type="button" data-vorlage="Werkstatt">Diese Vorlage wählen</button></div>
         </div>
       </article>
 
       <article class="tpl" style="--a:#5f7f6e;--b:#cfe0d6;--c:#f7faf8;--t:#22332b">
-        <div class="mock" aria-hidden="true">
+        <a class="tpl-live" href="vorlagen/praxis.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
           <div class="mbar"><i></i><i></i><i></i></div>
           <div class="mnav"><b>PRAXIS</b><span></span><span></span><span></span><em>Termin</em></div>
           <div class="mhero center"><p class="mh">Bewegung, die gut tut</p><p class="ms"></p><em>Termin vereinbaren</em></div>
           <div class="mrow three soft"><div></div><div></div><div></div></div>
-        </div>
+        </div></a>
         <div class="tpl-body">
           <h3>Praxis</h3>
           <p>Freundlich und klar – für Physiotherapie, Ärzte, Massage, Coaching und Gesundheit.</p>
           <ul><li>Leistungen & Kassen-Infos</li><li>Team-Vorstellung</li><li>Öffnungszeiten & Anfahrt</li></ul>
-          <button class="btn alt small" type="button" data-vorlage="Praxis">Diese Vorlage wählen</button>
+          <div class="tpl-actions"><a class="btn small" href="vorlagen/praxis.html">Live ansehen</a><button class="btn alt small" type="button" data-vorlage="Praxis">Diese Vorlage wählen</button></div>
         </div>
       </article>
 
       <article class="tpl" style="--a:#7a1f2b;--b:#e9d8b8;--c:#fbf7ef;--t:#3a0f15">
-        <div class="mock" aria-hidden="true">
+        <a class="tpl-live" href="vorlagen/genuss.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
           <div class="mbar"><i></i><i></i><i></i></div>
           <div class="mnav"><b>GENUSS</b><span></span><span></span><span></span><em>Reservieren</em></div>
           <div class="mhero img"><p class="mh">Regional. Saisonal. Gut.</p><em>Tisch reservieren</em></div>
           <div class="mrow two"><div></div><div></div></div>
-        </div>
+        </div></a>
         <div class="tpl-body">
           <h3>Genuss</h3>
           <p>Warm und einladend – für Gasthäuser, Cafés, Restaurants, Bäckereien und Hofläden.</p>
           <ul><li>Speisekarte</li><li>Tischreservierung</li><li>Events & Mittagsmenü</li></ul>
-          <button class="btn alt small" type="button" data-vorlage="Genuss">Diese Vorlage wählen</button>
+          <div class="tpl-actions"><a class="btn small" href="vorlagen/genuss.html">Live ansehen</a><button class="btn alt small" type="button" data-vorlage="Genuss">Diese Vorlage wählen</button></div>
         </div>
       </article>
 
       <article class="tpl" style="--a:#15803d;--b:#fde047;--c:#f5faf6;--t:#0c2e17">
-        <div class="mock" aria-hidden="true">
+        <a class="tpl-live" href="vorlagen/verein.html" aria-label="Vorlage live ansehen"><div class="mock" aria-hidden="true">
           <div class="mbar"><i></i><i></i><i></i></div>
           <div class="mnav dark"><b>SV VEREIN</b><span></span><span></span><span></span><em>Mitglied werden</em></div>
           <div class="mhero split"><div><p class="mh">Gemeinsam stark</p><p class="ms"></p><em>Termine</em></div><div class="mimg"></div></div>
           <div class="mrow list"><div></div><div></div><div></div></div>
-        </div>
+        </div></a>
         <div class="tpl-body">
           <h3>Verein</h3>
           <p>Lebendig und übersichtlich – für Sportvereine, Musikkapellen, Feuerwehr und Clubs.</p>
           <ul><li>News & Spielberichte</li><li>Termine & Events</li><li>Mitglied-werden-Formular</li></ul>
-          <button class="btn alt small" type="button" data-vorlage="Verein">Diese Vorlage wählen</button>
+          <div class="tpl-actions"><a class="btn small" href="vorlagen/verein.html">Live ansehen</a><button class="btn alt small" type="button" data-vorlage="Verein">Diese Vorlage wählen</button></div>
         </div>
       </article>
 
       <article class="tpl" style="--a:#0b0f1a;--b:#22d3ee;--c:#111827;--t:#e5f6fb">
-        <div class="mock night" aria-hidden="true">
+        <a class="tpl-live" href="vorlagen/arena.html" aria-label="Vorlage live ansehen"><div class="mock night" aria-hidden="true">
           <div class="mbar"><i></i><i></i><i></i></div>
           <div class="mnav dark"><b>ARENA</b><span></span><span></span><span></span><em>Discord</em></div>
           <div class="mhero dark glow"><p class="mh">Next Match: Samstag 20:00</p><p class="ms"></p><em>Team ansehen</em></div>
           <div class="mrow four"><div></div><div></div><div></div><div></div></div>
-        </div>
+        </div></a>
         <div class="tpl-body">
           <h3>Arena</h3>
           <p>Dunkel und energiegeladen – für Esports-Teams, Gaming-Communities, Streamer und Ligen.</p>
           <ul><li>Roster & Spielerprofile</li><li>Spielplan & Ergebnisse</li><li>Discord- & Twitch-Einbindung</li></ul>
-          <button class="btn alt small" type="button" data-vorlage="Arena">Diese Vorlage wählen</button>
+          <div class="tpl-actions"><a class="btn small" href="vorlagen/arena.html">Live ansehen</a><button class="btn alt small" type="button" data-vorlage="Arena">Diese Vorlage wählen</button></div>
         </div>
       </article>
 
@@ -652,7 +661,7 @@ input[type=file]{padding:10px;cursor:pointer}
     </div>
     <div class="faq">
       <details><summary>Wie bezahle ich?</summary><p>Per Überweisung auf Rechnung: 50 % Anzahlung zum Start, 50 % wenn die Website online ist. Die Rechnungsnummer bitte als Verwendungszweck angeben.</p></details>
-      <details><summary>Gibt es laufende Kosten?</summary><p>Nur die Domain (ca. 15 € im Jahr). Hosting ist bei den meisten Seiten kostenlos. Wartung ist optional.</p></details>
+      <details><summary>Muss ich danach noch etwas zahlen?</summary><p>Nein – nur die Domain, also deine Internetadresse (ca. 15 € im Jahr). Das Hosting ist bei uns inklusive, es gibt kein Abo und keine monatlichen Gebühren. Wartung kannst du freiwillig dazubuchen.</p></details>
       <details><summary>Wie lange dauert es?</summary><p>Basic und Standard sind meist in 7 Tagen fertig, sobald Texte und Bilder da sind.</p></details>
       <details><summary>Muss ich mich um Technik kümmern?</summary><p>Nein. Domain, Einrichtung und Veröffentlichung übernimmt Vionda.</p></details>
       <details><summary>Bekomme ich eine ordentliche Rechnung?</summary><p>Ja, du bekommst eine Rechnung mit allen gesetzlichen Angaben – auch für deine Buchhaltung.</p></details>
@@ -839,16 +848,6 @@ input[type=file]{padding:10px;cursor:pointer}
     </form>
   </div>
 </section>
-<section id="team-bereich">
-  <div class="wrap team-box">
-    <div>
-      <h2 style="font-size:clamp(1.6rem,4vw,2.2rem);margin:10px 0 8px">Für das Vionda-Team</h2>
-      <p>Hier melden sich Mitarbeiter und Buchhaltung mit ihrer @vionda.at-Adresse an – für Aufträge, Rechnungen und Buchhaltung.</p>
-      <div class="team-roles"><span class="chip">Aufträge & Kundenbriefings</span><span class="chip">Rechnungen</span><span class="chip">Buchhaltung</span></div>
-    </div>
-    <a href="portal/" class="btn"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Zum Team-Login</a>
-  </div>
-</section>
 </main>
 
 <button class="chat-fab" type="button" id="chatFab" aria-label="Nachricht an Vionda schreiben"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="fab-t">Nachricht schreiben</span></button>
@@ -862,7 +861,7 @@ input[type=file]{padding:10px;cursor:pointer}
       </div>
       <div><h3>Angebot</h3><ul><li><a href="#leistungen">Leistungen</a></li><li><a href="#preise">Preise</a></li><li><a href="#vorlagen">Vorlagen</a></li><li><a href="#anfrage">Projekt anfragen</a></li></ul></div>
       <div><h3>Kontakt</h3><ul><li>hallo@vionda.at</li><li>Oberlangstadl 5</li><li>4921 Hohenzell (bei Ried)</li><li>Oberösterreich</li></ul></div>
-      <div><h3>Rechtliches</h3><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="portal/">Team-Login</a></li></ul></div>
+      <div><h3>Rechtliches</h3><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li></ul></div>
     </div>
     <div class="f-bottom"><span>© <span id="y">2026</span> Vionda</span><span>Alle Preise sind Endpreise. Kleinunternehmer gemäß § 6 Abs. 1 Z 27 UStG.</span></div>
   </div>
@@ -885,10 +884,12 @@ document.querySelectorAll('[data-vorlage]').forEach(function(b){
     document.getElementById('f-vorlage').value = b.dataset.vorlage;
     document.querySelectorAll('.tpl').forEach(function(t){ t.classList.remove('picked'); });
     document.querySelectorAll('[data-vorlage]').forEach(function(x){ x.textContent = 'Diese Vorlage wählen'; });
-    b.closest('.tpl').classList.add('picked'); b.textContent = 'Ausgewählt – weiter zur Anfrage';
+    b.closest('.tpl').classList.add('picked'); b.textContent = 'Ausgewählt ✓';
     b.onclick = function(){ document.getElementById('anfrage').scrollIntoView({behavior:'smooth'}); };
   });
 });
+(function(){var v=new URLSearchParams(location.search).get('vorlage');if(!v)return;
+  var b=document.querySelector('[data-vorlage="'+v.replace(/[^A-Za-zÄÖÜäöü]/g,'')+'"]');if(b){b.click();}})();
 // Chat: tawk.to wird erst geladen, wenn der Besucher auf den Knopf tippt (keine Cookies vorher)
 (function(){
   var fab = document.getElementById('chatFab'), loaded = false;

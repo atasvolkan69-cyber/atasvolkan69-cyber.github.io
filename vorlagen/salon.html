@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Lumen – Vorlage „Salon“ von Vionda</title>
+<meta name="description" content="Beispiel-Website für Friseure und Beauty-Studios – Vorlage Salon von Vionda.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#faf6f3">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Jost:wght@400;500;600&family=Figtree:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+section{padding-block:clamp(56px,9vw,104px)}
+/* Vionda-Demoleiste */
+.vbar{position:sticky;top:0;z-index:60;background:#17232D;color:#F3EDE3;font:500 14px/1.3 'Figtree',system-ui,sans-serif;
+  display:flex;align-items:center;gap:12px;padding:9px max(16px,env(safe-area-inset-left,0px));flex-wrap:wrap}
+.vbar .vb-logo{display:flex;align-items:center;gap:8px;font-weight:700;text-decoration:none}
+.vbar .vb-logo svg{width:22px;height:22px}
+.vbar .vb-txt{opacity:.8;flex:1;min-width:150px}
+.vbar .vb-txt b{opacity:1;color:#fff}
+.vbar a.vb-btn{text-decoration:none;border-radius:999px;padding:7px 14px;font-weight:600;white-space:nowrap}
+.vbar a.vb-back{border:1px solid #3d4a55}
+.vbar a.vb-go{background:#0E8F7D;color:#fff}
+.vbar .vb-sw{display:flex;gap:4px;align-items:center}
+.vbar select{background:#22303A;border:1px solid #3d4a55;border-radius:8px;padding:6px 8px;font-size:13px;color:#F3EDE3}
+@media (max-width:640px){.vbar .vb-txt,.vbar .vb-l,.vbar .vb-back{display:none}.vbar a.vb-btn{padding:7px 12px}.vbar{gap:8px}.vbar .vb-sw{flex:1}.vbar select{width:100%}}
+/* Navigation */
+.nav{position:sticky;top:var(--vbar,44px);z-index:50}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.nav ul{display:flex;gap:26px;list-style:none}
+.nav ul a{text-decoration:none}
+.burger{display:none;background:none;border:0;width:42px;height:42px;cursor:pointer;place-items:center}
+.burger span{display:block;width:22px;height:2px;background:currentColor;margin:4px 0;transition:.2s}
+@media (max-width:860px){
+  .nav ul{position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:0;padding:8px 20px 18px;display:none}
+  .nav ul a{display:block;padding:12px 0;font-size:1.1rem}
+  .nav.open ul{display:flex}
+  .burger{display:grid}
+  .nav .cta-nav{display:none}
+}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,calc(100% + 40px));visibility:hidden;background:#17232D;color:#fff;padding:14px 20px;border-radius:14px;
+  font:500 15px/1.4 'Figtree',system-ui,sans-serif;z-index:80;transition:transform .35s ease;max-width:calc(100% - 32px);box-shadow:0 20px 40px -15px rgba(0,0,0,.5)}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+
+:root{--ink:#1c1917;--blush:#e8c4b8;--rose:#c98b7a;--cream:#faf6f3;--sand:#f1e7df;--muted:#6f625b;--line:#e7dad1}
+body{font:400 17px/1.65 'Jost',system-ui,sans-serif;color:var(--ink);background:var(--cream)}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.01em;line-height:1.05}
+h2{font-size:clamp(2.3rem,5vw,3.4rem);margin-bottom:14px}
+h2 em{color:var(--rose)}
+.eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);font-weight:500;margin-bottom:14px;display:block}
+.lead{color:var(--muted);max-width:52ch}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--cream);padding:15px 28px;border:0;border-radius:0;
+  text-decoration:none;font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:.82rem;cursor:pointer;transition:background .2s}
+.btn:hover{background:#3a312c}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.nav{background:rgba(250,246,243,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav ul{background:inherit}
+.brand{font:500 1.7rem 'Cormorant Garamond',serif;text-decoration:none;letter-spacing:.02em}
+.brand i{font-style:italic;color:var(--rose)}
+.nav ul a{font-size:.88rem;letter-spacing:.08em;text-transform:uppercase}
+.nav .cta-nav{padding:11px 20px}
+.hero{padding-top:clamp(40px,7vw,80px)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,6vw,80px);align-items:center}
+.hero h1{font-size:clamp(3.2rem,8vw,6.2rem);margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--rose)}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero .facts{display:flex;gap:34px;margin-top:44px;color:var(--muted);font-size:.92rem;flex-wrap:wrap}
+.hero .facts b{display:block;font:500 2rem 'Cormorant Garamond',serif;color:var(--ink)}
+.arch{aspect-ratio:4/5;border-radius:999px 999px 0 0;position:relative;overflow:hidden;
+  background:radial-gradient(70% 55% at 50% 35%,#f6dcd2,transparent 70%),linear-gradient(170deg,#e9c3b4,#c98b7a 60%,#8f5a4c)}
+.arch::before{content:"";position:absolute;inset:12% 18% -10% 18%;border-radius:999px 999px 0 0;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.05));}
+.arch svg{position:absolute;inset:auto 0 0 0;width:100%;opacity:.55}
+.arch .tag{position:absolute;left:-1px;bottom:28px;background:var(--cream);padding:14px 20px;font-size:.85rem;box-shadow:0 18px 40px -20px rgba(0,0,0,.35)}
+.arch .tag b{display:block;font:500 1.3rem 'Cormorant Garamond',serif}
+/* Leistungen */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:30px 0 26px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;padding:12px 18px;cursor:pointer;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
+.prices{display:grid;grid-template-columns:1fr 1fr;gap:4px 60px}
+.prices div{display:flex;align-items:baseline;gap:12px;padding:16px 0;border-bottom:1px dashed var(--line)}
+.prices span{flex:1}
+.prices small{display:block;color:var(--muted);font-size:.85rem}
+.prices b{font:500 1.35rem 'Cormorant Garamond',serif;white-space:nowrap}
+/* Buchung */
+.book{background:var(--ink);color:var(--cream)}
+.book .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,80px);align-items:start}
+.book .lead{color:#c9bdb6}
+.card{background:#26201d;padding:clamp(22px,4vw,36px);border:1px solid #3a312c}
+.card label{display:block;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:#bfa79c;margin:0 0 10px}
+.card select{width:100%;background:#1c1917;border:1px solid #3a312c;color:var(--cream);padding:13px 14px;margin-bottom:22px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chips button{background:transparent;border:1px solid #4a3f3a;color:var(--cream);padding:9px 12px;cursor:pointer;min-width:62px;font-size:.9rem;line-height:1.25}
+.chips button small{display:block;font-size:.7rem;color:#bfa79c;text-transform:uppercase;letter-spacing:.1em}
+.chips button[aria-pressed=true]{background:var(--blush);color:var(--ink);border-color:var(--blush)}
+.chips button[aria-pressed=true] small{color:var(--ink)}
+.chips button:disabled{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.sum{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid #3a312c;padding-top:20px;flex-wrap:wrap}
+.sum p{color:#d6c8c1;font-size:.95rem}
+.book .btn{background:var(--blush);color:var(--ink)}
+/* Team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,32px);margin-top:40px}
+.member .ph{aspect-ratio:3/4;border-radius:999px 999px 0 0;display:grid;place-items:center;font:italic 500 4rem 'Cormorant Garamond',serif;color:rgba(255,255,255,.9)}
+.member h3{font-size:1.7rem;margin-top:16px}
+.member p{color:var(--muted);font-size:.95rem}
+/* Galerie */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:10px;margin-top:40px}
+.gal div{position:relative;overflow:hidden}
+.gal div:nth-child(1),.gal div:nth-child(4){grid-row:span 2}
+.gal div::after{content:attr(data-l);position:absolute;left:12px;bottom:10px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;opacity:.9}
+/* Stimmen */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.quotes figure{background:var(--sand);padding:28px}
+.quotes blockquote{font:italic 500 1.35rem/1.35 'Cormorant Garamond',serif}
+.quotes figcaption{margin-top:16px;color:var(--muted);font-size:.9rem}
+.stars{color:var(--rose);letter-spacing:3px;margin-bottom:10px}
+/* Kontakt */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px)}
+.hours{list-style:none;margin-top:20px}
+.hours li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}
+.hours li.today{font-weight:600}
+.hours li.today{background:var(--sand);padding-inline:12px;margin-inline:-12px}
+.map{min-height:320px;background:
+  linear-gradient(90deg,transparent 48%,#fff 48% 52%,transparent 52%),linear-gradient(0deg,transparent 60%,#fff 60% 63%,transparent 63%),
+  linear-gradient(35deg,transparent 30%,#fff 30% 32%,transparent 32%),#efe4dc;position:relative}
+.map::after{content:"";position:absolute;left:calc(50% - 14px);top:calc(40% - 34px);width:28px;height:28px;background:var(--rose);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.map span{position:absolute;left:50%;top:44%;transform:translateX(-50%);background:#fff;padding:8px 12px;font-size:.85rem;white-space:nowrap}
+footer{background:var(--sand);padding:40px 0;font-size:.9rem;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:860px){
+  .hero .wrap,.book .wrap,.contact .wrap{grid-template-columns:1fr}
+  .arch{max-width:420px;width:100%;margin-inline:auto}
+  .prices{grid-template-columns:1fr}
+  .team,.quotes{grid-template-columns:1fr}
+  .team{grid-template-columns:repeat(2,1fr)}
+  .gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .gal div:nth-child(4){grid-row:span 1}
+}
+@media (max-width:520px){.team{grid-template-columns:1fr 1fr;gap:12px}.member h3{font-size:1.35rem}.member .ph{font-size:3rem}}
+</style>
+</head>
+<body>
+<div class="vbar" role="region" aria-label="Vionda Vorschau">
+  <a class="vb-logo" href="../#vorlagen"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0E8F7D"/><path d="M17 19 L32 46 L47 19" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="49" cy="15" r="5" fill="#F2A93B"/></svg>vionda</a>
+  <span class="vb-txt"><b>Beispiel-Website</b> – so könnte deine Seite aussehen. Alle Namen und Inhalte sind erfunden.</span>
+  <span class="vb-sw"><select id="vbSel" aria-label="Andere Vorlage ansehen"><option value="salon" selected>Vorlage: Salon</option><option value="werkstatt">Vorlage: Werkstatt</option><option value="praxis">Vorlage: Praxis</option><option value="genuss">Vorlage: Genuss</option><option value="verein">Vorlage: Verein</option><option value="arena">Vorlage: Arena</option></select></span>
+  <a class="vb-btn vb-back" href="../#vorlagen">Zurück</a>
+  <a class="vb-btn vb-go" href="../?vorlage=Salon#anfrage">Diese Vorlage<span class="vb-l"> anfragen</span></a>
+</div>
+
+<header class="nav"><div class="wrap">
+  <a class="brand" href="#top">Salon <i>Lumen</i></a>
+  <ul id="menu"><li><a href="#leistungen">Leistungen</a></li><li><a href="#termin">Termin</a></li><li><a href="#team">Team</a></li><li><a href="#galerie">Galerie</a></li><li><a href="#kontakt">Kontakt</a></li></ul>
+  <a class="btn cta-nav" href="#termin">Termin buchen</a>
+  <button class="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+</div></header>
+<main id="top">
+<section class="hero"><div class="wrap">
+  <div class="reveal">
+    <span class="eyebrow">Friseur &amp; Beauty in Ried im Innkreis</span>
+    <h1>Dein Look.<br><em>Unser Handwerk.</em></h1>
+    <p class="lead">Schnitt, Farbe und Styling mit Zeit für dich – in einem ruhigen Salon mitten in der Stadt. Termin in 30 Sekunden online buchen.</p>
+    <div class="row"><a class="btn" href="#termin">Online-Termin buchen</a><a class="btn ghost" href="#leistungen">Preise ansehen</a></div>
+    <div class="facts"><span><b>12</b>Jahre Erfahrung</span><span><b>4,9 ★</b>aus 210 Bewertungen</span><span><b>Di–Sa</b>auch abends</span></div>
+  </div>
+  <div class="arch reveal" role="img" aria-label="Bildbereich für ein Foto aus dem Salon"><svg viewBox="0 0 400 160" preserveAspectRatio="none"><path d="M0 90 C80 40 140 140 220 90 S340 50 400 80 V160 H0Z" fill="#fff" opacity=".35"/><path d="M0 120 C90 80 160 160 250 115 S350 95 400 115 V160 H0Z" fill="#fff" opacity=".4"/></svg><div class="tag"><b>Neu: Balayage-Tage</b>jeden Donnerstag</div></div>
+</div></section>
+
+<section id="leistungen"><div class="wrap">
+  <span class="eyebrow">Leistungen &amp; Preise</span>
+  <h2>Ehrliche Preise, <em>keine Überraschungen</em></h2>
+  <p class="lead">Alle Preise inkl. Beratung. Bei sehr dichtem oder langem Haar kann sich der Preis ändern – wir sagen es dir vorher.</p>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-cat="Damen">Damen</button><button role="tab" aria-selected="false" data-cat="Herren">Herren</button><button role="tab" aria-selected="false" data-cat="Farbe">Farbe</button><button role="tab" aria-selected="false" data-cat="Pflege">Pflege</button>
+  </div>
+  <div class="prices" id="priceList"><div><span>Waschen, Schneiden, Föhnen<small>kurz bis mittellang</small></span><b>ab 49 €</b></div><div><span>Waschen, Schneiden, Föhnen<small>lang</small></span><b>ab 62 €</b></div><div><span>Föhnen & Styling<small>inkl. Pflege</small></span><b>ab 32 €</b></div><div><span>Hochsteckfrisur<small>Hochzeit & Anlass</small></span><b>ab 79 €</b></div></div>
+</div></section>
+
+<section class="book" id="termin"><div class="wrap">
+  <div class="reveal">
+    <span class="eyebrow">Online-Termin</span>
+    <h2>Wann passt es dir?</h2>
+    <p class="lead">Leistung wählen, Tag und Uhrzeit antippen – fertig. Du bekommst sofort eine Bestätigung per E-Mail und eine Erinnerung am Vortag.</p>
+  </div>
+  <div class="card reveal">
+    <label for="svc">Leistung</label>
+    <select id="svc"><option>Damen – Waschen, Schneiden, Föhnen (60 Min.)</option><option>Herren – Haarschnitt (30 Min.)</option><option>Balayage (150 Min.)</option><option>Schnitt &amp; Bart (45 Min.)</option></select>
+    <label>Tag</label><div class="chips" id="days"></div>
+    <label>Uhrzeit</label><div class="chips" id="times"></div>
+    <div class="sum"><p id="sumTxt">Bitte Tag und Uhrzeit wählen.</p><button class="btn" id="bookBtn" type="button">Termin bestätigen</button></div>
+  </div>
+</div></section>
+
+<section id="team"><div class="wrap">
+  <span class="eyebrow">Unser Team</span>
+  <h2>Menschen, die zuhören</h2>
+  <div class="team">
+    <div class="member reveal"><div class="ph" style="background:linear-gradient(160deg,#e9c3b4,#a8705f)">M</div><h3>Marlene</h3><p>Inhaberin · Farbe &amp; Balayage</p></div>
+    <div class="member reveal"><div class="ph" style="background:linear-gradient(160deg,#d9c3b0,#7f6a58)">J</div><h3>Jonas</h3><p>Herrenschnitte &amp; Bart</p></div>
+    <div class="member reveal"><div class="ph" style="background:linear-gradient(160deg,#ead5cc,#b58c80)">S</div><h3>Sophie</h3><p>Hochzeit &amp; Hochsteck</p></div>
+  </div>
+</div></section>
+
+<section id="galerie" style="background:var(--sand)"><div class="wrap">
+  <span class="eyebrow">Galerie</span>
+  <h2>Aus dem Salon</h2>
+  <div class="gal">
+    <div data-l="Balayage" style="background:linear-gradient(160deg,#f0d3c4,#b3765f)"></div>
+    <div data-l="Bob" style="background:linear-gradient(200deg,#cbb2a3,#5d4a40)"></div>
+    <div data-l="Locken" style="background:linear-gradient(140deg,#e7c9b9,#9a6352)"></div>
+    <div data-l="Unser Salon" style="background:linear-gradient(120deg,#efe4dc,#cdb3a5 60%,#8d6f61)"></div>
+    <div data-l="Herren" style="background:linear-gradient(180deg,#b7a397,#3f342e)"></div>
+    <div data-l="Brautfrisur" style="background:linear-gradient(160deg,#f6e6dd,#d2a596)"></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <span class="eyebrow">Das sagen unsere Kundinnen</span>
+  <h2>4,9 von 5 Sternen</h2>
+  <div class="quotes">
+    <figure class="reveal"><div class="stars">★★★★★</div><blockquote>„Endlich ein Salon, in dem man sich wirklich beraten fühlt. Meine Farbe war noch nie so schön.“</blockquote><figcaption>Beispiel-Bewertung</figcaption></figure>
+    <figure class="reveal"><div class="stars">★★★★★</div><blockquote>„Online gebucht, pünktlich drangekommen, top Schnitt. So muss das sein.“</blockquote><figcaption>Beispiel-Bewertung</figcaption></figure>
+    <figure class="reveal"><div class="stars">★★★★★</div><blockquote>„Die Hochzeitsfrisur hat den ganzen Tag gehalten – danke, Sophie!“</blockquote><figcaption>Beispiel-Bewertung</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="contact" id="kontakt" style="padding-top:0"><div class="wrap">
+  <div>
+    <span class="eyebrow">Besuch uns</span>
+    <h2>Salon Lumen</h2>
+    <p class="lead">Musterstraße 12 · 4910 Ried im Innkreis<br>Telefon 07752 000 000 · hallo@salon-beispiel.at<br>Parkplätze direkt vor dem Salon</p>
+    <ul class="hours" id="hours"><li data-d="1"><span>Montag</span><span>geschlossen</span></li><li data-d="2"><span>Dienstag</span><span>9–18 Uhr</span></li><li data-d="3"><span>Mittwoch</span><span>9–18 Uhr</span></li><li data-d="4"><span>Donnerstag</span><span>9–20 Uhr</span></li><li data-d="5"><span>Freitag</span><span>9–20 Uhr</span></li><li data-d="6"><span>Samstag</span><span>8–14 Uhr</span></li><li data-d="0"><span>Sonntag</span><span>geschlossen</span></li></ul>
+  </div>
+  <div class="map" role="img" aria-label="Kartenbereich – hier wird Google Maps eingebunden"><span>📍 Salon Lumen</span></div>
+</div></section>
+</main>
+<footer><div class="wrap"><span>© <span data-year></span> Salon Lumen · Ried im Innkreis</span><span>Impressum · Datenschutz · Instagram</span></div></footer>
+
+<script>
+(function(){
+  var vb=document.querySelector('.vbar');
+  function setV(){document.documentElement.style.setProperty('--vbar',vb.offsetHeight+'px');}
+  setV(); addEventListener('resize',setV);
+  var nav=document.querySelector('.nav'), bg=document.querySelector('.burger');
+  if(bg){bg.addEventListener('click',function(){nav.classList.toggle('open');bg.setAttribute('aria-expanded',nav.classList.contains('open'));});
+    nav.querySelectorAll('ul a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');});});}
+  document.getElementById('vbSel').addEventListener('change',function(e){location.href=e.target.value+'.html';});
+  var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12}):null;
+  document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in');});
+  var t=document.createElement('div');t.className='toast';document.body.appendChild(t);var tm;
+  window.demoToast=function(msg){t.textContent=msg;t.classList.add('show');clearTimeout(tm);tm=setTimeout(function(){t.classList.remove('show');},4200);};
+  document.querySelectorAll('form[data-demo]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();
+    demoToast(f.dataset.demo||'Demo: In deiner echten Website landet diese Nachricht direkt in deinem Postfach.');f.reset();});});
+  var y=document.querySelectorAll('[data-year]');y.forEach(function(n){n.textContent=new Date().getFullYear();});
+})();
+
+var P={"Damen": [["Waschen, Schneiden, Föhnen", "kurz bis mittellang", "ab 49 €"], ["Waschen, Schneiden, Föhnen", "lang", "ab 62 €"], ["Föhnen & Styling", "inkl. Pflege", "ab 32 €"], ["Hochsteckfrisur", "Hochzeit & Anlass", "ab 79 €"]], "Herren": [["Haarschnitt", "inkl. Waschen & Styling", "29 €"], ["Maschinenschnitt", "eine Länge", "19 €"], ["Bart in Form", "inkl. Heißtuch", "18 €"], ["Schnitt & Bart", "das Komplettpaket", "42 €"]], "Farbe": [["Ansatzfarbe", "bis 2 cm", "ab 45 €"], ["Komplettfarbe", "inkl. Glossing", "ab 69 €"], ["Balayage", "freihand, natürlich", "ab 129 €"], ["Strähnen", "Folie, partiell", "ab 59 €"]], "Pflege": [["Olaplex-Kur", "Aufbau & Schutz", "25 €"], ["Kopfhaut-Ritual", "mit Massage, 20 Min.", "28 €"], ["Glossing", "Glanz & Farbauffrischung", "35 €"], ["Augenbrauen", "zupfen & färben", "19 €"]]};
+document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-selected','false');});b.setAttribute('aria-selected','true');
+  document.getElementById('priceList').innerHTML=P[b.dataset.cat].map(function(r){return '<div><span>'+r[0]+'<small>'+r[1]+'</small></span><b>'+r[2]+'</b></div>';}).join('');});});
+var td=new Date().getDay();var h=document.querySelector('#hours li[data-d="'+td+'"]');if(h)h.classList.add('today');
+var WD=['So','Mo','Di','Mi','Do','Fr','Sa'],days=document.getElementById('days'),times=document.getElementById('times'),sel={d:null,t:null};
+for(var i=1,n=0;n<7&&i<14;i++){var d=new Date();d.setDate(d.getDate()+i);if(d.getDay()===0||d.getDay()===1)continue;n++;
+  var b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed','false');b.innerHTML='<small>'+WD[d.getDay()]+'</small>'+d.getDate()+'.'+(d.getMonth()+1)+'.';
+  b.dataset.v=WD[d.getDay()]+', '+d.getDate()+'.'+(d.getMonth()+1)+'.';days.appendChild(b);}
+function slots(){times.innerHTML='';['09:00','10:30','12:00','13:30','15:00','16:30','18:00'].forEach(function(t,k){var b=document.createElement('button');b.type='button';b.textContent=t;b.setAttribute('aria-pressed','false');
+  if(sel.d&&((sel.d.length+k)%3===0))b.disabled=true;times.appendChild(b);});}
+slots();
+function sum(){document.getElementById('sumTxt').textContent=(sel.d&&sel.t)?(sel.d+' um '+sel.t+' Uhr'):'Bitte Tag und Uhrzeit wählen.';}
+days.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;days.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});b.setAttribute('aria-pressed','true');sel.d=b.dataset.v;sel.t=null;slots();sum();});
+times.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;times.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed','false');});b.setAttribute('aria-pressed','true');sel.t=b.textContent;sum();});
+document.getElementById('bookBtn').addEventListener('click',function(){if(!(sel.d&&sel.t)){demoToast('Bitte zuerst Tag und Uhrzeit auswählen.');return;}
+  demoToast('Demo: Termin am '+sel.d+' um '+sel.t+' Uhr – in deiner Website kommt die Buchung direkt bei dir an.');});
+</script>
+</body>
+</html>
